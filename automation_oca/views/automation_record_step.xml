@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="automation_record_step_form_view">
+        <field name="model">automation.record.step</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="id" />
+                        <field name="name" />
+                        <field name="scheduled_date" />
+                        <field name="processed_on" />
+                        <field name="step_type" />
+                        <field
+                            name="message_id"
+                            attrs="{'invisible': [('message_id', '=', False)]}"
+                        />
+                    </group>
+                    <group
+                        name="error"
+                        string="Error"
+                        attrs="{'invisible': [('state', '!=', 'error')]}"
+                    >
+                        <field name="error_trace" nolabel="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_record_step_tree_view">
+        <field name="model">automation.record.step</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="name" />
+                <field name="state" />
+                <button
+                    name="run"
+                    type="object"
+                    string="Run"
+                    attrs="{'invisible': [('state', '!=', 'scheduled')]}"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="automation_record_step_search_view" model="ir.ui.view">
+        <field name="name">automation.record.step.search</field>
+        <field name="model">automation.record.step</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <field name="configuration_step_id" />
+                <field name="configuration_id" />
+                <field name="record_id" />
+                <separator />
+                <filter
+                    string="Scheduled"
+                    name="scheduled"
+                    domain="[('state', '=', 'scheduled')]"
+                />
+                <filter string="Done" name="done" domain="[('state', '=', 'done')]" />
+                <filter
+                    string="Expired"
+                    name="expired"
+                    domain="[('state', '=', 'expired')]"
+                />
+                <filter
+                    string="Rejected"
+                    name="rejected"
+                    domain="[('state', '=', 'rejected')]"
+                />
+                <filter
+                    string="Error"
+                    name="error"
+                    domain="[('state', '=', 'error')]"
+                />
+                <filter
+                    string="Canceled"
+                    name="cancel"
+                    domain="[('state', '=', 'cancel')]"
+                />
+                <separator />
+                <filter
+                    name="filter_schedule_date"
+                    string="Scheduled date"
+                    date="scheduled_date"
+                />
+                <separator />
+                <filter
+                    name="filter_processed_on"
+                    string="Processed on"
+                    date="processed_on"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="automation_record_step_graph_view" model="ir.ui.view">
+        <field name="name">automation.record.step.graph</field>
+        <field name="model">automation.record.step</field>
+        <field name="arch" type="xml">
+            <graph string="Records">
+                <field name="scheduled_date" interval="day" />
+                <field name="state" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="automation_record_step_pivot_view" model="ir.ui.view">
+        <field name="name">automation.record.step.pivot</field>
+        <field name="model">automation.record.step</field>
+        <field name="arch" type="xml">
+            <pivot string="Records">
+                <field name="configuration_id" type="row" />
+                <field name="state" type="col" />
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automation_record_step_act_window">
+        <field name="name">Activities</field>
+        <field name="res_model">automation.record.step</field>
+        <field name="view_mode">graph,pivot,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="automation_record_step_menu">
+        <field name="name">Activities</field>
+        <field name="parent_id" ref="automation_reporting_root_menu" />
+        <field name="action" ref="automation_record_step_act_window" />
+        <field name="sequence" eval="20" />
+    </record>
+
+</odoo>

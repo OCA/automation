@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="automation_configuration_step_form_view">
+        <field name="model">automation.configuration.step</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field
+                                name="name"
+                                placeholder="e.g. Remember unpaid invoices"
+                            /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="step_type" />
+                            <field name="configuration_id" invisible="1" />
+                            <field name="model_id" invisible="1" />
+                            <field name="model" invisible="1" />
+                        </group>
+                        <group>
+                            <label for="trigger_interval" string="Trigger" />
+                            <div class="container ps-0">
+                                <div class="row">
+                                    <div class="col-2"><field
+                                            name="trigger_interval"
+                                            nolabel="1"
+                                        /></div>
+                                    <div class="col-10"><field
+                                            name="trigger_interval_type"
+                                            nolabel="1"
+                                        /></div>
+                                </div>
+                                <div class="row">
+                                    <span class="col-2">after</span>
+                                    <div class="col-10"><field
+                                            name="trigger_type"
+                                            nolabel="1"
+                                        /></div>
+                                </div>
+                                <div
+                                    class="row"
+                                    attrs="{'invisible': [('trigger_type', '=', 'start')]}"
+                                >
+                                    <span class="col-2">of</span>
+                                    <div class="col-10">
+                                        <field
+                                            name="parent_id"
+                                            domain="[('configuration_id', '=', configuration_id)]"
+                                        /></div>
+                                </div>
+                            </div>
+                            <field name="allow_expiry" invisible="1" />
+                            <field
+                                name="expiry"
+                                attrs="{'invisible': [('allow_expiry', '=', False)]}"
+                            />
+                            <label
+                                for="expiry_interval"
+                                string="Trigger"
+                                attrs="{'invisible': [('expiry', '=', False)]}"
+                            />
+                            <div
+                                class="container ps-0"
+                                attrs="{'invisible': [('expiry', '=', False)]}"
+                            >
+                                <div class="row">
+                                    <div class="col-2"><field
+                                            name="expiry_interval"
+                                            attrs="{'required': [('expiry', '=', True)]}"
+                                            nolabel="1"
+                                        /></div>
+                                    <div class="col-10"><field
+                                            name="expiry_interval_type"
+                                            attrs="{'required': [('expiry', '=', True)]}"
+                                            nolabel="1"
+                                        /></div>
+                                </div>
+                            </div>
+                        </group>
+                        <group attrs="{'invisible':[('step_type', '!=', 'action')]}">
+                            <field
+                                name="server_action_id"
+                                context="{'default_model_id': model_id}"
+                                attrs="{'required': [('step_type', '=', 'action')]}"
+                            />
+                        </group>
+                        <group attrs="{'invisible':[('step_type', '!=', 'mail')]}">
+                            <field
+                                name="mail_template_id"
+                                attrs="{'required': [('step_type', '=', 'mail')]}"
+                            />
+                            <field name="mail_author_id" />
+                        </group>
+                        <group attrs="{'invisible':[('step_type', '!=', 'activity')]}">
+                            <field
+                                name="activity_type_id"
+                                attrs="{'required': [('step_type', '=', 'activity')]}"
+                            />
+                            <label
+                                for="activity_date_deadline_range"
+                                string="Deadline"
+                            />
+                            <div class="container ps-0">
+                                <div class="row">
+                                    <div class="col-2"><field
+                                            name="activity_date_deadline_range"
+                                            nolabel="1"
+                                        /></div>
+                                    <div class="col-10"><field
+                                            name="activity_date_deadline_range_type"
+                                            nolabel="1"
+                                        /></div>
+                                </div>
+                            </div>
+                            <field name="activity_user_type" />
+                            <field
+                                name="activity_user_id"
+                                attrs="{'invisible': [('activity_user_type', '!=', 'specific')], 'required': [('activity_user_type', '=', 'specific')]}"
+                            />
+                            <field
+                                name="activity_user_field_id"
+                                domain="[('model_id', '=', model_id)]"
+                                attrs="{'invisible': [('activity_user_type', '!=', 'generic')], 'required': [('activity_user_type', '=', 'generic')]}"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Specific Domain" name="specific_domain">
+                            <field
+                                name="domain"
+                                widget="domain"
+                                options="{'foldable': True, 'model': 'model'}"
+                            />
+                        </page>
+                        <page string="Final Domain" name="final_domain">
+                            <div
+                            >This is the final domain that will be applied to the records.
+                                Consists in the join of the specific domain of the step and the domain of the records.</div>
+                            <field
+                                name="applied_domain"
+                                widget="domain"
+                                options="{'foldable': True, 'model': 'model'}"
+                            />
+                        </page>
+                        <page
+                            string="Activity"
+                            name="activity"
+                            attrs="{'invisible':[('step_type', '!=', 'activity')]}"
+                        >
+                            <group>
+                                <field name="activity_summary" />
+                                <field name="activity_note" />
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_configuration_step_search_view">
+        <field name="model">automation.configuration.step</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_configuration_step_tree_view">
+        <field name="model">automation.configuration.step</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

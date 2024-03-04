@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_automation_configuration,Access Automation Configuration,model_automation_configuration,group_automation_user,1,0,0,0
+manage_automation_configuration,Access Automation Configuration,model_automation_configuration,group_automation_manager,1,1,1,1
+access_automation_configuration_step,Access Automation Configuration Activity,model_automation_configuration_step,group_automation_user,1,0,0,0
+manage_automation_configuration_step,Access Automation Configuration Activity,model_automation_configuration_step,group_automation_manager,1,1,1,1
+access_automation_record,Access Automation Record,model_automation_record,group_automation_user,1,0,0,0
+manage_automation_record,Access Automation Record,model_automation_record,group_automation_manager,1,1,1,1
+access_automation_filter,Access Automation filter,model_automation_filter,group_automation_user,1,0,0,0
+manage_automation_filter,Access Automation filter,model_automation_filter,group_automation_manager,1,1,1,1
+access_automation_tag,Access Automation tag,model_automation_tag,group_automation_user,1,0,0,0
+manage_automation_tag,Access Automation tag,model_automation_tag,group_automation_manager,1,1,1,1
+access_automation_record_step,Access Automation Record Activity,model_automation_record_step,group_automation_user,1,0,0,0
+manage_automation_record_step,Access Automation Record Activity,model_automation_record_step,group_automation_manager,1,1,1,1
+manage_automation_configuration_test,Access Automation Configuration Test,model_automation_configuration_test,group_automation_manager,1,1,1,1
