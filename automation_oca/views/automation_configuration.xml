@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="automation_configuration_form_view">
+        <field name="model">automation.configuration</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        class="btn btn-primary"
+                        type="object"
+                        name="start_automation"
+                        string="Start"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        class="btn btn-primary"
+                        type="object"
+                        name="run_automation"
+                        attrs="{'invisible': [('state', '!=', 'ondemand')]}"
+                        string="Generate new records"
+                    />
+                    <button
+                        type="object"
+                        name="done_automation"
+                        class="btn-secondary"
+                        string="Mark as done"
+                        attrs="{'invisible': [('state', 'not in', ['periodic','ondemand'])]}"
+                    />
+                    <button
+                        type="object"
+                        name="back_to_draft"
+                        class="btn-secondary"
+                        string="Back to draft"
+                        attrs="{'invisible': [('state', '!=', 'done')]}"
+                    />
+                    <button
+                        type="action"
+                        name="%(automation_configuration_test_act_window)s"
+                        string="Test"
+                        class="btn-warning"
+                        groups="automation_oca.group_automation_manager"
+                    />
+                    <button
+                        type="object"
+                        name="run_automation"
+                        class="btn-info"
+                        string="Enforce generation"
+                        attrs="{'invisible': [('state', '!=', 'periodic')]}"
+                    />
+
+                    <field name="state" widget="statusbar" />
+                </header>
+                <div
+                    class="alert alert-info"
+                    role="alert"
+                    attrs="{'invisible': [('state', '!=', 'draft')]}"
+                >
+                    <div
+                        class="px-4"
+                        attrs="{'invisible': [('is_periodic', '=', False)]}"
+                    >
+                        On <b
+                        >periodical configurations</b>, the records are created automatically by a cron job.
+                        It is great for tasks that don't need user validation.
+                    </div>
+                    <div
+                        class="px-4"
+                        attrs="{'invisible': [('is_periodic', '=', True)]}"
+                    >
+                        On <b
+                        >on demand configurations</b>, the records are created only by pressing the run button.
+                        It is useful if you want to control the execution and created records manually.
+                    </div>
+                </div>
+                <div
+                    class="alert alert-info"
+                    role="alert"
+                    attrs="{'invisible': [('state', '!=', 'ondemand')]}"
+                >
+                    <div class="px-4">
+                        This is configuration only generates new records on demand. Press the button in order to execute them manually.
+                    </div>
+                </div>
+                <div
+                    class="alert alert-info"
+                    role="alert"
+                    attrs="{'invisible': [('state', '!=', 'periodic')]}"
+                >
+                    <div class="px-4">
+                        This a periodical configuration. New records are generated automatically.
+                        Next execution is programed for <field
+                            name="next_execution_date"
+                        />
+                    </div>
+                </div>
+                <sheet>
+                    <div name="button_box">
+                        <button
+                            name="%(automation_record_configuration_act_window)s"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-envelope"
+                            attrs="{'invisible': [('record_count', '=', 0)]}"
+                        >
+                            <field
+                                name="record_count"
+                                widget="statinfo"
+                                string="Records"
+                            />
+                        </button>
+                        <button
+                            name="%(automation_record_configuration_test_act_window)s"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-flask"
+                            attrs="{'invisible': [('record_test_count', '=', 0)]}"
+                        >
+                            <field
+                                name="record_test_count"
+                                widget="statinfo"
+                                string="Tests"
+                            />
+                        </button>
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <div class="oe_title">
+                        <h1><field
+                                name="name"
+                                placeholder="e.g. Remember unpaid invoices"
+                            /></h1>
+                    </div>
+                    <group>
+                        <field name="active" invisible="1" />
+                        <field
+                            name="is_periodic"
+                            attrs="{'readonly': [('state', '!=', 'draft')]}"
+                            widget="boolean_toggle"
+                        />
+                        <field
+                            name="tag_ids"
+                            widget="many2many_tags"
+                            options="{'color_field': 'color'}"
+                        />
+                        <field
+                            name="model_id"
+                            options="{'no_create_edit': True, 'no_open': True}"
+                        />
+                        <field name="model" invisible="1" />
+                        <field
+                            name="field_id"
+                            string="Unicity based on"
+                            options="{'no_create_edit': True, 'no_open': True}"
+                        />
+                        <label for="filter_id" string="Filter" />
+                        <div class="container ps-0">
+                            <div class="row">
+                                <div class="col-5">
+                                    <field name="filter_id" domain="filter_domain" />
+                                </div>
+                                <button
+                                    name="save_filter"
+                                    type="object"
+                                    string="Save filter"
+                                    icon="fa-save"
+                                    class="text-primary filter-left col-7"
+                                    attrs="{'invisible': [('filter_id', '!=', False)]}"
+                                />
+                            </div>
+                        </div>
+                        <field name="filter_domain" invisible="1" />
+                        <field
+                            name="domain"
+                            string="Domain"
+                            widget="domain"
+                            attrs="{'invisible': [('filter_id', '=', False)]}"
+                            options="{'foldable': True, 'model': 'model'}"
+                        />
+                        <field
+                            name="editable_domain"
+                            string="Domain"
+                            widget="domain"
+                            attrs="{'invisible': [('filter_id', '!=', False)]}"
+                            options="{'foldable': True, 'model': 'model'}"
+                        />
+                        <field name="company_id" groups="base.group_multi_company" />
+                    </group>
+                    <field
+                        name="automation_step_ids"
+                        widget="automation_step"
+                        mode="kanban"
+                        class="o_automation_kanban"
+                    >
+                        <kanban>
+                            <field name="id" />
+                            <field name="name" />
+                            <field name="step_type" />
+                            <field name="parent_id" />
+                            <field name="trigger_type" />
+                            <field name="parent_position" />
+                            <field name="trigger_child_types" />
+                            <field name="trigger_type_data" />
+                            <field name="step_icon" />
+                            <field name="step_name" />
+                            <templates>
+                                <div
+                                    t-name="kanban-box"
+                                    class="o_automation_kanban_box p-2"
+                                >
+                                    <div
+                                        class="o_automation_kanban_extra"
+                                        t-foreach="[...Array(record.parent_position.raw_value).keys()]"
+                                        t-as="extra"
+                                        t-key="extra"
+                                    >
+                                        <div
+                                            class="o_automation_kanban_position_line"
+                                        />
+                                    </div>
+                                    <div class="me-5 o_automation_kanban_time">
+                                        <div
+                                            class="o_automation_kanban_position_line"
+                                        />
+                                        <i
+                                            class="o_automation_kanban_card_position fa fa-circle text-info text-right"
+                                            title="Run on"
+                                        />
+                                        <div
+                                            class="p-2 o_automation_kanban_time_info text-center"
+                                        >
+                                            <div
+                                                t-att-class="record.trigger_type_data.raw_value.color"
+                                                t-if="record.trigger_type_data.raw_value.message_configuration"
+                                            >
+                                                <i
+                                                    t-att-class="record.trigger_type_data.raw_value.icon"
+                                                /> <t
+                                                    t-esc="record.trigger_type_data.raw_value.message_configuration"
+                                                />
+                                            </div>
+                                            <strong>
+                                                <i
+                                                    class="fa fa-clock-o pe-1"
+                                                    role="img"
+                                                    aria-label="Select time"
+                                                    title="Select time"
+                                                />
+                                                <span class="pe-1"><field
+                                                        name="trigger_interval"
+                                                    /></span>
+                                                <field name="trigger_interval_type" />
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="o_automation_kanban_card">
+                                        <div class="o_automation_kanban_header">
+                                            <button
+                                                class="o_automation_kanban_header_icon btn btn-primary"
+                                                type="edit"
+                                            >
+                                                <span
+                                                    t-att-class="record.step_icon.raw_value"
+                                                    t-att-title="record.step_name.raw_value"
+                                                    role="img"
+                                                    t-att-aria-label="record.step_name.raw_value"
+                                                />
+                                            </button>
+                                            <div
+                                                class="o_automation_kanban_header_title"
+                                            >
+                                                <h3 class="mb0 mt0"><a
+                                                        type="edit"
+                                                        class="oe_kanban_action oe_kanban_action_a"
+                                                        t-att-title="record.name.raw_value"
+                                                    ><field name="name" /></a></h3>
+                                                <div t-esc="record.step_type.value" />
+                                            </div>
+                                            <div
+                                                class="o_automation_kanban_header_actions"
+                                            >
+                                                <div
+                                                    t-if="!read_only_mode"
+                                                    class="float-start mt8 mr4"
+                                                >
+                                                    <a
+                                                        type="edit"
+                                                        role="button"
+                                                        class="btn btn-primary btn-sm"
+                                                        href="#"
+                                                    >Edit</a>
+                                                    <a
+                                                        type="delete"
+                                                        role="button"
+                                                        class="btn btn-link btn-sm"
+                                                        href="#"
+                                                    >Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="o_automation_kanban_graph row">
+                                            <div class="col-8">
+                                                <field
+                                                    name="graph_data"
+                                                    widget="automation_graph"
+                                                />
+                                            </div>
+                                            <div class="col-4 text-center pt-2">
+                                                <h2 class="o_automation_kpi_processed">
+                                                    <field name="graph_done" />
+                                                </h2>
+                                                <div
+                                                    class="o_automation_kpi_processed pb-3"
+                                                > Processed</div>
+                                                <h2 class="o_automation_kpi_error">
+                                                    <field name="graph_error" />
+                                                </h2>
+                                                <div
+                                                    class="o_automation_kpi_error"
+                                                > Error</div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            t-if="!read_only_mode"
+                                            class="o_automation_kanban_child_add text-center"
+                                        >
+                                            <div
+                                                class="o_automation_kanban_child_add_title card-footer"
+                                            >
+                                                <i
+                                                    class="fa fa-plus-circle"
+                                                /> Add child activity
+                                            </div>
+                                            <div
+                                                class="o_automation_kanban_child_add_buttons"
+                                            >
+                                                <t
+                                                    t-foreach="record.trigger_child_types.raw_value"
+                                                    t-as="trigger_type_id"
+                                                    t-key="trigger_type_id"
+                                                >
+                                                    <t
+                                                        t-set="trigger_type"
+                                                        t-value="record.trigger_child_types.raw_value[trigger_type_id]"
+                                                    />
+                                                    <div
+                                                        t-att-trigger-type="trigger_type_id"
+                                                        class="o_automation_kanban_child_add_button"
+                                                    >
+                                                    <i
+                                                            t-attf-class="{{trigger_type.icon}} {{trigger_type.color}}"
+                                                            t-att-title="trigger_type.name"
+                                                            role="img"
+                                                            t-att-aria-label="trigger_type.name"
+                                                        />
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </templates>
+                        </kanban>
+                    </field>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_configuration_search_view">
+        <field name="model">automation.configuration</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="tag_ids" />
+                <separator />
+                <filter name="draft" string="Draft" domain="[('state','=', 'draft')]" />
+                <filter
+                    name="run"
+                    string="Run"
+                    domain="[('state','in', ['periodic', 'ondemand'])]"
+                />
+                <filter name="done" string="Done" domain="[('state','=', 'done')]" />
+                <separator />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active','=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_configuration_kanban_view">
+        <field name="model">automation.configuration</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" quick_create="false">
+                <field name="state" readonly="1" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="row">
+                                <field name="name" class="o_text_overflow" />
+                                <field
+                                    name="tag_ids"
+                                    widget="many2many_tags"
+                                    options="{'color_field': 'color'}"
+                                />
+                            </div>
+                            <div class="row mt8">
+                                <div class="col-4 text-center text-black-50">
+                                    <div>Records</div>
+                                    <field name="record_count" class="h1" />
+                                </div>
+                                <div class="col-4 text-center text-primary">
+                                    <div>Running</div>
+                                    <field name="record_run_count" class="h1" />
+                                </div>
+                                <div class="col-4 text-center text-black-50">
+                                    <div>Done</div>
+                                    <field name="record_done_count" class="h1" />
+                                </div>
+                            </div>
+                            <div class="row mt8">
+                                <div class="col-4 text-center text-black-50">
+                                    <div><i
+                                            class="fa fa-envelope"
+                                            title="Mails"
+                                        /></div>
+                                    <field name="activity_mail_count" class="h2" />
+                                </div>
+                                <div class="col-4 text-center text-black-50">
+                                    <div><i class="fa fa-cogs" title="Actions" /></div>
+                                    <field name="activity_action_count" class="h2" />
+                                </div>
+                                <div class="col-4 text-center text-black-50">
+                                    <div><i
+                                            class="fa fa-hand-pointer-o"
+                                            title="Clicks"
+                                        /></div>
+                                    <field name="click_count" class="h2" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="automation_configuration_tree_view">
+        <field name="model">automation.configuration</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automation_configuration_act_window">
+        <field name="name">Automation Configuration</field> <!-- TODO -->
+        <field name="res_model">automation.configuration</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="automation_configuration_menu">
+        <field name="name">Automation Configuration</field>
+        <field name="parent_id" ref="automation_root_menu" />
+        <field name="action" ref="automation_configuration_act_window" />
+        <field name="sequence" eval="10" />
+    </record>
+
+</odoo>
