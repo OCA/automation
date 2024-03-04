@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="automation_record_form_view">
+        <field name="model">automation.record</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Test"
+                        bg_color="text-bg-danger"
+                        attrs="{'invisible': [('is_test', '=', False)]}"
+                    />
+
+                    <div class="oe_title">
+                        <h1><field
+                                name="resource_ref"
+                                required="1"
+                                options="{'hide_model': True}"
+                            /></h1>
+                    </div>
+                    <group>
+                        <field name="configuration_id" />
+                        <field name="is_test" invisible="1" />
+                    </group>
+                    <field
+                        name="automation_step_ids"
+                        widget="automation_step"
+                        mode="kanban"
+                        class="o_automation_kanban"
+                    >
+                        <kanban>
+                            <field name="id" />
+                            <field name="name" />
+                            <field name="step_type" />
+                            <field name="parent_id" />
+                            <field name="trigger_type" />
+                            <field name="parent_position" />
+                            <field name="mail_status" />
+                            <field name="mail_clicked_on" />
+                            <field name="activity_done_on" />
+                            <field name="state" />
+                            <field name="trigger_type_data" />
+                            <field name="step_icon" />
+                            <field name="step_name" />
+                            <field name="step_actions" />
+                            <templates>
+                                <div
+                                    t-name="kanban-box"
+                                    class="o_automation_kanban_box p-2"
+                                >
+                                    <div
+                                        class="o_automation_kanban_extra"
+                                        t-foreach="[...Array(record.parent_position.raw_value).keys()]"
+                                        t-as="extra"
+                                        t-key="extra"
+                                    >
+                                        <div
+                                            class="o_automation_kanban_position_line"
+                                        />
+                                    </div>
+                                    <div class="me-5 o_automation_kanban_time">
+                                        <div
+                                            class="o_automation_kanban_position_line"
+                                        />
+                                        <i
+                                            class="o_automation_kanban_card_position fa fa-circle text-info text-right"
+                                            title="Run on"
+                                        />
+                                        <div
+                                            class="p-2 o_automation_kanban_time_info text-center"
+                                        >
+                                            <strong>
+                                                <field
+                                                    class="text-success"
+                                                    name="processed_on"
+                                                    t-if="record.state.raw_value === 'done'"
+                                                />
+                                                <span
+                                                    class="text-warning"
+                                                    t-elif="record.state.raw_value == 'expired'"
+                                                >
+                                                    Expired <field
+                                                        name="processed_on"
+                                                    />
+                                                </span>
+                                                <span
+                                                    class="text-info"
+                                                    t-elif="record.state.raw_value == 'rejected'"
+                                                >
+                                                    Rejected <field
+                                                        name="processed_on"
+                                                    />
+                                                </span>
+                                                <span
+                                                    class="text-danger"
+                                                    t-elif="record.state.raw_value == 'error'"
+                                                >
+                                                    Error on <field
+                                                        name="processed_on"
+                                                    />
+                                                </span>
+                                                <span
+                                                    class="text-warning"
+                                                    t-elif="record.state.raw_value == 'cancel'"
+                                                >
+                                                    Cancelled <field
+                                                        name="processed_on"
+                                                    />
+                                                </span>
+                                                <field
+                                                    name="scheduled_date"
+                                                    t-elif="record.scheduled_date.value and record.state.raw_value === 'scheduled'"
+                                                />
+                                                <span t-else="" class="text-primary">
+                                                    <i
+                                                        t-att-class="record.trigger_type_data.raw_value.icon"
+                                                    /> <t
+                                                        t-esc="record.trigger_type_data.raw_value.message"
+                                                    />
+                                                </span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="o_automation_kanban_card">
+                                        <div class="o_automation_kanban_header">
+                                            <div
+                                                t-attf-class="o_automation_kanban_header_icon {{record.state.raw_value === 'done' ? 'btn-success': (record.state.raw_value === 'scheduled' ? 'btn-primary': (record.state.raw_value === 'error' ? 'btn-danger': (record.state.raw_value === 'rejected' ? 'btn-info': 'btn-warning')))}}"
+                                            >
+                                                <span
+                                                    t-att-class="record.step_icon.raw_value"
+                                                    t-att-title="record.step_name.raw_value"
+                                                    role="img"
+                                                    t-att-aria-label="record.step_name.raw_value"
+                                                />
+                                            </div>
+                                            <div
+                                                class="o_automation_kanban_header_title"
+                                            >
+                                                <h3 class="mb0 mt0"><a
+                                                        type="edit"
+                                                        class="oe_kanban_action oe_kanban_action_a"
+                                                        t-att-title="record.name.raw_value"
+                                                    ><field name="name" /></a></h3>
+                                                <div t-esc="record.step_type.value" />
+                                            </div>
+                                            <div
+                                                class="o_automation_kanban_header_actions"
+                                            >
+                                                <button
+                                                    type="object"
+                                                    name="run"
+                                                    class="fa fa-play btn-primary o_automation_kanban_header_icon"
+                                                    title="Run"
+                                                    t-if="record.state.raw_value == 'scheduled'"
+                                                />
+                                                <button
+                                                    type="object"
+                                                    name="cancel"
+                                                    class="fa fa-times btn-warning o_automation_kanban_header_icon"
+                                                    title="Cancel"
+                                                    t-if="record.state.raw_value == 'scheduled'"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="o_automation_kanban_states"
+                                            t-if="record.step_actions.raw_value.length > 0"
+                                        >
+                                            <t
+                                                t-foreach="record.step_actions.raw_value"
+                                                t-as="state"
+                                                t-key="state_index"
+                                            >
+                                                <div
+                                                    t-attf-class="o_automation_kanban_state {{ state.done ? state.color: 'text-muted' }}"
+                                                >
+                                                    <i
+                                                        t-att-class="state.icon"
+                                                        t-att-title="state.name"
+                                                        role="img"
+                                                        t-att-aria-label="state.name"
+                                                    /> <t t-esc="state.name" />
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </templates>
+                        </kanban>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_record_search_view">
+        <field name="model">automation.record</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="configuration_id" />
+                <separator />
+                <filter
+                    name="filter_create_date"
+                    string="Created on"
+                    date="create_date"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_record_tree_view">
+        <field name="model">automation.record</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="name" />
+                <field name="configuration_id" />
+                <field name="create_date" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'periodic'"
+                    decoration-success="state == 'done'"
+                />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="automation_record_graph_view" model="ir.ui.view">
+        <field name="name">automation.record.graph</field>
+        <field name="model">automation.record</field>
+        <field name="arch" type="xml">
+            <graph string="Records">
+                <field name="create_date" interval="day" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="automation_record_pivot_view" model="ir.ui.view">
+        <field name="name">automation.record.pivot</field>
+        <field name="model">automation.record</field>
+        <field name="arch" type="xml">
+            <pivot string="Records">
+                <field name="configuration_id" type="row" />
+                <field name="state" type="col" />
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automation_record_act_window">
+        <field name="name">Automation Record</field> <!-- TODO -->
+        <field name="res_model">automation.record</field>
+        <field name="view_mode">graph,pivot,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record
+        model="ir.actions.act_window"
+        id="automation_record_configuration_act_window"
+    >
+        <field name="name">Records</field>
+        <field name="res_model">automation.record</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="domain"
+        >[('configuration_id', '=', active_id), ('is_test', '=', False)]</field>
+        <field name="context">{}</field>
+    </record>
+    <record
+        model="ir.actions.act_window"
+        id="automation_record_configuration_test_act_window"
+    >
+        <field name="name">Test Records</field>
+        <field name="res_model">automation.record</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="domain"
+        >[('configuration_id', '=', active_id), ('is_test', '=', True)]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="automation_record_menu">
+        <field name="name">Records</field>
+        <field name="parent_id" ref="automation_reporting_root_menu" />
+        <field name="action" ref="automation_record_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>

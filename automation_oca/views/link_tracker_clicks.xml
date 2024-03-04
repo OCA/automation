@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="link_tracker_click_search_view" model="ir.ui.view">
+        <field name="name">link.tracker.click.view.search.inherit.mass_mailing</field>
+            <field name="model">link.tracker.click</field>
+        <field name="inherit_id" ref="link_tracker.link_tracker_click_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='country_id']" position="after">
+                <field name="automation_configuration_id" />
+            </xpath>
+            <xpath expr="//filter[@name='groupby_country_id']" position="after">
+                <filter
+                    string="Automation configuration"
+                    name="groupby_automation_configuration_id"
+                    context="{'group_by': 'automation_configuration_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="link_tracker_click_act_window">
+        <field name="name">Clicks</field>
+        <field name="res_model">link.tracker.click</field>
+        <field name="view_mode">graph,pivot,tree</field>
+        <field name="domain">[('automation_record_step_id', '!=', False)]</field>
+        <field
+            name="context"
+        >{'search_default_groupby_automation_configuration_id': 1}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="link_tracker_click_menu">
+        <field name="name">Clicks</field>
+        <field name="parent_id" ref="automation_reporting_root_menu" />
+        <field name="action" ref="link_tracker_click_act_window" />
+        <field name="sequence" eval="30" />
+    </record>
+</odoo>
