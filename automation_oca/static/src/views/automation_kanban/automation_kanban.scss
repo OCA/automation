@@ -1,0 +1,128 @@
+.o_automation_kanban {
+    .o_kanban_renderer.o_kanban_ungrouped .o_kanban_record {
+        flex: 0 0 100%;
+        width: unset;
+        margin: 0px;
+        > div {
+            border: none;
+        }
+        .o_automation_kanban_box {
+            display: flex;
+            .o_automation_kanban_card {
+                width: 600px;
+                max-width: 600px;
+            }
+            .o_automation_kanban_extra {
+                flex-direction: column;
+                width: 10rem;
+            }
+            .o_automation_kanban_position_line {
+                border-right: 3px dotted $gray-300;
+                top: -0.5rem;
+                bottom: 0.5rem;
+                width: 8.75rem;
+                position: absolute;
+            }
+            .o_automation_kanban_card_position {
+                position: absolute;
+                top: 1.5rem;
+                text-align: right;
+                width: 9.125rem;
+            }
+            .o_automation_kanban_time {
+                flex-direction: column;
+                .o_automation_kanban_time_info {
+                    border: 1px solid $gray-300;
+                    width: 7rem;
+                }
+            }
+            .o_automation_kanban_card {
+                border: 1px solid $gray-300;
+                flex-grow: 1;
+                flex-basis: 0;
+                flex-shrink: 0;
+                flex-direction: column;
+                .o_automation_kanban_header {
+                    position: relative;
+                    .o_automation_kanban_header_icon {
+                        display: inline-block;
+                        padding: 3px 7px;
+                        margin: 5px;
+                        width: 28px;
+                        height: 28px;
+                        color: white;
+                        font-size: 14px;
+                        border-radius: 3px;
+                    }
+                    .o_automation_kanban_header_title {
+                        display: inline-block;
+                        position: absolute;
+                        top: auto;
+                        left: auto;
+                        bottom: auto;
+                        right: auto;
+                    }
+                    .o_automation_kanban_header_actions {
+                        position: absolute;
+                        top: 0px;
+                        left: auto;
+                        bottom: auto;
+                        right: 0px;
+                    }
+                }
+                .o_automation_kanban_graph {
+                    .o_automation_kpi_processed {
+                        color: #4caf50;
+                    }
+                    .o_automation_kpi_error {
+                        color: #f44336;
+                    }
+                }
+                .o_automation_kanban_child_add {
+                    .o_automation_kanban_child_add_title {
+                        padding: 2px;
+                    }
+                    .o_automation_kanban_child_add_buttons {
+                        display: none;
+                    }
+                }
+                .o_automation_kanban_child_add:hover {
+                    .o_automation_kanban_child_add_buttons {
+                        display: flex;
+                        .o_automation_kanban_child_add_button {
+                            cursor: pointer;
+                            flex-grow: 1;
+                            flex-basis: 0;
+                            flex-shrink: 0;
+                            flex-direction: column;
+                            border: 1px solid $gray-300;
+                        }
+                    }
+                }
+                .o_automation_kanban_states {
+                    display: flex;
+                    .o_automation_kanban_state {
+                        padding: 0.5rem;
+                        flex-grow: 1;
+                        flex-basis: 0;
+                        flex-shrink: 0;
+                        flex-direction: column;
+                        border-top: 1px solid $gray-300;
+                        border-right: 1px solid $gray-300;
+                        text-align: center;
+                    }
+
+                    .o_automation_kanban_state:last-child {
+                        border-right: none;
+                    }
+                }
+            }
+        }
+    }
+}
+.o_field_automation_graph {
+    width: 100%;
+}
+.filter-left {
+    text-align: left;
+}
