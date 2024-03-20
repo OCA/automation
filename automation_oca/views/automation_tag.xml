@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="automation_tag_search_view">
+        <field name="model">automation.tag</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_tag_tree_view">
+        <field name="model">automation.tag</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="color" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automation_tag_act_window">
+        <field name="name">Tags</field> <!-- TODO -->
+        <field name="res_model">automation.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="automation_tag_menu">
+        <field name="name">Tags</field>
+        <field name="parent_id" ref="automation_config_root_menu" />
+        <field name="action" ref="automation_tag_act_window" />
+        <field name="sequence" eval="40" />
+    </record>
+
+</odoo>

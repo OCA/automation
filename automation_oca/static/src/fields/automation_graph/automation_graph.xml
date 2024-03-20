@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="automation_oca.AutomationGraph" owl="1">
+        <div class="o_automation_graph w-100" t-att-class="props.className">
+            <canvas t-ref="canvas" />
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="automation_filter_form_view">
+        <field name="model">automation.filter</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field
+                            name="model_id"
+                            options="{'no_create_edit': True, 'no_open': True}"
+                        />
+                        <field name="model" invisible="1" />
+                        <field
+                            name="domain"
+                            widget="domain"
+                            options="{'foldable': True, 'model': 'model'}"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_filter_search_view">
+        <field name="model">automation.filter</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="model_id" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="automation_filter_tree_view">
+        <field name="model">automation.filter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="model_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="automation_filter_act_window">
+        <field name="name">Filters</field>
+        <field name="res_model">automation.filter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="automation_filter_menu">
+        <field name="name">Filters</field>
+        <field name="parent_id" ref="automation_config_root_menu" />
+        <field name="action" ref="automation_filter_act_window" />
+        <field name="sequence" eval="20" />
+    </record>
+
+</odoo>
