@@ -383,9 +383,9 @@ items</li>
 <ul class="simple">
 <li><a class="reference internal" href="#usage" id="toc-entry-1">Usage</a><ul>
 <li><a class="reference internal" href="#configure-your-processes" id="toc-entry-2">Configure your processes</a></li>
-<li><a class="reference internal" href="#configuration-of-activities" id="toc-entry-3">Configuration of activities</a></li>
+<li><a class="reference internal" href="#configuration-of-steps" id="toc-entry-3">Configuration of steps</a></li>
 <li><a class="reference internal" href="#records-creation" id="toc-entry-4">Records creation</a></li>
-<li><a class="reference internal" href="#activity-execution" id="toc-entry-5">Activity execution</a></li>
+<li><a class="reference internal" href="#step-execution" id="toc-entry-5">Step execution</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#bug-tracker" id="toc-entry-6">Bug Tracker</a></li>
@@ -404,53 +404,66 @@ items</li>
 <h2><a class="toc-backref" href="#toc-entry-2">Configure your processes</a></h2>
 <ol class="arabic simple">
 <li>Access the <tt class="docutils literal">Automation</tt> menu.</li>
-<li>Create a new Configuration.</li>
-<li>Set the model and filters.</li>
-<li>Create the different activities.</li>
-<li>Press <tt class="docutils literal">Start</tt>. Now, every 6 hours, a process will check if new
-records need to be created.</li>
+<li>Create a new Automation Configuration.</li>
+<li>Set the model and domains.</li>
+<li>Go to Configuration -&gt; Filters to create filters as a preconfigured
+domains. Filters can be established in the proper field in the
+Automation Configuration record.</li>
+<li>Create the different steps by clicking the “ADD” button inside the
+automation configuration form.</li>
+<li>Create child steps by clicking the “Add child activity” at the
+bottom of a created step.</li>
+<li></li>
+<li>Select the kind of configuration you create. You can choose between:<ul>
+<li><em>Periodic configurations</em>: every 6 hours, a process will check if
+new records need to be created.</li>
+<li><em>On demand configurations</em>: user need to execute manually the
+job.</li>
+</ul>
+</li>
+<li>Press <tt class="docutils literal">Start</tt>.</li>
 <li>Inside the process, you can check all the created items.</li>
 </ol>
 <p><img alt="Configuration Screenshot" src="https://raw.githubusercontent.com/OCA/automation/16.0/automation_oca/static/description/configuration.png" /></p>
 </div>
-<div class="section" id="configuration-of-activities">
-<h2><a class="toc-backref" href="#toc-entry-3">Configuration of activities</a></h2>
-<p>Activities can trigger one of the following options:</p>
+<div class="section" id="configuration-of-steps">
+<h2><a class="toc-backref" href="#toc-entry-3">Configuration of steps</a></h2>
+<p>Steps can trigger one of the following options:</p>
 <ul class="simple">
-<li><tt class="docutils literal">Email</tt>: Sends an email using a template.</li>
+<li><tt class="docutils literal">Mail</tt>: Sends an email using a template.</li>
 <li><tt class="docutils literal">Server Action</tt>: Executes a server action.</li>
 <li><tt class="docutils literal">Activity</tt>: Creates an activity to the related record.</li>
 </ul>
-<p>All the activities need to specify the moment of execution. We will set
-the number of hours/days and a trigger type:</p>
+<p>All the steps need to specify the moment of execution. We will set the
+number of hours/days and a trigger type:</p>
 <ul class="simple">
 <li><tt class="docutils literal">Start of workflow</tt>: It will be executed at the
 previously-configured time after we create the record.</li>
-<li><tt class="docutils literal">Execution of another activity</tt>: It will be executed at the
-previously-configured time after the previous activity is finished
+<li><tt class="docutils literal">Execution of another step</tt>: It will be executed at the
+previously-configured time after the previous step is finished
 properly.</li>
 <li><tt class="docutils literal">Mail opened</tt>: It will be executed at the previously-configured
-time after the mail from the previous activity is opened.</li>
+time after the mail from the previous step is opened.</li>
 <li><tt class="docutils literal">Mail not opened</tt>: It will be executed at the previously-configured
-time after the mail from the previous activity is sent if it is not
+time after the mail from the previous step is sent if it is not
 opened before this time.</li>
 <li><tt class="docutils literal">Mail replied</tt>: It will be executed at the previously-configured
-time after the mail from the previous activity is replied.</li>
+time after the mail from the previous step is replied.</li>
 <li><tt class="docutils literal">Mail not replied</tt>: It will be executed at the
-previously-configured time after the mail from the previous activity
-is opened if it has not been replied.</li>
+previously-configured time after the mail from the previous step is
+opened if it has not been replied.</li>
 <li><tt class="docutils literal">Mail clicked</tt>: It will be executed at the previously-configured
-time after the links of the mail from the previous activity are
-clicked.</li>
+time after the links of the mail from the previous step are clicked.</li>
 <li><tt class="docutils literal">Mail not clicked</tt>: It will be executed at the
-previously-configured time after the mail from the previous activity
-is opened and no links are clicked.</li>
+previously-configured time after the mail from the previous step is
+opened and no links are clicked.</li>
 <li><tt class="docutils literal">Mail bounced</tt>: It will be executed at the previously-configured
-time after the mail from the previous activity is bounced back for
-any reason.</li>
-<li><tt class="docutils literal">Activity done</tt>: It will be executed at the previously-configured
-time after the activity from the previous action is done.</li>
-<li><tt class="docutils literal">Activity not done</tt>: It will be executed at the
+time after the mail from the previous step is bounced back for any
+reason.</li>
+<li><tt class="docutils literal">Activity has been finished</tt>: It will be executed at the
+previously-configured time after the activity from the previous
+action is done.</li>
+<li><tt class="docutils literal">Activity has not been finished</tt>: It will be executed at the
 previously-configured time after the previous action is executed if
 the related activity is not done.</li>
 </ul>
@@ -464,11 +477,10 @@ on the template</p>
 <p>Records are created using a cron action. This action is executed every 6
 hours by default.</p>
 </div>
-<div class="section" id="activity-execution">
-<h2><a class="toc-backref" href="#toc-entry-5">Activity execution</a></h2>
-<p>Activities are executed using a cron action. This action is executed
-every hour by default. On the record view, you can execute manually an
-action.</p>
+<div class="section" id="step-execution">
+<h2><a class="toc-backref" href="#toc-entry-5">Step execution</a></h2>
+<p>Steps are executed using a cron action. This action is executed every
+hour by default. On the record view, you can execute manually an action.</p>
 </div>
 </div>
 <div class="section" id="bug-tracker">
