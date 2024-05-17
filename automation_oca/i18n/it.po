@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-15 13:37+0000\n"
+"PO-Revision-Date: 2024-05-17 12:39+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -563,7 +563,7 @@ msgstr "Dominio finale"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_follower_ids
 msgid "Followers"
-msgstr "Chi segue"
+msgstr "Seguito da"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_partner_ids
