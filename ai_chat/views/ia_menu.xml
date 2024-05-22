@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo>
+
+    <record model="ir.ui.menu" id="ia_main_menu">
+        <field name="name">ai</field>
+        <field name="sequence" eval="100" />
+    </record>
+
+    <record model="ir.ui.menu" id="ia_menu_dashboard">
+        <field name="name">Dashboard</field>
+        <field name="parent_id" ref="ia_main_menu" />
+        <field name="sequence" eval="100" />
+    </record>
+
+    <record model="ir.ui.menu" id="ia_menu_operations">
+        <field name="name">Operations</field>
+        <field name="parent_id" ref="ia_main_menu" />
+        <field name="sequence" eval="200" />
+    </record>
+
+    <record model="ir.ui.menu" id="ia_menu_data">
+        <field name="name">Data</field>
+        <field name="parent_id" ref="ia_main_menu" />
+        <field name="sequence" eval="300" />
+    </record>
+
+    <record model="ir.ui.menu" id="ia_config_submenu">
+        <field name="name">Configuration</field>
+        <field name="parent_id" ref="ia_main_menu" />
+        <field name="sequence" eval="999" />
+    </record>
+
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo noupdate="1">
+
+    <record model="ai.tool" id="ia_tool_SerperDevTool">
+       <field name="name">Serper</field>
+       <field name="tool_type">SerperDevTool</field>
+       <field name="serper_api_key">68b3a1fc34410382434ea634a40ad1538a794a2e</field>
+    </record>
+
+    <record model="ai.tool" id="ia_tool_BrowserTools">
+       <field name="name">BrowserTools</field>
+       <field name="tool_type">BrowserTools</field>
+    </record>
+
+    <record model="ai.tool" id="ia_tool_SearchTools">
+       <field name="name">SearchTools</field>
+       <field name="tool_type">SearchTools</field>
+    </record>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="ia_llm_form_view">
+        <field name="model">ai.llm</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <field name="name" />
+                        <field name="llm_type" />
+                        <field name="endpoint" />
+                        <field name="model_name" />
+                        <field name="api_key" password="True" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_llm_search_view">
+        <field name="model">ai.llm</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_llm_tree_view">
+        <field name="model">ai.llm</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="llm_type" />
+                <field name="endpoint" />
+                <field name="model_name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ia_llm_act_window">
+        <field name="name">Llm</field>
+        <field name="res_model">ai.llm</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="ia_llm_menu">
+        <field name="name">Llm</field>
+        <field name="parent_id" ref="ia_chat.ia_config_submenu" />
+        <field name="action" ref="ia_llm_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>
