@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo>
+
+    <record model="ir.ui.view" id="ia_execution_form_view">
+        <field name="model">ai.execution</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_confirm"
+                        string="Start"
+                        type="object"
+                        class="oe_highlight"
+                        states="draft,error"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="crew_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="agent_ids" widget="many2many_tags" />
+                        <field name="task_ids" widget="many2many_tags" />
+                    </group>
+                    <field name="execution_data_ids" />
+                    <field name="execution_result" />
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_execution_search_view">
+        <field name="model">ai.execution</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_execution_tree_view">
+        <field name="model">ai.execution</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="crew_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ia_execution_act_window">
+        <field name="name">Execution</field>
+        <field name="res_model">ai.execution</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="ia_execution_menu">
+        <field name="name">Execution</field>
+        <field name="parent_id" ref="ia_chat.ia_menu_operations" />
+        <field name="action" ref="ia_execution_act_window" />
+        <field name="sequence" eval="100" />
+    </record>
+
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo>
+
+    <record model="ir.ui.view" id="ia_crew_form_view">
+        <field name="model">ai.crew</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- TODO -->
+                </header>
+                <sheet>
+                    <!-- TODO -->
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="process" />
+                            <field
+                                name="manager_llm_id"
+                                attrs="{'required': [('process', '=', 'hierarchical')]}"
+                            />
+
+                        </group>
+                        <group>
+                            <field name="verbose" />
+                            <field name="full_output" />
+                            <field name="language" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tasks">
+                            <field name="task_ids" />
+                        </page>
+                        <page string="Agents">
+                            <field name="agent_ids" />
+                        </page>
+                        <page string="Extra Info">
+                            <group>
+                                <field name="function_calling_llm" />
+                                <field name="config" />
+                                <field name="max_rpm" />
+                                <field name="step_callback" />
+                                <field name="share_crew" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_crew_search_view">
+        <field name="model">ai.crew</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_crew_tree_view">
+        <field name="model">ai.crew</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name" />
+                <field name="process" />
+                <field name="task_ids" widget="many2many_tags" />
+                <field name="agent_ids" widget="many2many_tags" />
+                <field name="language" />
+                <field name="verbose" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ia_crew_act_window">
+        <field name="name">Crew</field> <!-- TODO -->
+        <field name="res_model">ai.crew</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="ia_crew_menu">
+        <field name="name">Crew</field>
+        <field name="parent_id" ref="ia_chat.ia_menu_data" />
+        <field name="action" ref="ia_crew_act_window" />
+        <field name="sequence" eval="100" />
+    </record>
+
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo noupdate="1">
+
+
+    <record model="ai.execution" id="ia_execution_healthcare">
+       <field name="name">AI in healthcare</field>
+       <field name="crew_id" ref="ia_agent.ia_crew_research_crew_1" />
+    </record>
+
+    <record model="ai.execution.data" id="ia_execution_healthcare_data_1">
+        <field name="key">topic</field>
+        <field name="value">AI in healthcare</field>
+        <field name="execution_id" ref="ia_agent.ia_execution_healthcare" />
+     </record>
+
+
+</odoo>

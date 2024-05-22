@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo noupdate="1">
+
+    <!-- TODO
+    <record model="ai.execution" id="ia_execution_demo_1">
+       <field name="name">...</field>
+    </record>
+    -->
+
+</odoo>

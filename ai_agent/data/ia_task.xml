@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo noupdate="1">
+
+    <record model="ai.task" id="ia_task_demo_1">
+        <field name="name">Research Task</field>
+        <field
+            name="description"
+        >Identify the next big trend in {topic}. Focus on identifying pros and cons and the overall narrative. Your final report should clearly articulate the key points, its market opportunities, and potential risks.</field>
+        <field
+            name="expected_output"
+        >A comprehensive 3 paragraphs long report on the latest AI trends.</field>
+        <field name="tool_ids" eval="[(4, ref('ia_chat.ia_tool_SerperDevTool'))]" />
+        <field name="agent_id" ref="ia_agent_senior_research_1" />
+    </record>
+
+    <record model="ai.task" id="ia_task_demo_2">
+        <field name="name">Writer Task</field>
+        <field
+            name="description"
+        >Compose an insightful article on {topic}. Focus on the latest trends and how it's impacting the industry. This article should be easy to understand, engaging, and positive.</field>
+        <field
+            name="expected_output"
+        >A 4 paragraph article on {topic} advancements formatted as markdown.</field>
+        <field name="tool_ids" eval="[(4, ref('ia_chat.ia_tool_SerperDevTool'))]" />
+        <field name="agent_id" ref="ia_agent_writer_1" />
+        <field name="async_execution" eval="False" />
+        <field name="output_file">new-blog-post.md</field>
+    </record>
+
+</odoo>

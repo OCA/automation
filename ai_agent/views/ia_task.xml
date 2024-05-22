@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo>
+
+    <record model="ir.ui.view" id="ia_task_form_view">
+        <field name="model">ai.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="agent_id" />
+                            <field name="tool_ids" widget="many2many_tags" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Information">
+                            <separator string="Description" />
+                            <field name="description" nolabel="1" />
+                            <separator string="Expected Output" />
+                            <field name="expected_output" nolabel="1" />
+                        </page>
+                        <page string="Extra Info">
+                            <group>
+                                <field name="async_execution" />
+                                <field name="context" />
+                                <field name="output_json" />
+                                <field name="output_pydantic" />
+                                <field name="output_file" />
+                                <field name="callback" />
+                                <field name="crew_id" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_task_search_view">
+        <field name="model">ai.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_task_tree_view">
+        <field name="model">ai.task</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- TODO -->
+                <field name="name" />
+                <field name="description" />
+                <field name="agent_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ia_task_act_window">
+        <field name="name">ai Task</field> <!-- TODO -->
+        <field name="res_model">ai.task</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="ia_task_menu">
+        <field name="name">Task</field>
+        <field name="parent_id" ref="ia_chat.ia_menu_data" />
+        <field name="action" ref="ia_task_act_window" />
+        <field name="sequence" eval="200" />
+    </record>
+
+</odoo>
