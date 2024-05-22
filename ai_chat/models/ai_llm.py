@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from odoo import fields, models
 
 
-class IaLlm(models.Model):
+class AiLlm(models.Model):
 
     _name = "ai.llm"
     _description = "Llm"

@@ -8,7 +8,7 @@ import crewai_tools
 from odoo import fields, models
 
 
-class IaTools(models.Model):
+class AiTools(models.Model):
 
     _name = "ai.tool"
     _description = "ai Tools"

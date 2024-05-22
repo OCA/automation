@@ -20,10 +20,10 @@ from langchain_core.messages import (
     ToolMessageChunk,
 )
 
-class IaChat(models.Model):
+class AiChat(models.Model):
 
     _name = "ai.chat"
-    _description = "ai Chat"
+    _description = "Ai Chat"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char()
