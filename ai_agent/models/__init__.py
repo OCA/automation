@@ -1,7 +1,7 @@
-from . import ia_agent
-from . import ia_task
-from . import ia_crew
-from . import ia_execution
-from . import ia_execution_data
-# from . import ia_tool
-# from . import ia_llm
+from . import ai_agent
+from . import ai_task
+from . import ai_crew
+from . import ai_execution
+from . import ai_execution_data
+# from . import ai_tool
+# from . import ai_llm
