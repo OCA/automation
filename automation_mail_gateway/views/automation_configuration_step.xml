@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="automation_configuration_step_form_view">
+        <field name="model">automation.configuration.step</field>
+        <field
+            name="inherit_id"
+            ref="automation_oca.automation_configuration_step_form_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='step_type']/../.." position="inside">
+
+                <group attrs="{'invisible':[('step_type', '!=', 'gateway')]}">
+                    <field
+                        name="gateway_id"
+                        attrs="{'required': [('step_type', '=', 'gateway')]}"
+                    />
+                    <field
+                        name="gateway_template_id"
+                        attrs="{'required': [('step_type', '=', 'gateway')]}"
+                    />
+                    <field name="gateway_author_id" />
+                    <field
+                        name="gateway_field_id"
+                        domain="[('model_id', '=', model_id), ('relation', '=',  'res.partner')]"
+                        attrs="{'required': [('step_type', '=', 'gateway')]}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
