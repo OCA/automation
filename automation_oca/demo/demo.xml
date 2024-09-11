@@ -36,7 +36,9 @@ for record in records.filtered(lambda r: not r.is_blacklisted):
             eval="[(4, ref('demo_tag_process')), (4, ref('demo_tag_demo'))]"
         />
         <field name="field_id" ref="base.field_res_partner__email" />
-        <field name="editable_domain">[('email', '!=', False)]</field>
+        <field
+            name="editable_domain"
+        >[ ("email", "!=", False), ("create_date", "&lt;=", datetime.datetime.now())]</field>
     </record>
     <record id="demo_configuration_welcome_send" model="automation.configuration.step">
         <field name="name">Send email</field>

@@ -24,9 +24,29 @@ class AutomationConfiguration(models.Model):
     tag_ids = fields.Many2many("automation.tag")
     company_id = fields.Many2one("res.company")
     domain = fields.Char(
-        required=True, default="[]", help="Filter to apply", compute="_compute_domain"
+        required=True,
+        default="[]",
+        compute="_compute_domain",
+        help="""
+        Filter to apply
+        Following special variable can be used in filter :
+         * datetime
+         * dateutil
+         * time
+         * user
+         * ref """,
     )
-    editable_domain = fields.Char(required=True, default="[]", help="Filter to apply")
+    editable_domain = fields.Char(
+        required=True,
+        default="[]",
+        help="""Filter to apply
+        Following special variable can be used in filter :
+         * datetime
+         * dateutil
+         * time
+         * user
+         * ref """,
+    )
     model_id = fields.Many2one(
         "ir.model",
         domain=[("is_mail_thread", "=", True)],
