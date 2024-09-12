@@ -5,7 +5,12 @@ from collections import defaultdict
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.tools.safe_eval import safe_eval
+from odoo.tools.safe_eval import (
+    datetime as safe_datetime,
+    dateutil as safe_dateutil,
+    safe_eval,
+    time as safe_time,
+)
 
 
 class AutomationConfiguration(models.Model):
@@ -19,9 +24,29 @@ class AutomationConfiguration(models.Model):
     tag_ids = fields.Many2many("automation.tag")
     company_id = fields.Many2one("res.company")
     domain = fields.Char(
-        required=True, default="[]", help="Filter to apply", compute="_compute_domain"
+        required=True,
+        default="[]",
+        compute="_compute_domain",
+        help="""
+        Filter to apply
+        Following special variable can be used in filter :
+         * datetime
+         * dateutil
+         * time
+         * user
+         * ref """,
     )
-    editable_domain = fields.Char(required=True, default="[]", help="Filter to apply")
+    editable_domain = fields.Char(
+        required=True,
+        default="[]",
+        help="""Filter to apply
+        Following special variable can be used in filter :
+         * datetime
+         * dateutil
+         * time
+         * user
+         * ref """,
+    )
     model_id = fields.Many2one(
         "ir.model",
         domain=[("is_mail_thread", "=", True)],
@@ -184,6 +209,18 @@ class AutomationConfiguration(models.Model):
         for record in self.search([("state", "=", "periodic")]):
             record.run_automation()
 
+    def _get_eval_context(self):
+        """Prepare the context used when evaluating python code
+        :returns: dict -- evaluation context given to safe_eval
+        """
+        return {
+            "ref": self.env.ref,
+            "user": self.env.user,
+            "time": safe_time,
+            "datetime": safe_datetime,
+            "dateutil": safe_dateutil,
+        }
+
     def _get_automation_records_to_create(self):
         """
         We will find all the records that fulfill the domain but don't have a record created.
@@ -191,7 +228,8 @@ class AutomationConfiguration(models.Model):
 
         In order to do this, we will add some extra joins on the query of the domain
         """
-        domain = safe_eval(self.domain)
+        eval_context = self._get_eval_context()
+        domain = safe_eval(self.domain, eval_context)
         Record = self.env[self.model_id.model]
         if self.company_id and "company_id" in Record._fields:
             # In case of company defined, we add only if the records have company field
