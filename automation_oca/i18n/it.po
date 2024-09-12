@@ -17,6 +17,19 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
+msgid ""
+"\n"
+"        Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
+
+#. module: automation_oca
 #. odoo-python
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
@@ -66,7 +79,8 @@ msgstr ""
 #: model:mail.template,body_html:automation_oca.demo_welcome_template
 msgid ""
 "<p>Welcome!</p>\n"
-"            <p>Thanks <t t-out=\"object.name\"></t> for becoming a contact.</p>\n"
+"            <p>Thanks <t t-out=\"object.name\"></t> for becoming a contact.</"
+"p>\n"
 "            <p>Kind regards,</p>\n"
 "        "
 msgstr ""
@@ -538,11 +552,21 @@ msgid "Filter Domain"
 msgstr "Dominio filtro"
 
 #. module: automation_oca
-#: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
-#: model:ir.model.fields,help:automation_oca.field_automation_configuration__editable_domain
 #: model:ir.model.fields,help:automation_oca.field_automation_filter__domain
 msgid "Filter to apply"
 msgstr "Filtro da applicare"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__editable_domain
+msgid ""
+"Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__domain
@@ -923,8 +947,10 @@ msgstr "Numero di messaggi con errore di consegna"
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
-"On <b>on demand configurations</b>, the records are created only by pressing the run button.\n"
-"                        It is useful if you want to control the execution and created records manually."
+"On <b>on demand configurations</b>, the records are created only by pressing "
+"the run button.\n"
+"                        It is useful if you want to control the execution "
+"and created records manually."
 msgstr ""
 "Con <b>configurazione a richiestas</b>, i recordo sono creati solo facendo "
 "clic sul pulsante di esecuzione.\n"
@@ -934,8 +960,10 @@ msgstr ""
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
-"On <b>periodical configurations</b>, the records are created automatically by a cron job.\n"
-"                        It is great for tasks that don't need user validation."
+"On <b>periodical configurations</b>, the records are created automatically "
+"by a cron job.\n"
+"                        It is great for tasks that don't need user "
+"validation."
 msgstr ""
 "Con <b>configurazioni periodiche</b>, i record sono creati automaticamente "
 "da un lavoro cron.\n"
@@ -1245,8 +1273,8 @@ msgstr ""
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
-"This is configuration only generates new records on demand. Press the button"
-" in order to execute them manually."
+"This is configuration only generates new records on demand. Press the button "
+"in order to execute them manually."
 msgstr ""
 "Questa configurazione genera record solo su richiesta. Cliccare il pulsante "
 "per eseguirli manualmente."
@@ -1255,7 +1283,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
 msgid ""
 "This is the final domain that will be applied to the records.\n"
-"                                Consists in the join of the specific domain of the step and the domain of the records."
+"                                Consists in the join of the specific domain "
+"of the step and the domain of the records."
 msgstr ""
 "Questo è il dominio finale che si applicherà ai record.\n"
 "                                Consiste nell'unione del dominio specifico "
@@ -1316,7 +1345,8 @@ msgstr "Unicità basata su"
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_user_type
 msgid ""
 "Use 'Specific User' to always assign the same user on the next activity.\n"
-"        Use 'Generic User From Record' to specify the field name of the user\n"
+"        Use 'Generic User From Record' to specify the field name of the "
+"user\n"
 "        to choose on the record."
 msgstr ""
 "Utilizzare 'Utente specifico' per assegnare sempre lo stesso utente "
