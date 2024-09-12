@@ -14,6 +14,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
+msgid ""
+"\n"
+"        Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
+
+#. module: automation_oca
 #. odoo-python
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
@@ -526,10 +539,20 @@ msgid "Filter Domain"
 msgstr ""
 
 #. module: automation_oca
-#: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
-#: model:ir.model.fields,help:automation_oca.field_automation_configuration__editable_domain
 #: model:ir.model.fields,help:automation_oca.field_automation_filter__domain
 msgid "Filter to apply"
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__editable_domain
+msgid ""
+"Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
 msgstr ""
 
 #. module: automation_oca
