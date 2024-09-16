@@ -48,13 +48,13 @@ class AutomationConfigurationStep(models.Model):
     )
     trigger_interval = fields.Integer()
     trigger_interval_type = fields.Selection(
-        [("hours", "Hours"), ("days", "Days")], required=True, default="hours"
+        [("hours", "Hour(s)"), ("days", "Day(s)")], required=True, default="hours"
     )
     allow_expiry = fields.Boolean(compute="_compute_allow_expiry")
     expiry = fields.Boolean(compute="_compute_expiry", store=True, readonly=False)
     expiry_interval = fields.Integer()
     expiry_interval_type = fields.Selection(
-        [("hours", "Hours"), ("days", "Days")], required=True, default="hours"
+        [("hours", "Hour(s)"), ("days", "Day(s)")], required=True, default="hours"
     )
     trigger_type = fields.Selection(
         selection="_trigger_type_selection",
@@ -94,7 +94,7 @@ class AutomationConfigurationStep(models.Model):
         store=True,
     )
     activity_date_deadline_range_type = fields.Selection(
-        [("days", "Days"), ("weeks", "Weeks"), ("months", "Months")],
+        [("days", "Day(s)"), ("weeks", "Week(s)"), ("months", "Month(s)")],
         string="Due type",
         default="days",
         compute="_compute_activity_info",
