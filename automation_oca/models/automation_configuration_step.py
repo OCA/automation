@@ -14,7 +14,6 @@ from odoo.tools.safe_eval import safe_eval
 
 
 class AutomationConfigurationStep(models.Model):
-
     _name = "automation.configuration.step"
     _description = "Automation Steps"
     _order = "trigger_interval_hours ASC"

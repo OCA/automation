@@ -157,7 +157,7 @@ class AutomationRecordStep(models.Model):
                     self.record_id.resource_ref,
                     parent_id=self.id,
                     record_id=self.record_id.id,
-                    **kwargs
+                    **kwargs,
                 )
                 for activity in self.configuration_step_id.child_ids
             ]
