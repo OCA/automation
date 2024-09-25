@@ -284,7 +284,8 @@ class AutomationConfigurationStep(models.Model):
     @api.model
     def _trigger_types(self):
         """
-        This function will return a dictionary that map trigger_types to its configurations.
+        This function will return a dictionary that map
+        trigger_types to its configurations.
         Each trigger_type can contain:
         - name (Required field)
         - step type: List of step types that succeed after this.

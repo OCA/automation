@@ -78,7 +78,7 @@ class TestAutomationSecurity(AutomationTestCase):
     @users("user_automation_01")
     def test_security_01(self):
         record = self.env["automation.record"].search(
-            [("configuration_id", "=", self.configuration.id)]
+            domain=[("configuration_id", "=", self.configuration.id)]
         )
         self.assertEqual(1, len(record))
         self.assertEqual(self.partner_02, record.resource_ref)

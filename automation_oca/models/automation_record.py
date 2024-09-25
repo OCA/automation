@@ -61,7 +61,7 @@ class AutomationRecord(models.Model):
     def _compute_resource_ref(self):
         for record in self:
             if record.model and record.model in self.env:
-                record.resource_ref = "%s,%s" % (record.model, record.res_id or 0)
+                record.resource_ref = f"{record.model},{record.res_id or 0}"
             else:
                 record.resource_ref = None
 
@@ -85,7 +85,6 @@ class AutomationRecord(models.Model):
             offset=offset,
             limit=limit,
             order=order,
-            count=False,
             access_rights_uid=access_rights_uid,
         )
         if self.env.is_system():
@@ -98,7 +97,17 @@ class AutomationRecord(models.Model):
         # Remark: self.record is @property, not field
 
         if not ids:
-            return 0 if count else []
+            return (
+                0
+                if count
+                else super()._search(
+                    args,
+                    offset=offset,
+                    limit=limit,
+                    order=order,
+                    access_rights_uid=access_rights_uid,
+                )
+            )
         orig_ids = ids
         ids = set(ids)
         result = []
@@ -151,7 +160,11 @@ class AutomationRecord(models.Model):
             )
         # Restore original ordering
         result = [x for x in orig_ids if x in result]
-        return len(result) if count else list(result)
+        return (
+            len(result)
+            if count
+            else super()._search([("id", "in", result)], order=order)
+        )
 
     def read(self, fields=None, load="_classic_read"):
         """Override to explicitely call check_access_rule, that is not called

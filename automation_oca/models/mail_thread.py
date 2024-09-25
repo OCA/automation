@@ -10,13 +10,11 @@ class MailThread(models.AbstractModel):
     @api.model
     def _routing_handle_bounce(self, email_message, message_dict):
         """We want to mark the bounced email"""
-        result = super(MailThread, self)._routing_handle_bounce(
-            email_message, message_dict
-        )
-        bounced_msg_id = message_dict.get("bounced_msg_id")
-        if bounced_msg_id:
+        result = super()._routing_handle_bounce(email_message, message_dict)
+        bounced_msg_ids = message_dict.get("bounced_msg_ids")
+        if bounced_msg_ids:
             self.env["automation.record.step"].search(
-                [("message_id", "in", bounced_msg_id)]
+                [("message_id", "in", bounced_msg_ids)]
             )._set_mail_bounced()
         return result
 
@@ -36,9 +34,7 @@ class MailThread(models.AbstractModel):
                 )
                 records._set_mail_open()
                 records._set_mail_reply()
-        return super(MailThread, self)._message_route_process(
-            message, message_dict, routes
-        )
+        return super()._message_route_process(message, message_dict, routes)
 
     @api.model
     def get_automation_access(self, doc_ids, operation, model_name=False):

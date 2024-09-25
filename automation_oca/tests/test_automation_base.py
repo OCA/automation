@@ -497,7 +497,7 @@ class TestAutomationBase(AutomationTestCase):
             )
         ) as f:
             self.assertTrue(f.resource_ref)
-            f.resource_ref = "%s,%s" % (self.partner_01._name, self.partner_01.id)
+            f.resource_ref = f"{self.partner_01._name},{self.partner_01.id}"
         wizard = f.save()
         wizard_action = wizard.test_record()
         record = self.env[wizard_action["res_model"]].browse(wizard_action["res_id"])

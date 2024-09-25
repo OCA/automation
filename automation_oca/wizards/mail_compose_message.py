@@ -9,8 +9,8 @@ class MailComposeMessage(models.TransientModel):
 
     automation_record_step_id = fields.Many2one("automation.record.step")
 
-    def get_mail_values(self, res_ids):
-        result = super().get_mail_values(res_ids)
+    def _prepare_mail_values(self, res_ids):
+        result = super()._prepare_mail_values(res_ids)
         if self.automation_record_step_id:
             for res_id in res_ids:
                 result[res_id][

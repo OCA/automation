@@ -1,6 +1,8 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from requests import PreparedRequest, Response, Session
+
 from odoo import tools
 from odoo.tests.common import Form, HttpCase
 
@@ -38,7 +40,8 @@ Content-Transfer-Encoding: quoted-printable
  <head>=20
   <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8" />
  </head>=20
- <body style=3D"margin: 0; padding: 0; background: #ffffff;-webkit-text-size-adjust: 100%;">=20
+ <body style=3D"margin: 0; padding: 0; background: #ffffff;-webkit-text-size-adjust:
+ 100%;">=20
 
   <p>I would gladly answer to your mass mailing !</p>
 
@@ -52,6 +55,14 @@ Content-Transfer-Encoding: quoted-printable
 
 
 class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
+    @classmethod
+    def _request_handler(cls, s: Session, r: PreparedRequest, /, **kw):
+        if r.url.startswith("https://www.twitter.com"):
+            r = Response()
+            r.status_code = 200
+            return r
+        return super()._request_handler(s, r, **kw)
+
     def test_activity_execution(self):
         """
         We will check the execution of the tasks and that we cannot execute them again
@@ -63,7 +74,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         messages_01 = self.partner_01.message_ids
         with self.mock_mail_gateway():
             self.env["automation.record.step"]._cron_automation_steps()
-            self.assertSentEmail(self.env.user.partner_id, [self.partner_01])
+        self.assertSentEmail(self.env.user.partner_id, [self.partner_01])
         record_activity = self.env["automation.record.step"].search(
             [("configuration_step_id", "=", activity.id)]
         )
@@ -101,7 +112,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
             "bounced_partner": self.env["res.partner"].sudo(),
             "bounced_message": self.env["mail.message"].sudo(),
             "bounced_email": "",
-            "bounced_msg_id": [record_activity.message_id],
+            "bounced_msg_ids": [record_activity.message_id],
         }
         record_activity.invalidate_recordset()
         self.assertFalse(
@@ -274,7 +285,8 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
 
     def test_no_open(self):
         """
-        Now we will check the not open validation when it is not opened (should be executed)
+        Now we will check the not open validation when it is not opened
+        (should be executed)
         """
         activity = self.create_mail_activity()
         child_activity = self.create_mail_activity(
@@ -374,12 +386,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         )
         self.assertTrue(tracker)
         self.url_open(
-            "/r/%s/au/%s/%s"
-            % (
-                tracker.code,
-                record_activity.id,
-                record_activity._get_mail_tracking_token(),
-            )
+            f"/r/{tracker.code}/au/{record_activity.id}/{record_activity._get_mail_tracking_token()}"
         )
         self.assertEqual("open", record_activity.mail_status)
         self.assertEqual(
@@ -404,12 +411,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         self.assertEqual(1, self.configuration.click_count)
         # Now we will check that a second click does not generate a second log
         self.url_open(
-            "/r/%s/au/%s/%s"
-            % (
-                tracker.code,
-                record_activity.id,
-                record_activity._get_mail_tracking_token(),
-            )
+            f"/r/{tracker.code}/au/{record_activity.id}/{record_activity._get_mail_tracking_token()}"
         )
         self.assertEqual(
             1,
@@ -451,24 +453,13 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
             [("url", "=", "https://www.twitter.com")]
         )
         self.assertTrue(tracker)
-        self.url_open(
-            "/r/%s/au/%s/1234"
-            % (
-                tracker.code,
-                record_activity.id,
-            )
-        )
+        self.url_open(f"/r/{tracker.code}/au/{record_activity.id}/1234")
         self.assertEqual("sent", record_activity.mail_status)
         self.assertFalse(record_child_activity.scheduled_date)
         # Now we check the case where the code is not found
         tracker.unlink()
         self.url_open(
-            "/r/%s/au/%s/%s"
-            % (
-                tracker.code,
-                record_activity.id,
-                record_activity._get_mail_tracking_token(),
-            )
+            f"/r/{tracker.code}/au/{record_activity.id}/{record_activity._get_mail_tracking_token()}"
         )
         self.assertEqual("sent", record_activity.mail_status)
         self.assertFalse(record_child_activity.scheduled_date)
@@ -481,7 +472,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         child_activity = self.create_mail_activity(
             parent_id=activity.id, trigger_type="mail_not_clicked"
         )
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         with self.mock_mail_gateway():
@@ -510,7 +501,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         child_activity = self.create_mail_activity(
             parent_id=activity.id, trigger_type="mail_not_clicked"
         )
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         with self.mock_mail_gateway():
@@ -532,12 +523,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
             [("url", "=", "https://www.twitter.com")]
         )
         self.url_open(
-            "/r/%s/au/%s/%s"
-            % (
-                tracker.code,
-                record_activity.id,
-                record_activity._get_mail_tracking_token(),
-            )
+            f"/r/{tracker.code}/au/{record_activity.id}/{record_activity._get_mail_tracking_token()}"
         )
         self.env["automation.record.step"]._cron_automation_steps()
         self.assertEqual("rejected", record_child_activity.state)
@@ -547,7 +533,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         We want to ensure that no mails are sent on tests
         """
         self.create_mail_activity()
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         with Form(
             self.env["automation.configuration.test"].with_context(
                 default_configuration_id=self.configuration.id,
@@ -555,7 +541,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
             )
         ) as f:
             self.assertTrue(f.resource_ref)
-            f.resource_ref = "%s,%s" % (self.partner_01._name, self.partner_01.id)
+            f.resource_ref = f"{self.partner_01._name},{self.partner_01.id}"
         wizard = f.save()
         wizard_action = wizard.test_record()
         record = self.env[wizard_action["res_model"]].browse(wizard_action["res_id"])

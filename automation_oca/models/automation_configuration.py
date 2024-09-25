@@ -5,18 +5,7 @@ from collections import defaultdict
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.tools.safe_eval import (
-    datetime as safe_datetime,
-)
-from odoo.tools.safe_eval import (
-    dateutil as safe_dateutil,
-)
-from odoo.tools.safe_eval import (
-    safe_eval,
-)
-from odoo.tools.safe_eval import (
-    time as safe_time,
-)
+from odoo.tools.safe_eval import safe_eval
 
 
 class AutomationConfiguration(models.Model):
@@ -31,26 +20,13 @@ class AutomationConfiguration(models.Model):
     domain = fields.Char(
         required=True,
         default="[]",
+        help="Filter to apply",
         compute="_compute_domain",
-        help="""
-        Filter to apply
-        Following special variable can be used in filter :
-         * datetime
-         * dateutil
-         * time
-         * user
-         * ref """,
     )
     editable_domain = fields.Char(
         required=True,
         default="[]",
-        help="""Filter to apply
-        Following special variable can be used in filter :
-         * datetime
-         * dateutil
-         * time
-         * user
-         * ref """,
+        help="Filter to apply",
     )
     model_id = fields.Many2one(
         "ir.model",
@@ -214,48 +190,33 @@ class AutomationConfiguration(models.Model):
         for record in self.search([("state", "=", "periodic")]):
             record.run_automation()
 
-    def _get_eval_context(self):
-        """Prepare the context used when evaluating python code
-        :returns: dict -- evaluation context given to safe_eval
-        """
-        return {
-            "ref": self.env.ref,
-            "user": self.env.user,
-            "time": safe_time,
-            "datetime": safe_datetime,
-            "dateutil": safe_dateutil,
-        }
-
     def _get_automation_records_to_create(self):
         """
-        We will find all the records that fulfill the domain but don't have a record created.
+        We will find all the records that fulfill
+        the domain but don't have a record created.
         Also, we need to check by autencity field if defined.
 
         In order to do this, we will add some extra joins on the query of the domain
         """
-        eval_context = self._get_eval_context()
-        domain = safe_eval(self.domain, eval_context)
+        domain = safe_eval(self.domain)
         Record = self.env[self.model_id.model]
         if self.company_id and "company_id" in Record._fields:
             # In case of company defined, we add only if the records have company field
             domain += [("company_id", "=", self.company_id.id)]
         query = Record._where_calc(domain)
         alias = query.left_join(
-            query._tables[Record._table],
+            Record._table,
             "id",
             "automation_record",
             "res_id",
             "automation_record",
-            "{rhs}.model = %s AND {rhs}.configuration_id = %s AND "
-            "({rhs}.is_test IS NULL OR NOT {rhs}.is_test)",
-            (Record._name, self.id),
         )
         query.add_where(f"{alias}.id is NULL")
         if self.field_id:
             # In case of unicity field defined, we need to add this
             # left join to find already created records
             linked_tab = query.left_join(
-                query._tables[Record._table],
+                Record._table,
                 self.field_id.name,
                 Record._table,
                 self.field_id.name,
@@ -267,9 +228,6 @@ class AutomationConfiguration(models.Model):
                 "automation_record",
                 "res_id",
                 "automation_record_linked",
-                "{rhs}.model = %s AND {rhs}.configuration_id = %s AND "
-                "({rhs}.is_test IS NULL OR NOT {rhs}.is_test)",
-                (Record._name, self.id),
             )
             query.add_where(f"{alias2}.id is NULL")
             from_clause, where_clause, params = query.get_sql()
@@ -280,10 +238,10 @@ class AutomationConfiguration(models.Model):
                 ", ".join([f'MIN("{next(iter(query._tables))}".id) as id']),
                 from_clause,
                 where_clause or "TRUE",
-                (" ORDER BY %s" % self.order) if query.order else "",
-                (" LIMIT %d" % self.limit) if query.limit else "",
-                (" OFFSET %d" % self.offset) if query.offset else "",
-                "%s.%s" % (query._tables[Record._table], self.field_id.name),
+                (f" ORDER BY {self.order}") if query.order else "",
+                (f" LIMIT {self.limit}") if query.limit else "",
+                (f" OFFSET {self.offset}") if query.offset else "",
+                f"{Record._table}.{self.field_id.name}",
             )
         else:
             query_str, params = query.select()

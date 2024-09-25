@@ -40,9 +40,8 @@ class TestAutomationAction(AutomationTestCase):
         In this case, the task 1_1_1 will only be generated for partner 1 and task 1_2_1
         for partner 2
         """
-        self.configuration.editable_domain = "[('id', 'in', [%s, %s])]" % (
-            self.partner_01.id,
-            self.partner_02.id,
+        self.configuration.editable_domain = (
+            f"[('id', 'in', [{self.partner_01.id}, {self.partner_02.id}])]"
         )
 
         activity_1 = self.create_server_action()
