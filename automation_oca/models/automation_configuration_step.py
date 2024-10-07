@@ -265,12 +265,14 @@ class AutomationConfigurationStep(models.Model):
     )
     def _compute_applied_domain(self):
         for record in self:
+            eval_context = record.configuration_id._get_eval_context()
             record.applied_domain = expression.AND(
                 [
-                    safe_eval(record.domain),
+                    safe_eval(record.domain, eval_context),
                     safe_eval(
                         (record.parent_id and record.parent_id.applied_domain)
-                        or record.configuration_id.domain
+                        or record.configuration_id.domain,
+                        eval_context,
                     ),
                 ]
             )
