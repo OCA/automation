@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="ia_chat_form_view">
+        <field name="model">ai.chat</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="llm_id"/>
+                        </group>
+                    </group>
+                    <field name="prompt"/>
+                    <button name="action_send" string="Send" type="object"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_chat_search_view">
+        <field name="model">ai.chat</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="llm_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_chat_tree_view">
+        <field name="model">ai.chat</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="llm_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ia_chat_act_window">
+        <field name="name">Chat</field>
+        <field name="res_model">ai.chat</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="ia_chat_menu">
+        <field name="name">Chat</field>
+        <field name="parent_id" ref="ia_chat.ia_menu_operations"/>
+        <field name="action" ref="ia_chat_act_window"/>
+        <field name="sequence" eval="50"/>
+    </record>
+
+</odoo>

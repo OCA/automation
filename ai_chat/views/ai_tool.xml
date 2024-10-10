@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo>
+
+    <record model="ir.ui.view" id="ia_tools_form_view">
+        <field name="model">ai.tool</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="tool_type" />
+                    </group>
+                    <notebook>
+                        <page
+                            string="Serper"
+                            name="serper_config"
+                            attrs="{'invisible': [('tool_type', '!=', 'SerperDevTool')]}"
+                        >
+                            <group>
+                                <field
+                                    name="serper_api_key"
+                                    attrs="{'required': [('tool_type', '=', 'SerperDevTool')]}"
+                                />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_tools_search_view">
+        <field name="model">ai.tool</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <group expand="0" string="Group By...">
+                    <filter
+                        string="Tool Type"
+                        name="tool_type"
+                        domain="[]"
+                        context="{'group_by': 'tool_type'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_tools_tree_view">
+        <field name="model">ai.tool</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="tool_type" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ia_tools_act_window">
+        <field name="name">Tools</field>
+        <field name="res_model">ai.tool</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="ia_tools_menu">
+        <field name="name">Tools</field>
+        <field name="parent_id" ref="ia_chat.ia_config_submenu" />
+        <field name="action" ref="ia_tools_act_window" />
+        <field name="sequence" eval="100" />
+    </record>
+
+</odoo>

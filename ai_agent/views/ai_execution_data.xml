@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGLP-3.0 or later (https://www.gnu.org/licenses/lglp). -->
+<odoo>
+
+    <record model="ir.ui.view" id="ia_execution_data_tree_view">
+        <field name="model">ai.execution.data</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="key" />
+                <field name="value" />
+                <field name="execution_id" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3). -->
+<odoo>
+
+    <record model="ir.ui.view" id="ia_agent_form_view">
+        <field name="model">ai.agent</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="role" />
+                            <field name="memory" />
+                            <field name="allow_delegation" />
+                        </group>
+                        <group>
+                            <field name="llm_id" />
+                            <field name="tool_ids" widget="many2many_tags" />
+                            <field name="verbose" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Information">
+                            <separator string="Goal" />
+                            <field name="goal" nolabel="1" />
+                            <separator string="Backstory" />
+                            <field name="backstory" nolabel="1" />
+                        </page>
+                        <page string="Extra Info">
+                            <group>
+                                <field name="function_calling_llm" />
+                                <field name="max_iter" />
+                                <field name="max_rpm" />
+                                <field name="step_callback" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_agent_search_view">
+        <field name="model">ai.agent</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="ia_agent_tree_view">
+        <field name="model">ai.agent</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="role" />
+                <field name="llm_id" optional="show" />
+                <field name="tool_ids" widget="many2many_tags" optional="show" />
+                <field name="goal" optional="hide" />
+                <field name="backstory" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ia_agent_act_window">
+        <field name="name">Agent</field>
+        <field name="res_model">ai.agent</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="ia_agent_menu">
+        <field name="name">Agent</field>
+        <field name="parent_id" ref="ia_chat.ia_menu_data" />
+        <field name="action" ref="ia_agent_act_window" />
+        <field name="sequence" eval="150" />
+    </record>
+
+</odoo>

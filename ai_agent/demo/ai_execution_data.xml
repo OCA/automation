@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License LGLP-3.0 or later (https://www.gnu.org/licenses/lglp). -->
+<odoo noupdate="1">
+
+    <!-- TODO
+    <record model="ai.execution.data" id="ia_execution_data_demo_1">
+       <field name="name">...</field>
+    </record>
+    -->
+
+</odoo>
