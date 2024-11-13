@@ -123,7 +123,10 @@ class AutomationRecordStep(models.Model):
         if (
             self.record_id.resource_ref is None
             or not self.record_id.resource_ref.filtered_domain(
-                safe_eval(self.configuration_step_id.applied_domain)
+                safe_eval(
+                    self.configuration_step_id.applied_domain,
+                    self.configuration_step_id.configuration_id._get_eval_context(),
+                )
             )
             or not self._check_to_execute()
         ):
