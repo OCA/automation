@@ -30,8 +30,8 @@ msgid ""
 msgstr ""
 "\n"
 "        Filtro da applicare\n"
-"        Le seguenti variabili speciali possono essere utilizzate nel filtro:"
-"\n"
+"        Le seguenti variabili speciali possono essere utilizzate nel "
+"filtro:\n"
 "         * datetime\n"
 "         * dateutil\n"
 "         * time\n"
@@ -410,8 +410,8 @@ msgstr "Creato il"
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__days
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__days
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__days
-msgid "Days"
-msgstr "Giorni"
+msgid "Day(s)"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
@@ -577,8 +577,8 @@ msgid ""
 "         * ref "
 msgstr ""
 "Filtro da applicare\n"
-"        Le seguenti variabili speciali possono essere utilizzate nel filtro:"
-"\n"
+"        Le seguenti variabili speciali possono essere utilizzate nel "
+"filtro:\n"
 "         * datetime\n"
 "         * dateutil\n"
 "         * time\n"
@@ -644,8 +644,8 @@ msgstr "Ha un messaggio"
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__hours
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__hours
-msgid "Hours"
-msgstr "Ore"
+msgid "Hour(s)"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__id
@@ -862,8 +862,8 @@ msgstr "Modello dove è applicata la configurazione"
 
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__months
-msgid "Months"
-msgstr "Mesi"
+msgid "Month(s)"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__name
@@ -1389,8 +1389,8 @@ msgstr "Nome campo utente"
 
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__weeks
-msgid "Weeks"
-msgstr "Settimane"
+msgid "Week(s)"
+msgstr ""
 
 #. module: automation_oca
 #: model:mail.template,name:automation_oca.demo_welcome_template
@@ -1421,3 +1421,15 @@ msgstr "esecuzione di un altro passo"
 #, python-format
 msgid "start of workflow"
 msgstr "inizio del flusso di lavoro"
+
+#~ msgid "Days"
+#~ msgstr "Giorni"
+
+#~ msgid "Hours"
+#~ msgstr "Ore"
+
+#~ msgid "Months"
+#~ msgstr "Mesi"
+
+#~ msgid "Weeks"
+#~ msgstr "Settimane"

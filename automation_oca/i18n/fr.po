@@ -397,8 +397,8 @@ msgstr "Créé le"
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__days
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__days
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__days
-msgid "Days"
-msgstr "Jours"
+msgid "Day(s)"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
@@ -623,8 +623,8 @@ msgstr ""
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__hours
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__hours
-msgid "Hours"
-msgstr "Heures"
+msgid "Hour(s)"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__id
@@ -841,8 +841,8 @@ msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__months
-msgid "Months"
-msgstr "Mois"
+msgid "Month(s)"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__name
@@ -1358,8 +1358,8 @@ msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__weeks
-msgid "Weeks"
-msgstr "Semaines"
+msgid "Week(s)"
+msgstr ""
 
 #. module: automation_oca
 #: model:mail.template,name:automation_oca.demo_welcome_template
@@ -1390,3 +1390,15 @@ msgstr ""
 #, python-format
 msgid "start of workflow"
 msgstr ""
+
+#~ msgid "Days"
+#~ msgstr "Jours"
+
+#~ msgid "Hours"
+#~ msgstr "Heures"
+
+#~ msgid "Months"
+#~ msgstr "Mois"
+
+#~ msgid "Weeks"
+#~ msgstr "Semaines"
