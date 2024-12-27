@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-09-16 11:06+0000\n"
+"PO-Revision-Date: 2024-12-27 11:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -411,7 +411,7 @@ msgstr "Creato il"
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__days
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__days
 msgid "Day(s)"
-msgstr ""
+msgstr "Giorno(i)"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
@@ -645,7 +645,7 @@ msgstr "Ha un messaggio"
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__hours
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__hours
 msgid "Hour(s)"
-msgstr ""
+msgstr "Ora(e)"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__id
@@ -863,7 +863,7 @@ msgstr "Modello dove è applicata la configurazione"
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__months
 msgid "Month(s)"
-msgstr ""
+msgstr "Mese(i)"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__name
@@ -1390,7 +1390,7 @@ msgstr "Nome campo utente"
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__weeks
 msgid "Week(s)"
-msgstr ""
+msgstr "Settimana(e)"
 
 #. module: automation_oca
 #: model:mail.template,name:automation_oca.demo_welcome_template
