@@ -19,7 +19,17 @@
                     />
 
                     <div class="oe_title">
-                        <h1><field
+                        <div attrs="{'invisible': [('is_orphan_record', '=', False)]}">
+                            <field name="is_orphan_record" invisible="1" />
+                            <h1><span>This record is an orphan record</span></h1>
+                            <group>
+                                <field name="model" />
+                            </group>
+                        </div>
+
+                        <h1
+                            attrs="{'invisible': [('is_orphan_record', '=', True)]}"
+                        ><field
                                 name="resource_ref"
                                 required="1"
                                 options="{'hide_model': True}"
