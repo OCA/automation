@@ -4,7 +4,7 @@
 import logging
 from collections import defaultdict
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -40,6 +40,12 @@ class AutomationRecord(models.Model):
     )
     is_test = fields.Boolean()
 
+    is_orphan_record = fields.Boolean(
+        default=False,
+        help="Indicates if this record is a placeholder for a missing resource.",
+        readonly=True,
+    )
+
     @api.model
     def _selection_target_model(self):
         return [
@@ -69,7 +75,10 @@ class AutomationRecord(models.Model):
     @api.depends("res_id", "model")
     def _compute_name(self):
         for record in self:
-            record.name = self.env[record.model].browse(record.res_id).display_name
+            if not record.is_orphan_record:
+                record.name = self.env[record.model].browse(record.res_id).display_name
+            else:
+                record.name = _("Orphan Record")
 
     @api.model
     def _search(
@@ -89,56 +98,60 @@ class AutomationRecord(models.Model):
             count=False,
             access_rights_uid=access_rights_uid,
         )
-        if self.env.is_system():
-            # restrictions do not apply to group "Settings"
-            return len(ids) if count else ids
-
-        # TODO highlight orphaned records in UI:
-        #  - self.model + self.res_id are set
-        #  - self.record returns empty recordset
-        # Remark: self.record is @property, not field
-
         if not ids:
             return 0 if count else []
         orig_ids = ids
         ids = set(ids)
         result = []
-        model_data = defaultdict(
-            lambda: defaultdict(set)
-        )  # {res_model: {res_id: set(ids)}}
+        model_data = defaultdict(lambda: defaultdict(set))
         for sub_ids in self._cr.split_for_in_conditions(ids):
             self._cr.execute(
                 """
-                            SELECT id, res_id, model
+                            SELECT id, res_id, model, configuration_id
                             FROM "%s"
                             WHERE id = ANY (%%(ids)s)"""
                 % self._table,
                 dict(ids=list(sub_ids)),
             )
-            for eid, res_id, model in self._cr.fetchall():
-                model_data[model][res_id].add(eid)
+            for eid, res_id, model, config_id in self._cr.fetchall():
+                model_data[model][(res_id, config_id)].add(eid)
 
         for model, targets in model_data.items():
             if not self.env[model].check_access_rights("read", False):
                 continue
-            recs = self.env[model].browse(list(targets))
+            res_ids = [res_id for res_id, _ in targets]
+            recs = self.env[model].browse(res_ids)
             missing = recs - recs.exists()
-            if missing:
-                for res_id in missing.ids:
-                    _logger.warning(
-                        "Deleted record %s,%s is referenced by automation.record %s",
-                        model,
-                        res_id,
-                        list(targets[res_id]),
+            if len(missing) > 0:
+                for (res_id, config_id) in [
+                    (res_id, config_id)
+                    for (res_id, config_id) in targets.keys()
+                    if res_id is None or res_id in missing.ids
+                ]:
+                    automation_record = self.env["automation.record"].browse(
+                        list(targets[(res_id, config_id)])
                     )
-                recs = recs - missing
+                    if not automation_record.is_orphan_record:
+                        _logger.info(
+                            "Deleted record %s,%s is referenced by automation.record",
+                            model,
+                            res_id,
+                        )
+                        # sudo to avoid access rights check on the record
+                        automation_record.sudo().write(
+                            {
+                                "is_orphan_record": True,
+                                "res_id": False,
+                            }
+                        )
+                    result += list(targets[(res_id, config_id)])
             allowed = (
                 self.env[model]
                 .with_context(active_test=False)
                 ._search([("id", "in", recs.ids)])
             )
             for target_id in allowed:
-                result += list(targets[target_id])
+                result += list(targets.get((target_id, config_id), []))
         if len(orig_ids) == limit and len(result) < len(orig_ids):
             result.extend(
                 self._search(

@@ -100,6 +100,7 @@ class TestAutomationSecurity(AutomationTestCase):
         record = self.env["automation.record"].search(
             [("configuration_id", "=", self.configuration.id)]
         )
-        self.assertFalse(record)
+        self.assertTrue(record)
+        self.assertTrue(record.is_orphan_record)
         self.assertTrue(original_record)
-        self.assertFalse(original_record.read())
+        self.assertTrue(original_record.read())
