@@ -544,3 +544,21 @@ class TestAutomationBase(AutomationTestCase):
             {"after_step", "activity_done", "activity_not_done"},
             set(activity.trigger_child_types.keys()),
         )
+
+    def test_generation_orphan_record(self):
+        self.configuration.editable_domain = (
+            "['|', ('id', '=', %s), ('id', '=', %s)]"
+            % (self.partner_01.id, self.partner_02.id)
+        )
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        self.partner_01.unlink()
+        records = self.env["automation.record"].search(
+            [("configuration_id", "=", self.configuration.id), ("is_test", "=", False)]
+        )
+        self.configuration._compute_record_count()
+        self.assertEqual(len(records), 2, "Seems like no orphan record was created")
+        orphan_record_found = any(record.name == "Orphan Record" for record in records)
+        self.assertTrue(
+            orphan_record_found, "No record named 'Orphan Record' was found"
+        )
