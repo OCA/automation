@@ -110,6 +110,11 @@ msgid "<span class=\"col-2\">of</span>"
 msgstr "<span class=\"col-2\">di</span>"
 
 #. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "<span>This record is an orphan record</span>"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction
 msgid "Action Needed"
 msgstr "Azione richiesta"
@@ -669,9 +674,19 @@ msgid "If checked, some messages have a delivery error."
 msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
 #. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_record__is_orphan_record
+msgid "Indicates if this record is a placeholder for a missing resource."
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_is_follower
 msgid "Is Follower"
 msgstr "Segue"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__is_orphan_record
+msgid "Is Orphan Record"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__is_periodic
@@ -1015,6 +1030,13 @@ msgstr "Aperta"
 #, python-format
 msgid "Opened after"
 msgstr "Aperta dopo"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record.py:0
+#, python-format
+msgid "Orphan Record"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model,name:automation_oca.model_mail_mail
