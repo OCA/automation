@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-12-27 11:06+0000\n"
+"PO-Revision-Date: 2025-01-25 16:07+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -112,7 +112,7 @@ msgstr "<span class=\"col-2\">di</span>"
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
 msgid "<span>This record is an orphan record</span>"
-msgstr ""
+msgstr "<span>Questo è un record orfano</span>"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction
@@ -676,7 +676,7 @@ msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_record__is_orphan_record
 msgid "Indicates if this record is a placeholder for a missing resource."
-msgstr ""
+msgstr "Indica se questo record è un segnaposto per una risorsa mancante."
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_is_follower
@@ -686,7 +686,7 @@ msgstr "Segue"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_record__is_orphan_record
 msgid "Is Orphan Record"
-msgstr ""
+msgstr "È un record orfano"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__is_periodic
@@ -1036,7 +1036,7 @@ msgstr "Aperta dopo"
 #: code:addons/automation_oca/models/automation_record.py:0
 #, python-format
 msgid "Orphan Record"
-msgstr ""
+msgstr "Record orfano"
 
 #. module: automation_oca
 #: model:ir.model,name:automation_oca.model_mail_mail
