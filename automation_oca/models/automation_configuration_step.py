@@ -26,6 +26,7 @@ class AutomationConfigurationStep(models.Model):
     domain = fields.Char(
         required=True, default="[]", help="Filter to apply specifically"
     )
+    apply_parent_domain = fields.Boolean(default=True)
     applied_domain = fields.Char(
         compute="_compute_applied_domain",
         recursive=True,
@@ -261,21 +262,28 @@ class AutomationConfigurationStep(models.Model):
             )
 
     @api.depends(
-        "domain", "configuration_id.domain", "parent_id", "parent_id.applied_domain"
+        "domain",
+        "configuration_id.domain",
+        "parent_id",
+        "parent_id.applied_domain",
+        "apply_parent_domain",
     )
     def _compute_applied_domain(self):
         for record in self:
             eval_context = record.configuration_id._get_eval_context()
-            record.applied_domain = expression.AND(
-                [
-                    safe_eval(record.domain, eval_context),
-                    safe_eval(
-                        (record.parent_id and record.parent_id.applied_domain)
-                        or record.configuration_id.domain,
-                        eval_context,
-                    ),
-                ]
-            )
+            if record.apply_parent_domain:
+                record.applied_domain = expression.AND(
+                    [
+                        safe_eval(record.domain, eval_context),
+                        safe_eval(
+                            (record.parent_id and record.parent_id.applied_domain)
+                            or record.configuration_id.domain,
+                            eval_context,
+                        ),
+                    ]
+                )
+            else:
+                record.applied_domain = safe_eval(record.domain, eval_context)
 
     @api.model
     def _trigger_type_selection(self):

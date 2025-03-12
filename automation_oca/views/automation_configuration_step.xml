@@ -131,6 +131,9 @@
                     </group>
                     <notebook>
                         <page string="Specific Domain" name="specific_domain">
+                            <group>
+                                <field name="apply_parent_domain" />
+                            </group>
                             <field
                                 name="domain"
                                 widget="domain"
