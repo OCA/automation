@@ -27,6 +27,7 @@ class AutomationRecordStep(models.Model):
     )
     step_type = fields.Selection(related="configuration_step_id.step_type", store=True)
     scheduled_date = fields.Datetime(readonly=True)
+    do_not_wait = fields.Boolean()
     expiry_date = fields.Datetime(readonly=True)
     processed_on = fields.Datetime(readonly=True)
     parent_id = fields.Many2one("automation.record.step", readonly=True)
@@ -267,7 +268,11 @@ class AutomationRecordStep(models.Model):
         # Creates a cron trigger.
         # On glue modules we could use queue job for a more discrete example
         # But cron trigger fulfills the job in some way
-        for date in set(self.mapped("scheduled_date")):
+        for activity in self.filtered(lambda r: r.do_not_wait):
+            activity.run()
+        for date in set(
+            self.filtered(lambda r: not r.do_not_wait).mapped("scheduled_date")
+        ):
             if date:
                 self.env["ir.cron.trigger"].create(
                     {

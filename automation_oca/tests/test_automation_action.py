@@ -5,6 +5,22 @@ from .common import AutomationTestCase
 
 
 class TestAutomationAction(AutomationTestCase):
+    def test_activity_immediate_execution(self):
+        """
+        We will check the execution of the tasks and that we cannot execute them again
+        """
+        activity = self.create_server_action(trigger_interval=-1)
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        self.assertFalse(self.partner_01.comment)
+        self.assertTrue(self.partner_02.comment)
+        record_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", activity.id)]
+        )
+        self.assertEqual(1, len(record_activity))
+        self.assertEqual("done", record_activity.state)
+
     def test_activity_execution(self):
         """
         We will check the execution of the tasks and that we cannot execute them again

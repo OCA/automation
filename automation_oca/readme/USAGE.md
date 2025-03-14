@@ -54,3 +54,6 @@ Step execution
 
 Steps are executed using a cron action. This action is executed every hour by default.
 On the record view, you can execute manually an action.
+
+There is a way to enforce step execution when finalize the previous one.
+If we set a negative value on the period, the execution will be immediate without a cron.
