@@ -15,6 +15,13 @@
                                 placeholder="e.g. Remember unpaid invoices"
                             /></h1>
                     </div>
+                    <div
+                        class="alert alert-warning"
+                        role="alert"
+                        attrs="{'invisible': [('trigger_interval', '>=', 0)]}"
+                    >
+                        In this case, the task will be executed automatically when we create it in the same process.
+                    </div>
                     <group>
                         <group>
                             <field name="step_type" />

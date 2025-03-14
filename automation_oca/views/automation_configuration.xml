@@ -252,10 +252,19 @@
                                                     aria-label="Select time"
                                                     title="Select time"
                                                 />
-                                                <span class="pe-1"><field
-                                                        name="trigger_interval"
-                                                    /></span>
-                                                <field name="trigger_interval_type" />
+                                                <t
+                                                    t-if="record.trigger_interval.raw_value >= 0"
+                                                >
+                                                    <span class="pe-1"><field
+                                                            name="trigger_interval"
+                                                        /></span>
+                                                    <field
+                                                        name="trigger_interval_type"
+                                                    />
+                                                </t>
+                                                <t t-else="">
+                                                    <span class="pe-1">Immediatly</span>
+                                                </t>
                                             </strong>
                                         </div>
                                     </div>
