@@ -7,14 +7,19 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.safe_eval import (
     datetime as safe_datetime,
+)
+from odoo.tools.safe_eval import (
     dateutil as safe_dateutil,
+)
+from odoo.tools.safe_eval import (
     safe_eval,
+)
+from odoo.tools.safe_eval import (
     time as safe_time,
 )
 
 
 class AutomationConfiguration(models.Model):
-
     _name = "automation.configuration"
     _description = "Automation Configuration"
     _inherit = ["mail.thread"]
@@ -245,7 +250,7 @@ class AutomationConfiguration(models.Model):
             "({rhs}.is_test IS NULL OR NOT {rhs}.is_test)",
             (Record._name, self.id),
         )
-        query.add_where("{}.id is NULL".format(alias))
+        query.add_where(f"{alias}.id is NULL")
         if self.field_id:
             # In case of unicity field defined, we need to add this
             # left join to find already created records
@@ -266,7 +271,7 @@ class AutomationConfiguration(models.Model):
                 "({rhs}.is_test IS NULL OR NOT {rhs}.is_test)",
                 (Record._name, self.id),
             )
-            query.add_where("{}.id is NULL".format(alias2))
+            query.add_where(f"{alias2}.id is NULL")
             from_clause, where_clause, params = query.get_sql()
             # We also need to find with a group by in order to avoid duplication
             # when we have both records created between two executions

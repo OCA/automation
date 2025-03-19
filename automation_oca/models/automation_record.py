@@ -10,7 +10,6 @@ _logger = logging.getLogger(__name__)
 
 
 class AutomationRecord(models.Model):
-
     _name = "automation.record"
     _description = "Automation Record"
 
@@ -123,7 +122,7 @@ class AutomationRecord(models.Model):
             recs = self.env[model].browse(res_ids)
             missing = recs - recs.exists()
             if len(missing) > 0:
-                for (res_id, config_id) in [
+                for res_id, config_id in [
                     (res_id, config_id)
                     for (res_id, config_id) in targets.keys()
                     if res_id is None or res_id in missing.ids
