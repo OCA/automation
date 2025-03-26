@@ -30,6 +30,7 @@
                             <field name="model" invisible="1" />
                         </group>
                         <group>
+                            <field name="trigger_date_kind" />
                             <label for="trigger_interval" string="Trigger" />
                             <div class="container ps-0">
                                 <div class="row">
@@ -42,8 +43,26 @@
                                             nolabel="1"
                                         /></div>
                                 </div>
-                                <div class="row">
+                                <div
+                                    class="row"
+                                    attrs="{'invisible': [('trigger_date_kind', '!=', 'date')]}"
+                                >
                                     <span class="col-2">after</span>
+                                    <div class="col-10"><field
+                                            name="trigger_date_field_id"
+                                            nolabel="1"
+                                            attrs="{'required': [('trigger_date_kind', '=', 'date')]}"
+                                        /></div>
+                                </div>
+                                <div class="row">
+                                    <span
+                                        class="col-2"
+                                        attrs="{'invisible': [('trigger_date_kind', '!=', 'offset')]}"
+                                    >after</span>
+                                    <span
+                                        class="col-2"
+                                        attrs="{'invisible': [('trigger_date_kind', '=', 'offset')]}"
+                                    >when</span>
                                     <div class="col-10"><field
                                             name="trigger_type"
                                             nolabel="1"
@@ -62,6 +81,14 @@
                                 </div>
                             </div>
                             <field name="allow_expiry" invisible="1" />
+                            <div
+                                class="container ps-0 alert alert-warning"
+                                colspan="2"
+                                attrs="{'invisible': [('trigger_date_kind', '!=', 'date')]}"
+                            >
+                                The scheduled date will be the date of the record at the moment we generate the new record.
+                                Later changes of the field will not affect the scheduled date.
+                            </div>
                             <field
                                 name="expiry"
                                 attrs="{'invisible': [('allow_expiry', '=', False)]}"
