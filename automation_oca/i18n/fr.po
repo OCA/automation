@@ -197,6 +197,11 @@ msgid "Applied Domain"
 msgstr ""
 
 #. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__apply_parent_domain
+msgid "Apply Parent Domain"
+msgstr ""
+
+#. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
 msgid "Archived"
