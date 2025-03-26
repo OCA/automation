@@ -45,6 +45,14 @@ class AutomationConfigurationStep(models.Model):
     )
     step_icon = fields.Char(compute="_compute_step_info")
     step_name = fields.Char(compute="_compute_step_info")
+    trigger_date_kind = fields.Selection(
+        [
+            ("offset", "Offset"),
+            ("date", "Force on Record Date"),
+        ],
+        required=True,
+        default="offset",
+    )
     trigger_interval_hours = fields.Integer(
         compute="_compute_trigger_interval_hours", store=True
     )
@@ -56,6 +64,11 @@ class AutomationConfigurationStep(models.Model):
     trigger_interval_type = fields.Selection(
         [("hours", "Hour(s)"), ("days", "Day(s)")], required=True, default="hours"
     )
+    trigger_date_field_id = fields.Many2one(
+        "ir.model.fields",
+        domain="[('model_id', '=', model_id), ('ttype', 'in', ['date', 'datetime'])]",
+    )
+    trigger_date_field = fields.Char(related="trigger_date_field_id.field_description")
     allow_expiry = fields.Boolean(compute="_compute_allow_expiry")
     expiry = fields.Boolean(compute="_compute_expiry", store=True, readonly=False)
     expiry_interval = fields.Integer()
@@ -517,8 +530,8 @@ class AutomationConfigurationStep(models.Model):
         for record in self:
             record._check_configuration()
 
-    def _get_record_activity_scheduled_date(self):
-        if self.trigger_type in [
+    def _get_record_activity_scheduled_date(self, record, force=False):
+        if not force and self.trigger_type in [
             "mail_open",
             "mail_bounce",
             "mail_click",
@@ -529,7 +542,15 @@ class AutomationConfigurationStep(models.Model):
             "activity_cancel",
         ]:
             return False
-        return fields.Datetime.now() + relativedelta(
+        if (
+            self.trigger_date_kind == "date"
+            and self.trigger_date_field_id
+            and record[self.trigger_date_field_id.name]
+        ):
+            date = fields.Datetime.to_datetime(record[self.trigger_date_field_id.name])
+        else:
+            date = fields.Datetime.now()
+        return date + relativedelta(
             **{self.trigger_interval_type: self.trigger_interval}
         )
 
@@ -541,7 +562,7 @@ class AutomationConfigurationStep(models.Model):
         )
 
     def _create_record_activity_vals(self, record, **kwargs):
-        scheduled_date = self._get_record_activity_scheduled_date()
+        scheduled_date = self._get_record_activity_scheduled_date(record)
         do_not_wait = scheduled_date and scheduled_date < fields.Datetime.now()
         return {
             "configuration_step_id": self.id,

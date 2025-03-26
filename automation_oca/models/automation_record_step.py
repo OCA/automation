@@ -334,8 +334,8 @@ class AutomationRecordStep(models.Model):
         current_date = fields.Datetime.now()
         for record in todo:
             config = record.configuration_step_id
-            scheduled_date = fields.Datetime.now() + relativedelta(
-                **{config.trigger_interval_type: config.trigger_interval}
+            scheduled_date = config._get_record_activity_scheduled_date(
+                record.record_id.resource_ref, force=True
             )
             record.write(
                 {
