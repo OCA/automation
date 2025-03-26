@@ -288,8 +288,8 @@ class AutomationRecordStep(models.Model):
         todo = self.filtered(lambda r: not r.scheduled_date)
         for record in todo:
             config = record.configuration_step_id
-            record.scheduled_date = fields.Datetime.now() + relativedelta(
-                **{config.trigger_interval_type: config.trigger_interval}
+            record.scheduled_date = config._get_record_activity_scheduled_date(
+                record.record_id.resource_ref, force=True
             )
         todo._trigger_activities()
 
