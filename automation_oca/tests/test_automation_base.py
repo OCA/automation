@@ -393,6 +393,38 @@ class TestAutomationBase(AutomationTestCase):
                 record_activity.scheduled_date, datetime(2022, 1, 1, 1, 0, 0, 0)
             )
 
+    def test_schedule_date_force(self):
+        partner_01 = self.env["res.partner"].create(
+            {
+                "name": "Demo partner",
+                "comment": "Demo",
+                "email": "test@test.com",
+                "date": "2025-01-01",
+            }
+        )
+        with freeze_time("2024-01-01 00:00:00"):
+            activity = self.create_server_action(
+                trigger_date_kind="date",
+                trigger_date_field_id=self.env["ir.model.fields"]
+                .search(
+                    [
+                        ("name", "=", "date"),
+                        ("model", "=", "res.partner"),
+                    ]
+                )
+                .id,
+                trigger_interval=1,
+                trigger_interval_type="days",
+            )
+            self.configuration.editable_domain = "[('id', '=', %s)]" % partner_01.id
+            self.configuration.start_automation()
+            self.env["automation.configuration"].cron_automation()
+            record_activity = self.env["automation.record.step"].search(
+                [("configuration_step_id", "=", activity.id)]
+            )
+            self.assertEqual("scheduled", record_activity.state)
+            self.assertEqual(record_activity.scheduled_date, datetime(2025, 1, 2))
+
     def test_schedule_date_computation_days(self):
         with freeze_time("2022-01-01"):
             activity = self.create_server_action(

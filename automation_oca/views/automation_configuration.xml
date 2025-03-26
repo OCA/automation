@@ -214,6 +214,7 @@
                             <field name="parent_position" />
                             <field name="trigger_child_types" />
                             <field name="trigger_type_data" />
+                            <field name="trigger_date_kind" />
                             <field name="step_icon" />
                             <field name="step_name" />
                             <templates>
@@ -251,6 +252,17 @@
                                                 /> <t
                                                     t-esc="record.trigger_type_data.raw_value.message_configuration"
                                                 />
+                                            </div>
+                                            <div
+                                                t-if="record.trigger_date_kind.raw_value == 'date'"
+                                            >
+                                                <i
+                                                    class="fa fa-calendar pe-1"
+                                                    role="img"
+                                                    aria-label="At"
+                                                    title="At"
+                                                />
+                                                <field name="trigger_date_field" />
                                             </div>
                                             <strong>
                                                 <i
