@@ -346,6 +346,17 @@ class AutomationRecordStep(models.Model):
         todo._trigger_activities()
 
     def _set_activity_done(self):
+        domain = safe_eval(
+            self.configuration_step_id.activity_verification_domain or "[]",
+            self.configuration_step_id.configuration_id._get_eval_context(),
+        )
+        if domain and not self.record_id.resource_ref.filtered_domain(domain):
+            raise ValidationError(
+                _(
+                    "The record does not fulfill the expected domain:\n%(domain)s",
+                    domain=self.configuration_step_id.activity_verification_domain_error,
+                )
+            )
         self.write({"activity_done_on": fields.Datetime.now()})
         self.child_ids.filtered(
             lambda r: r.trigger_type == "activity_done"

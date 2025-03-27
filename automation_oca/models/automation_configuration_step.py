@@ -94,6 +94,13 @@ class AutomationConfigurationStep(models.Model):
     activity_note = fields.Html(
         "Note", compute="_compute_activity_info", readonly=False, store=True
     )
+    activity_verification_domain = fields.Char(
+        required=True, default="[]", help="Filter to verify when the activity is done"
+    )
+    activity_verification_domain_error = fields.Text(
+        translate=True,
+        help="Message to show when the activity domain is not as expected",
+    )
     activity_date_deadline_range = fields.Integer(
         string="Due Date In",
         compute="_compute_activity_info",

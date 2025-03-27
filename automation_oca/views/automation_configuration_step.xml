@@ -165,6 +165,12 @@
                             <group>
                                 <field name="activity_summary" />
                                 <field name="activity_note" />
+                                <field
+                                    name="activity_verification_domain"
+                                    widget="domain"
+                                    options="{'foldable': True, 'model': 'model'}"
+                                />
+                                <field name="activity_verification_domain_error" />
                             </group>
                         </page>
                         <page name="action" string="Server Action">
