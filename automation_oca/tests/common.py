@@ -26,20 +26,33 @@ class AutomationTestCase(TransactionCase):
                 "code": "raise UserError('ERROR')",
             }
         )
+        body_html = """
+            <p>My template
+            <a href="https://www.twitter.com">with link</a>
+            </p>
+        """
         cls.template = cls.env["mail.template"].create(
             {
                 "name": "My template",
                 "model_id": cls.env.ref("base.model_res_partner").id,
                 "subject": "Subject",
                 "partner_to": "{{ object.id }}",
-                "body_html": 'My template <a href="https://www.twitter.com" /> with link',
+                "body_html": body_html,
             }
         )
         cls.partner_01 = cls.env["res.partner"].create(
-            {"name": "Demo partner", "comment": "Demo", "email": "test@test.com"}
+            {
+                "name": "Demo partner",
+                "comment": "Demo",
+                "email": "test@test.com",
+            }
         )
         cls.partner_02 = cls.env["res.partner"].create(
-            {"name": "Demo partner 2", "comment": "Demo", "email": "test@test.com"}
+            {
+                "name": "Demo partner 2",
+                "comment": "Demo",
+                "email": "test@test.com",
+            }
         )
         cls.configuration = cls.env["automation.configuration"].create(
             {

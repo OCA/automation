@@ -21,8 +21,9 @@ class MailMail(models.Model):
             record.automation_record_step_id.message_id = record.message_id
         return records
 
-    def _send_prepare_body(self):
-        body = super()._send_prepare_body()
+    def _prepare_outgoing_body(self):
+        body = super()._prepare_outgoing_body()
+
         if self.automation_record_step_id:
             body = self.env["mail.render.mixin"]._shorten_links(body, {}, blacklist=[])
             token = self.automation_record_step_id._get_mail_tracking_token()
@@ -35,8 +36,7 @@ class MailMail(models.Model):
                 if parsed.scheme.startswith("http") and parsed.path.startswith("/r/"):
                     new_href = href.replace(
                         url,
-                        "%s/au/%s/%s"
-                        % (url, str(self.automation_record_step_id.id), token),
+                        f"{url}/au/{str(self.automation_record_step_id.id)}/{token}",
                     )
                     body = body.replace(
                         markupsafe.Markup(href), markupsafe.Markup(new_href)

@@ -191,9 +191,9 @@ class AutomationRecordStep(models.Model):
         return True
 
     def _run_mail(self):
-        author_id = self.configuration_step_id.mail_author_id.id
+        # author_id = self.configuration_step_id.mail_author_id.id
         composer_values = {
-            "author_id": author_id,
+            # "author_id": author_id,
             "record_name": False,
             "model": self.record_id.model,
             "composition_mode": "mass_mail",
@@ -206,14 +206,7 @@ class AutomationRecordStep(models.Model):
             .with_context(active_ids=res_ids)
             .create(composer_values)
         )
-        composer.write(
-            composer._onchange_template_id(
-                self.configuration_step_id.mail_template_id.id,
-                "mass_mail",
-                self.record_id.model,
-                self.record_id.res_id,
-            )["value"]
-        )
+
         # composer.body =
         extra_context = self._run_mail_context()
         composer = composer.with_context(active_ids=res_ids, **extra_context)
@@ -231,8 +224,8 @@ class AutomationRecordStep(models.Model):
     def _get_mail_tracking_url(self):
         return werkzeug.urls.url_join(
             self.get_base_url(),
-            "automation_oca/track/%s/%s/blank.gif"
-            % (self.id, self._get_mail_tracking_token()),
+            f"automation_oca/track/{self.id}/"
+            f"{self._get_mail_tracking_token()}/blank.gif",
         )
 
     def _run_mail_context(self):

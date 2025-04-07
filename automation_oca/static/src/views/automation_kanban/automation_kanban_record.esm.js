@@ -15,3 +15,4 @@ export class AutomationKanbanRecord extends KanbanRecord {
 }
 
 AutomationKanbanRecord.Compiler = AutomationKanbanCompiler;
+AutomationKanbanRecord.components = {...KanbanRecord.components};

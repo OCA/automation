@@ -15,11 +15,11 @@
                         name="web_ribbon"
                         title="Test"
                         bg_color="text-bg-danger"
-                        attrs="{'invisible': [('is_test', '=', False)]}"
+                        invisible="is_test == False"
                     />
 
                     <div class="oe_title">
-                        <div attrs="{'invisible': [('is_orphan_record', '=', False)]}">
+                        <div invisible="is_orphan_record == False">
                             <field name="is_orphan_record" invisible="1" />
                             <h1><span>This record is an orphan record</span></h1>
                             <group>
@@ -27,9 +27,7 @@
                             </group>
                         </div>
 
-                        <h1
-                            attrs="{'invisible': [('is_orphan_record', '=', True)]}"
-                        ><field
+                        <h1 invisible="is_orphan_record == True"><field
                                 name="resource_ref"
                                 required="1"
                                 options="{'hide_model': True}"

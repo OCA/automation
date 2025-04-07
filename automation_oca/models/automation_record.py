@@ -15,7 +15,9 @@ class AutomationRecord(models.Model):
 
     name = fields.Char(compute="_compute_name")
     state = fields.Selection(
-        [("run", "Running"), ("done", "Done")], compute="_compute_state", store=True
+        [("run", "Running"), ("done", "Done")],
+        compute="_compute_state",
+        store=True,
     )
     configuration_id = fields.Many2one(
         "automation.configuration", required=True, readonly=True
@@ -41,7 +43,7 @@ class AutomationRecord(models.Model):
 
     is_orphan_record = fields.Boolean(
         default=False,
-        help="Indicates if this record is a placeholder for a missing resource.",
+        help="Indicates if this record is a placeholder " "for a missing resource.",
         readonly=True,
     )
 
@@ -67,14 +69,17 @@ class AutomationRecord(models.Model):
     def _compute_resource_ref(self):
         for record in self:
             if record.model and record.model in self.env:
-                record.resource_ref = "%s,%s" % (record.model, record.res_id or 0)
+                record.resource_ref = f"{record.model},{record.res_id or 0}"
             else:
                 record.resource_ref = None
 
     @api.depends("res_id", "model")
     def _compute_name(self):
         for record in self:
-            if not record.is_orphan_record:
+            if (
+                not record.is_orphan_record
+                and self.env[record.model].browse(record.res_id).exists()
+            ):
                 record.name = self.env[record.model].browse(record.res_id).display_name
             else:
                 record.name = _("Orphan Record")
@@ -94,11 +99,23 @@ class AutomationRecord(models.Model):
             offset=offset,
             limit=limit,
             order=order,
-            count=False,
             access_rights_uid=access_rights_uid,
         )
+        if self.env.is_system():
+            # restrictions do not apply to group "Settings"
+            return len(ids) if count else ids
         if not ids:
-            return 0 if count else []
+            return (
+                0
+                if count
+                else super()._search(
+                    args,
+                    offset=offset,
+                    limit=limit,
+                    order=order,
+                    access_rights_uid=access_rights_uid,
+                )
+            )
         orig_ids = ids
         ids = set(ids)
         result = []
@@ -106,9 +123,9 @@ class AutomationRecord(models.Model):
         for sub_ids in self._cr.split_for_in_conditions(ids):
             self._cr.execute(
                 """
-                            SELECT id, res_id, model, configuration_id
-                            FROM "%s"
-                            WHERE id = ANY (%%(ids)s)"""
+                    SELECT id, res_id, model, configuration_id
+                    FROM "%s"
+                    WHERE id = ANY (%%(ids)s)"""
                 % self._table,
                 dict(ids=list(sub_ids)),
             )
@@ -127,30 +144,48 @@ class AutomationRecord(models.Model):
                     for (res_id, config_id) in targets.keys()
                     if res_id is None or res_id in missing.ids
                 ]:
-                    automation_record = self.env["automation.record"].browse(
-                        list(targets[(res_id, config_id)])
-                    )
-                    if not automation_record.is_orphan_record:
-                        _logger.info(
-                            "Deleted record %s,%s is referenced by automation.record",
-                            model,
-                            res_id,
+                    # Usar sudo y context para evitar recursión
+                    automation_record_ids = list(targets[(res_id, config_id)])
+                    # Acceso directo a la BD para evitar el ciclo de recursión
+                    if automation_record_ids:
+                        self._cr.execute(
+                            """
+                            SELECT id FROM "%s"
+                            WHERE id IN %%s AND is_orphan_record = FALSE
+                            """
+                            % self._table,
+                            (tuple(automation_record_ids),),
                         )
-                        # sudo to avoid access rights check on the record
-                        automation_record.sudo().write(
-                            {
-                                "is_orphan_record": True,
-                                "res_id": False,
-                            }
-                        )
-                    result += list(targets[(res_id, config_id)])
+                        records_to_update = [r[0] for r in self._cr.fetchall()]
+                        if records_to_update:
+                            _logger.info(
+                                "Deleted record %s,%s is referenced by "
+                                "automation.record",
+                                model,
+                                res_id,
+                            )
+
+                            self.env["automation.record"].sudo().browse(
+                                records_to_update
+                            ).write(
+                                {
+                                    "is_orphan_record": True,
+                                    "res_id": False,
+                                }
+                            )
+                    result += automation_record_ids
             allowed = (
                 self.env[model]
                 .with_context(active_test=False)
                 ._search([("id", "in", recs.ids)])
             )
             for target_id in allowed:
-                result += list(targets.get((target_id, config_id), []))
+                matched_ids = []
+                # Las claves son tuplas (res_id, config_id)
+                for key in targets.keys():
+                    if isinstance(key, tuple) and len(key) >= 1 and key[0] == target_id:
+                        matched_ids.extend(list(targets[key]))
+                result += matched_ids
         if len(orig_ids) == limit and len(result) < len(orig_ids):
             result.extend(
                 self._search(
@@ -164,7 +199,11 @@ class AutomationRecord(models.Model):
             )
         # Restore original ordering
         result = [x for x in orig_ids if x in result]
-        return len(result) if count else list(result)
+        return (
+            len(result)
+            if count
+            else super()._search([("id", "in", result)], order=order)
+        )
 
     def read(self, fields=None, load="_classic_read"):
         """Override to explicitely call check_access_rule, that is not called
@@ -173,8 +212,8 @@ class AutomationRecord(models.Model):
         return super().read(fields=fields, load=load)
 
     def check_access_rule(self, operation):
-        """In order to check if we can access a record, we are checking if we can access
-        the related document"""
+        """In order to check if we can access a record, we are checking
+        if we can access the related document"""
         super().check_access_rule(operation)
         if self.env.is_superuser():
             return
@@ -185,7 +224,9 @@ class AutomationRecord(models.Model):
             by_model_rec_ids[exc_rec.model].add(exc_rec.res_id)
             if exc_rec.model not in by_model_checker:
                 by_model_checker[exc_rec.model] = getattr(
-                    self.env[exc_rec.model], "get_automation_access", default_checker
+                    self.env[exc_rec.model],
+                    "get_automation_access",
+                    default_checker,
                 )
 
         for model, rec_ids in by_model_rec_ids.items():

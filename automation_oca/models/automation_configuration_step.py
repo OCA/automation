@@ -36,7 +36,11 @@ class AutomationConfigurationStep(models.Model):
         "automation.configuration.step", inverse_name="parent_id"
     )
     step_type = fields.Selection(
-        [("mail", "Mail"), ("action", "Server Action"), ("activity", "Activity")],
+        [
+            ("mail", "Mail"),
+            ("action", "Server Action"),
+            ("activity", "Activity"),
+        ],
         required=True,
         default="mail",
     )
@@ -47,13 +51,17 @@ class AutomationConfigurationStep(models.Model):
     )
     trigger_interval = fields.Integer()
     trigger_interval_type = fields.Selection(
-        [("hours", "Hour(s)"), ("days", "Day(s)")], required=True, default="hours"
+        [("hours", "Hour(s)"), ("days", "Day(s)")],
+        required=True,
+        default="hours",
     )
     allow_expiry = fields.Boolean(compute="_compute_allow_expiry")
     expiry = fields.Boolean(compute="_compute_expiry", store=True, readonly=False)
     expiry_interval = fields.Integer()
     expiry_interval_type = fields.Selection(
-        [("hours", "Hour(s)"), ("days", "Day(s)")], required=True, default="hours"
+        [("hours", "Hour(s)"), ("days", "Day(s)")],
+        required=True,
+        default="hours",
     )
     trigger_type = fields.Selection(
         selection="_trigger_type_selection",
@@ -63,16 +71,20 @@ class AutomationConfigurationStep(models.Model):
     trigger_child_types = fields.Json(compute="_compute_trigger_child_types")
     trigger_type_data = fields.Json(compute="_compute_trigger_type_data")
     mail_author_id = fields.Many2one(
-        "res.partner", required=True, default=lambda r: r.env.user.id
+        comodel_name="res.partner",
+        required=True,
+        default=lambda self: self.env.user.partner_id.id,
     )
     mail_template_id = fields.Many2one(
-        "mail.template", domain="[('model_id', '=', model_id)]"
+        comodel_name="mail.template",
+        domain="[('model_id', '=', model_id)]",
     )
     server_action_id = fields.Many2one(
-        "ir.actions.server", domain="[('model_id', '=', model_id)]"
+        comodel_name="ir.actions.server",
+        domain="[('model_id', '=', model_id)]",
     )
     activity_type_id = fields.Many2one(
-        "mail.activity.type",
+        comodel_name="mail.activity.type",
         string="Activity",
         domain="['|', ('res_model', '=', False), ('res_model', '=', model)]",
         compute="_compute_activity_info",
@@ -101,7 +113,10 @@ class AutomationConfigurationStep(models.Model):
         store=True,
     )
     activity_user_type = fields.Selection(
-        [("specific", "Specific User"), ("generic", "Generic User From Record")],
+        [
+            ("specific", "Specific User"),
+            ("generic", "Generic User From Record"),
+        ],
         compute="_compute_activity_info",
         readonly=False,
         store=True,
@@ -260,7 +275,10 @@ class AutomationConfigurationStep(models.Model):
             )
 
     @api.depends(
-        "domain", "configuration_id.domain", "parent_id", "parent_id.applied_domain"
+        "domain",
+        "configuration_id.domain",
+        "parent_id",
+        "parent_id.applied_domain",
     )
     def _compute_applied_domain(self):
         for record in self:
@@ -286,7 +304,8 @@ class AutomationConfigurationStep(models.Model):
     @api.model
     def _trigger_types(self):
         """
-        This function will return a dictionary that map trigger_types to its configurations.
+        This function will return a dictionary that map trigger_types
+        to its configurations.
         Each trigger_type can contain:
         - name (Required field)
         - step type: List of step types that succeed after this.
@@ -460,7 +479,10 @@ class AutomationConfigurationStep(models.Model):
         ):
             step_types = dict(self._fields["step_type"].selection)
             raise ValidationError(
-                _("To use a %(name)s trigger type we need a parent of type %(parents)s")
+                _(
+                    "To use a %(name)s trigger type we need a parent"
+                    " of type %(parents)s"
+                )
                 % {
                     "name": trigger_conf["name"],
                     "parents": ",".join(

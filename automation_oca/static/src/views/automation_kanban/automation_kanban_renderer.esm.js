@@ -33,6 +33,6 @@ export class AutomationKanbanRenderer extends KanbanRenderer {
 }
 
 AutomationKanbanRenderer.components = {
-    ...AutomationKanbanRenderer.components,
+    ...KanbanRenderer.components,
     KanbanRecord: AutomationKanbanRecord,
 };

@@ -18,6 +18,8 @@ from odoo.tools.safe_eval import (
     time as safe_time,
 )
 
+from ..utils.query import add_complex_left_join
+
 
 class AutomationConfiguration(models.Model):
     _name = "automation.configuration"
@@ -228,10 +230,11 @@ class AutomationConfiguration(models.Model):
 
     def _get_automation_records_to_create(self):
         """
-        We will find all the records that fulfill the domain but don't have a record created.
-        Also, we need to check by autencity field if defined.
-
-        In order to do this, we will add some extra joins on the query of the domain
+        We will find all the records that fulfill the domain but don't
+        have a record created. Also, we need to check by autencity field
+        if defined.
+        In order to do this, we will add some extra joins on the query
+        of the domain
         """
         eval_context = self._get_eval_context()
         domain = safe_eval(self.domain, eval_context)
@@ -240,28 +243,33 @@ class AutomationConfiguration(models.Model):
             # In case of company defined, we add only if the records have company field
             domain += [("company_id", "=", self.company_id.id)]
         query = Record._where_calc(domain)
-        alias = query.left_join(
-            query._tables[Record._table],
+        alias = add_complex_left_join(
+            query,
+            Record._table,
             "id",
             "automation_record",
             "res_id",
             "automation_record",
             "{rhs}.model = %s AND {rhs}.configuration_id = %s AND "
             "({rhs}.is_test IS NULL OR NOT {rhs}.is_test)",
-            (Record._name, self.id),
+            [Record._name, self.id],
         )
         query.add_where(f"{alias}.id is NULL")
         if self.field_id:
             # In case of unicity field defined, we need to add this
             # left join to find already created records
-            linked_tab = query.left_join(
-                query._tables[Record._table],
+            linked_tab = add_complex_left_join(
+                query,
+                Record._table,
                 self.field_id.name,
                 Record._table,
                 self.field_id.name,
                 "linked",
+                "",
+                [],
             )
-            alias2 = query.left_join(
+            alias2 = add_complex_left_join(
+                query,
                 linked_tab,
                 "id",
                 "automation_record",
@@ -269,22 +277,26 @@ class AutomationConfiguration(models.Model):
                 "automation_record_linked",
                 "{rhs}.model = %s AND {rhs}.configuration_id = %s AND "
                 "({rhs}.is_test IS NULL OR NOT {rhs}.is_test)",
-                (Record._name, self.id),
+                [Record._name, self.id],
             )
             query.add_where(f"{alias2}.id is NULL")
             from_clause, where_clause, params = query.get_sql()
             # We also need to find with a group by in order to avoid duplication
             # when we have both records created between two executions
             # (first one has priority)
-            query_str = "SELECT {} FROM {} WHERE {}{}{}{} GROUP BY {}".format(
-                ", ".join([f'MIN("{next(iter(query._tables))}".id) as id']),
-                from_clause,
-                where_clause or "TRUE",
-                (" ORDER BY %s" % self.order) if query.order else "",
-                (" LIMIT %d" % self.limit) if query.limit else "",
-                (" OFFSET %d" % self.offset) if query.offset else "",
-                "%s.%s" % (query._tables[Record._table], self.field_id.name),
-            )
+
+            # Asegurarnos de que tenemos un nombre de tabla válido para el GROUP BY
+            table_name = Record._table
+
+            query_str = f"""
+                SELECT MIN("{table_name}".id) as id
+                FROM {from_clause}
+                WHERE {where_clause or 'TRUE'}
+                {(" ORDER BY %s" % query.order) if query.order else ""}
+                {(" LIMIT %d" % query.limit) if query.limit else ""}
+                {(" OFFSET %d" % query.offset) if query.offset else ""}
+                GROUP BY "{table_name}".{self.field_id.name}
+            """
         else:
             query_str, params = query.select()
         self.env.cr.execute(query_str, params)

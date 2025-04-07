@@ -17,16 +17,9 @@
                         <field name="scheduled_date" />
                         <field name="processed_on" />
                         <field name="step_type" />
-                        <field
-                            name="message_id"
-                            attrs="{'invisible': [('message_id', '=', False)]}"
-                        />
+                        <field name="message_id" invisible="message_id == False" />
                     </group>
-                    <group
-                        name="error"
-                        string="Error"
-                        attrs="{'invisible': [('state', '!=', 'error')]}"
-                    >
+                    <group name="error" string="Error" invisible="state != 'error'">
                         <field name="error_trace" nolabel="1" />
                     </group>
                 </sheet>
@@ -44,7 +37,7 @@
                     name="run"
                     type="object"
                     string="Run"
-                    attrs="{'invisible': [('state', '!=', 'scheduled')]}"
+                    invisible="state != 'scheduled'"
                 />
             </tree>
         </field>

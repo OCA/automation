@@ -1,11 +1,12 @@
 /** @odoo-module **/
 /* global Chart*/
 
+import {Component, onWillStart, useEffect, useRef} from "@odoo/owl";
+
+import {_t} from "@web/core/l10n/translation";
 import {loadJS} from "@web/core/assets";
 import {registry} from "@web/core/registry";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
-
-const {Component, onWillStart, useEffect, useRef} = owl;
 
 export class AutomationGraph extends Component {
     setup() {
@@ -21,55 +22,66 @@ export class AutomationGraph extends Component {
             };
         });
     }
+
+    _getGraphData() {
+        if (
+            this.props.record?.data &&
+            this.props.name &&
+            this.props.record.data[this.props.name]
+        ) {
+            return this.props.record.data[this.props.name];
+        }
+
+        return {done: [], error: []};
+    }
+
     _getChartConfig() {
+        const graphData = this._getGraphData();
         return {
             type: "line",
             data: {
-                labels: this.props.value.done.map(function (pt) {
+                labels: graphData.done.map(function (pt) {
                     return pt.x;
                 }),
                 datasets: [
                     {
                         backgroundColor: "#4CAF5080",
                         borderColor: "#4CAF50",
-                        data: this.props.value.done,
+                        data: graphData.done,
                         fill: "start",
-                        label: this.env._t("Done"),
+                        label: _t("Done"),
                         borderWidth: 2,
                     },
                     {
                         backgroundColor: "#F4433680",
                         borderColor: "#F44336",
-                        data: this.props.value.error,
+                        data: graphData.error,
                         fill: "start",
-                        label: this.env._t("Error"),
+                        label: _t("Error"),
                         borderWidth: 2,
                     },
                 ],
             },
             options: {
-                legend: {display: false},
-
+                plugins: {
+                    legend: {display: false},
+                },
                 layout: {
                     padding: {left: 10, right: 10, top: 10, bottom: 10},
                 },
                 scales: {
-                    yAxes: [
-                        {
-                            type: "linear",
-                            display: false,
-                            ticks: {
-                                beginAtZero: true,
-                            },
+                    y: {
+                        type: "linear",
+                        display: false,
+                        ticks: {
+                            beginAtZero: true,
                         },
-                    ],
-                    xAxes: [
-                        {
-                            ticks: {
-                                maxRotation: 0,
-                            },
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 0,
                         },
-                    ],
+                    },
                 },
                 maintainAspectRatio: false,
                 elements: {
@@ -92,7 +104,7 @@ export class AutomationGraph extends Component {
         }
         var config = this._getChartConfig();
         this.chart = new Chart(this.canvasRef.el, config);
-        Chart.animationService.advance();
+        // Chart.animationService.advance();
     }
 }
 
@@ -101,4 +113,4 @@ AutomationGraph.props = {
     ...standardFieldProps,
 };
 
-registry.category("fields").add("automation_graph", AutomationGraph);
+registry.category("fields").add("automation_graph", {component: AutomationGraph});

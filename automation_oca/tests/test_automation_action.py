@@ -7,10 +7,11 @@ from .common import AutomationTestCase
 class TestAutomationAction(AutomationTestCase):
     def test_activity_execution(self):
         """
-        We will check the execution of the tasks and that we cannot execute them again
+        We will check the execution of the tasks and
+        that we cannot execute them again
         """
         activity = self.create_server_action()
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.assertTrue(self.partner_01.comment)
@@ -31,26 +32,28 @@ class TestAutomationAction(AutomationTestCase):
 
     def test_child_execution_filters(self):
         """
-        We will create a task that executes two more tasks filtered with and extra task
+        We will create a task that executes two more tasks filtered with and
+        extra task
         The child tasks should only be created after the first one is finished.
         Also, if one is aborted, the subsuquent tasks will not be created.
         TASK 1 ---> TASK 1_1 (only for partner 1) --> TASK 1_1_1
                ---> TASK 1_2 (only for partner 2) --> TASK 1_2_1
 
-        In this case, the task 1_1_1 will only be generated for partner 1 and task 1_2_1
-        for partner 2
+        In this case, the task 1_1_1 will only be generated for partner 1 and
+        task 1_2_1 for partner 2
         """
-        self.configuration.editable_domain = "[('id', 'in', [%s, %s])]" % (
-            self.partner_01.id,
-            self.partner_02.id,
+        self.configuration.editable_domain = (
+            f"[('id', 'in', [{self.partner_01.id}, {self.partner_02.id}])]"
         )
 
         activity_1 = self.create_server_action()
         activity_1_1 = self.create_server_action(
-            parent_id=activity_1.id, domain="[('id', '=', %s)]" % self.partner_01.id
+            parent_id=activity_1.id,
+            domain=f"[('id', '=', {self.partner_01.id})]",
         )
         activity_1_2 = self.create_server_action(
-            parent_id=activity_1.id, domain="[('id', '=', %s)]" % self.partner_02.id
+            parent_id=activity_1.id,
+            domain=f"[('id', '=', {self.partner_02.id})]",
         )
         activity_1_1_1 = self.create_server_action(parent_id=activity_1_1.id)
         activity_1_2_1 = self.create_server_action(parent_id=activity_1_2.id)

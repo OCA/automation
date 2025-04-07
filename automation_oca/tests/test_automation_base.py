@@ -9,13 +9,16 @@ from odoo.exceptions import ValidationError
 from odoo.tests import Form
 from odoo.tools.safe_eval import safe_eval
 
+from odoo.addons.mail.tests.common import MailCommon
+
 from .common import AutomationTestCase
 
 
-class TestAutomationBase(AutomationTestCase):
+class TestAutomationBase(AutomationTestCase, MailCommon):
     def test_no_cron_no_start(self):
         """
-        We want to check that the system only generates on periodical configurations
+        We want to check that the system only
+        generates on periodical configurations
         """
         self.env["automation.configuration"].cron_automation()
         self.assertEqual(
@@ -62,7 +65,8 @@ class TestAutomationBase(AutomationTestCase):
             ).nextcall = datetime.now()
             self.configuration.start_automation()
             self.assertEqual(
-                self.configuration.next_execution_date, datetime(2022, 1, 1, 0, 0, 0)
+                self.configuration.next_execution_date,
+                datetime(2022, 1, 1, 0, 0, 0),
             )
 
     def test_cron_no_duplicates(self):
@@ -295,7 +299,10 @@ class TestAutomationBase(AutomationTestCase):
         self.assertEqual(0, child_activity.graph_error)
         self.assertEqual(0, sum(d["y"] for d in child_activity.graph_data["done"]))
         self.assertEqual(0, sum(d["y"] for d in child_activity.graph_data["error"]))
-        self.env["automation.record.step"]._cron_automation_steps()
+
+        with self.mock_mail_gateway():
+            self.env["automation.record.step"]._cron_automation_steps()
+
         self.configuration.invalidate_recordset()
         self.assertEqual(1, self.configuration.activity_mail_count)
         self.assertEqual(1, self.configuration.activity_action_count)
@@ -399,9 +406,8 @@ class TestAutomationBase(AutomationTestCase):
             self.assertFalse(f.parent_id)
 
     def test_field_not_field_unicity(self):
-        self.configuration.editable_domain = (
-            "[('id', 'in', %s)]" % (self.partner_01 | self.partner_02).ids
-        )
+        partners = self.partner_01 | self.partner_02
+        self.configuration.editable_domain = f"[('id', 'in', {partners.ids})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.assertEqual(
@@ -497,10 +503,11 @@ class TestAutomationBase(AutomationTestCase):
             )
         ) as f:
             self.assertTrue(f.resource_ref)
-            f.resource_ref = "%s,%s" % (self.partner_01._name, self.partner_01.id)
+            f.resource_ref = f"{self.partner_01._name},{self.partner_01.id}"
         wizard = f.save()
         wizard_action = wizard.test_record()
-        record = self.env[wizard_action["res_model"]].browse(wizard_action["res_id"])
+        wizard_model = wizard_action["res_model"]
+        record = self.env[wizard_model].browse(wizard_action["res_id"])
         self.assertEqual(self.configuration, record.configuration_id)
         self.assertEqual(1, self.configuration.record_test_count)
         self.assertEqual(0, self.configuration.record_count)
@@ -547,17 +554,24 @@ class TestAutomationBase(AutomationTestCase):
 
     def test_generation_orphan_record(self):
         self.configuration.editable_domain = (
-            "['|', ('id', '=', %s), ('id', '=', %s)]"
-            % (self.partner_01.id, self.partner_02.id)
+            f"['|', ('id', '=', {self.partner_01.id}),"
+            f"('id', '=', {self.partner_02.id})]"
         )
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.partner_01.unlink()
         records = self.env["automation.record"].search(
-            [("configuration_id", "=", self.configuration.id), ("is_test", "=", False)]
+            [
+                ("configuration_id", "=", self.configuration.id),
+                ("is_test", "=", False),
+            ]
         )
         self.configuration._compute_record_count()
-        self.assertEqual(len(records), 2, "Seems like no orphan record was created")
+        self.assertEqual(
+            len(records),
+            2,
+            "Seems like no orphan record was created",
+        )
         orphan_record_found = any(record.name == "Orphan Record" for record in records)
         self.assertTrue(
             orphan_record_found, "No record named 'Orphan Record' was found"
