@@ -47,7 +47,11 @@ class AutomationConfigurationStep(models.Model):
     trigger_interval_hours = fields.Integer(
         compute="_compute_trigger_interval_hours", store=True
     )
-    trigger_interval = fields.Integer()
+    trigger_interval = fields.Integer(
+        help="""Set a negative time trigger if you want the step to be executed
+        immediately, in parallel with the previous step, without waiting for it to
+        finish."""
+    )
     trigger_interval_type = fields.Selection(
         [("hours", "Hour(s)"), ("days", "Day(s)")], required=True, default="hours"
     )
@@ -510,9 +514,12 @@ class AutomationConfigurationStep(models.Model):
         )
 
     def _create_record_activity_vals(self, record, **kwargs):
+        scheduled_date = self._get_record_activity_scheduled_date()
+        do_not_wait = scheduled_date and scheduled_date < fields.Datetime.now()
         return {
             "configuration_step_id": self.id,
+            "do_not_wait": do_not_wait,
             "expiry_date": self._get_expiry_date(),
-            "scheduled_date": self._get_record_activity_scheduled_date(),
+            "scheduled_date": scheduled_date,
             **kwargs,
         }
