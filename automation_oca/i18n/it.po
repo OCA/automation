@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-03-27 15:06+0000\n"
+"PO-Revision-Date: 2025-04-08 10:24+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
@@ -112,7 +112,7 @@ msgstr "<span class=\"col-2\">di</span>"
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid "<span class=\"pe-1\">Immediatly</span>"
-msgstr ""
+msgstr "<span class=\"pe-1\">Immediatamente</span>"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
@@ -452,7 +452,7 @@ msgstr "Nome visualizzato"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__do_not_wait
 msgid "Do Not Wait"
-msgstr ""
+msgstr "Non aspettare"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__domain
@@ -694,6 +694,8 @@ msgid ""
 "In this case, the task will be executed automatically when we create it in "
 "the same process."
 msgstr ""
+"In questo caso, il lavoro verrà eseguito automaticamente alla creazione "
+"nello stesso processo."
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_record__is_orphan_record
@@ -1229,6 +1231,10 @@ msgid ""
 "it to\n"
 "        finish."
 msgstr ""
+"Impostare un trigger temporale negativo se si vuole che il passaggio \n"
+"        venga eseguito immediatamente, parallelamente al passaggio "
+"precedente,\n"
+"        senza attendere che termini."
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
