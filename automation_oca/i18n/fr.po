@@ -97,6 +97,11 @@ msgid "<span class=\"col-2\">of</span>"
 msgstr "<span class=\"col-2\">de</span>"
 
 #. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<span class=\"pe-1\">Immediatly</span>"
+msgstr ""
+
+#. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
 msgid "<span>This record is an orphan record</span>"
 msgstr ""
@@ -432,6 +437,11 @@ msgid "Display Name"
 msgstr "Nom"
 
 #. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__do_not_wait
+msgid "Do Not Wait"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__domain
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__domain
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter__domain
@@ -656,6 +666,13 @@ msgstr "Si coché, des nouveaux messages requièrent votre attention."
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si coché, des messages ont des erreurs de délivrabilité."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"In this case, the task will be executed automatically when we create it in "
+"the same process."
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_record__is_orphan_record
@@ -1182,6 +1199,15 @@ msgstr "Envoyé"
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__action
 msgid "Server Action"
 msgstr "Action serveur"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__trigger_interval
+msgid ""
+"Set a negative time trigger if you want the step to be executed\n"
+"        immediately, in parallel with the previous step, without waiting for "
+"it to\n"
+"        finish."
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
