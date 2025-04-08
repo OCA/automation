@@ -570,5 +570,5 @@ class TestAutomationMail(AutomationTestCase, MailCommon, HttpCase):
         self.assertFalse(record.automation_step_ids.mail_status)
         with self.mock_mail_gateway():
             record.automation_step_ids.run()
-            self.assertNotSentEmail()
+        self.assertNotSentEmail()
         self.assertEqual("sent", record.automation_step_ids.mail_status)

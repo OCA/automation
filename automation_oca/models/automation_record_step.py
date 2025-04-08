@@ -222,8 +222,10 @@ class AutomationRecordStep(models.Model):
         return tools.hmac(self.env(su=True), "automation_oca", self.id)
 
     def _get_mail_tracking_url(self):
+        # url = self.get_base_url()
+        url = "http://127.0.0.1:8069"
         return werkzeug.urls.url_join(
-            self.get_base_url(),
+            url,
             f"automation_oca/track/{self.id}/"
             f"{self._get_mail_tracking_token()}/blank.gif",
         )

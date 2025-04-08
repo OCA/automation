@@ -28,9 +28,9 @@ class AutomationOCAController(http.Controller):
             token,
             tools.hmac(request.env(su=True), "automation_oca", record_id),
         ):
-            request.env["automation.record.step"].sudo().browse(
-                record_id
-            )._set_mail_open()
+            step = request.env["automation.record.step"].sudo().browse(record_id)
+            if step.exists():
+                step._set_mail_open()
         response = Response()
         response.mimetype = "image/gif"
         response.data = base64.b64decode(
@@ -41,7 +41,9 @@ class AutomationOCAController(http.Controller):
         return response
 
     @http.route(
-        "/r/<string:code>/au/<int:record_id>/<string:token>", type="http", auth="public"
+        "/r/<string:code>/au/<int:record_id>/<string:token>",
+        type="http",
+        auth="public",
     )
     def automation_oca_redirect(self, code, record_id, token, **post):
         # don't assume geoip is set, it is part of the website module
