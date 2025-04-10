@@ -68,6 +68,7 @@ class AutomationRecordStep(models.Model):
     mail_replied_on = fields.Datetime(readonly=True)
     mail_opened_on = fields.Datetime(readonly=True)
     activity_done_on = fields.Datetime(readonly=True)
+    activity_cancel_on = fields.Datetime(readonly=True)
     is_test = fields.Boolean(related="record_id.is_test", store=True)
     step_actions = fields.Json(compute="_compute_step_actions")
 
@@ -131,7 +132,7 @@ class AutomationRecordStep(models.Model):
             )
             or not self._check_to_execute()
         ):
-            self.write({"state": "rejected", "processed_on": fields.Datetime.now()})
+            self._reject()
             return self.browse()
         try:
             result = getattr(self, "_run_%s" % self.configuration_step_id.step_type)()
@@ -153,6 +154,9 @@ class AutomationRecordStep(models.Model):
                 }
             )
         return self.browse()
+
+    def _reject(self):
+        self.write({"state": "rejected", "processed_on": fields.Datetime.now()})
 
     def _fill_childs(self, **kwargs):
         return self.create(
@@ -305,6 +309,24 @@ class AutomationRecordStep(models.Model):
             and not r.scheduled_date
             and r.state == "scheduled"
         )._activate()
+        self.child_ids.filtered(
+            lambda r: r.trigger_type == "activity_cancel"
+            and not r.scheduled_date
+            and r.state == "scheduled"
+        )._reject()
+
+    def _set_activity_cancel(self):
+        self.write({"activity_cancel_on": fields.Datetime.now()})
+        self.child_ids.filtered(
+            lambda r: r.trigger_type == "activity_cancel"
+            and not r.scheduled_date
+            and r.state == "scheduled"
+        )._activate()
+        self.child_ids.filtered(
+            lambda r: r.trigger_type == "activity_done"
+            and not r.scheduled_date
+            and r.state == "scheduled"
+        )._reject()
 
     def _set_mail_bounced(self):
         self.write({"mail_status": "bounce"})
