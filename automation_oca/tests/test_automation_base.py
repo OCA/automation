@@ -539,9 +539,9 @@ class TestAutomationBase(AutomationTestCase):
             },
             set(mail.trigger_child_types.keys()),
         )
-        self.assertEqual(3, len(activity.trigger_child_types))
+        self.assertEqual(4, len(activity.trigger_child_types))
         self.assertEqual(
-            {"after_step", "activity_done", "activity_not_done"},
+            {"after_step", "activity_done", "activity_not_done", "activity_cancel"},
             set(activity.trigger_child_types.keys()),
         )
 
