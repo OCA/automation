@@ -394,6 +394,14 @@ class AutomationConfigurationStep(models.Model):
                 "message_configuration": _("After finished"),
                 "message": _("Activity not done"),
             },
+            "activity_cancel": {
+                "name": _("Activity has been cancelled"),
+                "step_type": ["activity"],
+                "color": "text-warning",
+                "icon": "fa fa-ban",
+                "message_configuration": _("After finished"),
+                "message": _("Activity not cancelled"),
+            },
             "activity_not_done": {
                 "name": _("Activity has not been finished"),
                 "allow_expiry": True,
@@ -500,6 +508,7 @@ class AutomationConfigurationStep(models.Model):
             "mail_reply",
             "mail_not_reply",
             "activity_done",
+            "activity_cancel",
         ]:
             return False
         return fields.Datetime.now() + relativedelta(
