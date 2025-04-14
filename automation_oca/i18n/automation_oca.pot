@@ -133,6 +133,11 @@ msgid "Activity Action Count"
 msgstr ""
 
 #. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__activity_cancel_on
+msgid "Activity Cancel On"
+msgstr ""
+
+#. module: automation_oca
 #. odoo-python
 #: code:addons/automation_oca/models/automation_record_step.py:0
 #, python-format
@@ -158,6 +163,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
+msgid "Activity has been cancelled"
+msgstr ""
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
 msgid "Activity has been finished"
 msgstr ""
 
@@ -172,11 +184,19 @@ msgstr ""
 #. odoo-python
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
+msgid "Activity not cancelled"
+msgstr ""
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
 msgid "Activity not done"
 msgstr ""
 
 #. module: automation_oca
 #. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
 msgid "After finished"
