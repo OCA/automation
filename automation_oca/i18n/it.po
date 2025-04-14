@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-04-08 10:24+0000\n"
+"PO-Revision-Date: 2025-04-14 12:24+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -157,7 +157,7 @@ msgstr "Conteggio azioni attività"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__activity_cancel_on
 msgid "Activity Cancel On"
-msgstr ""
+msgstr "Annulla attività su"
 
 #. module: automation_oca
 #. odoo-python
@@ -186,7 +186,7 @@ msgstr "Tipo utente attività"
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
 msgid "Activity has been cancelled"
-msgstr ""
+msgstr "L'attività è stata annullata"
 
 #. module: automation_oca
 #. odoo-python
@@ -207,7 +207,7 @@ msgstr "L'attività non è terminata"
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
 msgid "Activity not cancelled"
-msgstr ""
+msgstr "Attività non annullata"
 
 #. module: automation_oca
 #. odoo-python
