@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Dixmit
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="automation_configuration_form_view">
         <field name="model">automation.configuration</field>
         <field name="arch" type="xml">
@@ -13,13 +12,13 @@
                         type="object"
                         name="start_automation"
                         string="Start"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         class="btn btn-primary"
                         type="object"
                         name="run_automation"
-                        attrs="{'invisible': [('state', '!=', 'ondemand')]}"
+                        invisible="state != 'ondemand'"
                         string="Generate new records"
                     />
                     <button
@@ -27,14 +26,14 @@
                         name="done_automation"
                         class="btn-secondary"
                         string="Mark as done"
-                        attrs="{'invisible': [('state', 'not in', ['periodic','ondemand'])]}"
+                        invisible="state not in ['periodic','ondemand']"
                     />
                     <button
                         type="object"
                         name="back_to_draft"
                         class="btn-secondary"
                         string="Back to draft"
-                        attrs="{'invisible': [('state', '!=', 'done')]}"
+                        invisible="state != 'done'"
                     />
                     <button
                         type="action"
@@ -48,37 +47,27 @@
                         name="run_automation"
                         class="btn-info"
                         string="Enforce generation"
-                        attrs="{'invisible': [('state', '!=', 'periodic')]}"
+                        invisible="state != 'periodic'"
                     />
 
                     <field name="state" widget="statusbar" />
                 </header>
-                <div
-                    class="alert alert-info"
-                    role="alert"
-                    attrs="{'invisible': [('state', '!=', 'draft')]}"
-                >
-                    <div
-                        class="px-4"
-                        attrs="{'invisible': [('is_periodic', '=', False)]}"
-                    >
+                <div class="alert alert-info" role="alert" invisible="state != 'draft'">
+                    <div class="px-4" invisible="not is_periodic">
                         On <b
-                        >periodical configurations</b>, the records are created automatically by a cron job.
+                    >periodical configurations</b>, the records are created automatically by a cron job.
                         It is great for tasks that don't need user validation.
                     </div>
-                    <div
-                        class="px-4"
-                        attrs="{'invisible': [('is_periodic', '=', True)]}"
-                    >
+                    <div class="px-4" invisible="is_periodic">
                         On <b
-                        >on demand configurations</b>, the records are created only by pressing the run button.
+                    >on demand configurations</b>, the records are created only by pressing the run button.
                         It is useful if you want to control the execution and created records manually.
                     </div>
                 </div>
                 <div
                     class="alert alert-info"
                     role="alert"
-                    attrs="{'invisible': [('state', '!=', 'ondemand')]}"
+                    invisible="state != 'ondemand'"
                 >
                     <div class="px-4">
                         This is configuration only generates new records on demand. Press the button in order to execute them manually.
@@ -87,13 +76,13 @@
                 <div
                     class="alert alert-info"
                     role="alert"
-                    attrs="{'invisible': [('state', '!=', 'periodic')]}"
+                    invisible="state != 'periodic'"
                 >
                     <div class="px-4">
                         This a periodical configuration. New records are generated automatically.
                         Next execution is programed for <field
-                            name="next_execution_date"
-                        />
+                        name="next_execution_date"
+                    />
                     </div>
                 </div>
                 <sheet>
@@ -103,7 +92,7 @@
                             type="action"
                             class="oe_stat_button"
                             icon="fa-envelope"
-                            attrs="{'invisible': [('record_count', '=', 0)]}"
+                            invisible="record_count == 0"
                         >
                             <field
                                 name="record_count"
@@ -116,7 +105,7 @@
                             type="action"
                             class="oe_stat_button"
                             icon="fa-flask"
-                            attrs="{'invisible': [('record_test_count', '=', 0)]}"
+                            invisible="record_test_count == 0"
                         >
                             <field
                                 name="record_test_count"
@@ -129,19 +118,21 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="text-bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <div class="oe_title">
-                        <h1><field
+                        <h1>
+                            <field
                                 name="name"
                                 placeholder="e.g. Remember unpaid invoices"
-                            /></h1>
+                            />
+                        </h1>
                     </div>
                     <group>
                         <field name="active" invisible="1" />
                         <field
                             name="is_periodic"
-                            attrs="{'readonly': [('state', '!=', 'draft')]}"
+                            readonly="state != 'draft'"
                             widget="boolean_toggle"
                         />
                         <field
@@ -171,7 +162,7 @@
                                     string="Save filter"
                                     icon="fa-save"
                                     class="text-primary filter-left col-7"
-                                    attrs="{'invisible': [('filter_id', '!=', False)]}"
+                                    invisible="filter_id"
                                 />
                             </div>
                         </div>
@@ -180,14 +171,14 @@
                             name="domain"
                             string="Domain"
                             widget="domain"
-                            attrs="{'invisible': [('filter_id', '=', False)]}"
+                            invisible="not filter_id"
                             options="{'foldable': True, 'model': 'model'}"
                         />
                         <field
                             name="editable_domain"
                             string="Domain"
                             widget="domain"
-                            attrs="{'invisible': [('filter_id', '!=', False)]}"
+                            invisible="filter_id"
                             options="{'foldable': True, 'model': 'model'}"
                         />
                         <field name="company_id" groups="base.group_multi_company" />
@@ -242,7 +233,8 @@
                                             >
                                                 <i
                                                     t-att-class="record.trigger_type_data.raw_value.icon"
-                                                /> <t
+                                                />
+                                                <t
                                                     t-esc="record.trigger_type_data.raw_value.message_configuration"
                                                 />
                                             </div>
@@ -267,9 +259,11 @@
                                                 <t
                                                     t-if="record.trigger_interval.raw_value >= 0"
                                                 >
-                                                    <span class="pe-1"><field
+                                                    <span class="pe-1">
+                                                        <field
                                                             name="trigger_interval"
-                                                        /></span>
+                                                        />
+                                                    </span>
                                                     <field
                                                         name="trigger_interval_type"
                                                     />
@@ -296,11 +290,15 @@
                                             <div
                                                 class="o_automation_kanban_header_title"
                                             >
-                                                <h3 class="mb0 mt0"><a
+                                                <h3 class="mb0 mt0">
+                                                    <a
                                                         type="edit"
                                                         class="oe_kanban_action oe_kanban_action_a"
                                                         t-att-title="record.name.raw_value"
-                                                    ><field name="name" /></a></h3>
+                                                    >
+                                                        <field name="name" />
+                                                    </a>
+                                                </h3>
                                                 <div t-esc="record.step_type.value" />
                                             </div>
                                             <div
@@ -356,8 +354,8 @@
                                                 class="o_automation_kanban_child_add_title card-footer"
                                             >
                                                 <i
-                                                    class="fa fa-plus-circle"
-                                                /> Add child activity
+                                                class="fa fa-plus-circle"
+                                            /> Add child activity
                                             </div>
                                             <div
                                                 class="o_automation_kanban_child_add_buttons"
@@ -375,7 +373,7 @@
                                                         t-att-trigger-type="trigger_type_id"
                                                         class="o_automation_kanban_child_add_button"
                                                     >
-                                                    <i
+                                                        <i
                                                             t-attf-class="{{trigger_type.icon}} {{trigger_type.color}}"
                                                             t-att-title="trigger_type.name"
                                                             role="img"
@@ -391,10 +389,7 @@
                         </kanban>
                     </field>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -455,21 +450,24 @@
                             </div>
                             <div class="row mt8">
                                 <div class="col-4 text-center text-black-50">
-                                    <div><i
-                                            class="fa fa-envelope"
-                                            title="Mails"
-                                        /></div>
+                                    <div>
+                                        <i class="fa fa-envelope" title="Mails" />
+                                    </div>
                                     <field name="activity_mail_count" class="h2" />
                                 </div>
                                 <div class="col-4 text-center text-black-50">
-                                    <div><i class="fa fa-cogs" title="Actions" /></div>
+                                    <div>
+                                        <i class="fa fa-cogs" title="Actions" />
+                                    </div>
                                     <field name="activity_action_count" class="h2" />
                                 </div>
                                 <div class="col-4 text-center text-black-50">
-                                    <div><i
+                                    <div>
+                                        <i
                                             class="fa fa-hand-pointer-o"
                                             title="Clicks"
-                                        /></div>
+                                        />
+                                    </div>
                                     <field name="click_count" class="h2" />
                                 </div>
                             </div>
@@ -480,21 +478,21 @@
         </field>
     </record>
 
-
     <record model="ir.ui.view" id="automation_configuration_tree_view">
         <field name="model">automation.configuration</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <!-- TODO -->
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record model="ir.actions.act_window" id="automation_configuration_act_window">
-        <field name="name">Automation Configuration</field> <!-- TODO -->
+        <field name="name">Automation Configuration</field>
+        <!-- TODO -->
         <field name="res_model">automation.configuration</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
@@ -505,5 +503,4 @@
         <field name="action" ref="automation_configuration_act_window" />
         <field name="sequence" eval="10" />
     </record>
-
 </odoo>
