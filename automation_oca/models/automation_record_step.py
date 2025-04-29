@@ -16,23 +16,34 @@ class AutomationRecordStep(models.Model):
     _description = "Activities done on the record"
     _order = "scheduled_date ASC"
 
-    name = fields.Char(related="configuration_step_id.name")
+    name = fields.Char(compute="_compute_step_data", store=True)
     record_id = fields.Many2one("automation.record", required=True, ondelete="cascade")
-    configuration_step_id = fields.Many2one(
-        "automation.configuration.step", required=True
-    )
+    configuration_step_id = fields.Many2one("automation.configuration.step")
     configuration_id = fields.Many2one(
-        related="configuration_step_id.configuration_id",
+        "automation.configuration",
+        compute="_compute_step_data",
         store=True,
     )
-    step_type = fields.Selection(related="configuration_step_id.step_type", store=True)
+    step_type = fields.Selection(
+        selection=lambda r: r.env["automation.configuration.step"]
+        ._fields["step_type"]
+        .selection,
+        compute="_compute_step_data",
+        store=True,
+    )
     scheduled_date = fields.Datetime(readonly=True)
     do_not_wait = fields.Boolean()
     expiry_date = fields.Datetime(readonly=True)
     processed_on = fields.Datetime(readonly=True)
     parent_id = fields.Many2one("automation.record.step", readonly=True)
     child_ids = fields.One2many("automation.record.step", inverse_name="parent_id")
-    trigger_type = fields.Selection(related="configuration_step_id.trigger_type")
+    trigger_type = fields.Selection(
+        selection=lambda r: r.env[
+            "automation.configuration.step"
+        ]._trigger_type_selection(),
+        compute="_compute_step_data",
+        store=True,
+    )
     trigger_type_data = fields.Json(compute="_compute_trigger_type_data")
     step_icon = fields.Char(compute="_compute_step_info")
     step_name = fields.Char(compute="_compute_step_info")
@@ -71,6 +82,14 @@ class AutomationRecordStep(models.Model):
     activity_cancel_on = fields.Datetime(readonly=True)
     is_test = fields.Boolean(related="record_id.is_test", store=True)
     step_actions = fields.Json(compute="_compute_step_actions")
+
+    @api.depends("configuration_step_id")
+    def _compute_step_data(self):
+        for record in self.filtered(lambda r: r.configuration_step_id):
+            record.name = record.configuration_step_id.name
+            record.configuration_id = record.configuration_step_id.configuration_id
+            record.step_type = record.configuration_step_id.step_type
+            record.trigger_type = record.configuration_step_id.trigger_type
 
     @api.depends("trigger_type")
     def _compute_trigger_type_data(self):
@@ -124,6 +143,7 @@ class AutomationRecordStep(models.Model):
             return self.browse()
         if (
             self.record_id.resource_ref is None
+            or not self.configuration_step_id
             or not self.record_id.resource_ref.filtered_domain(
                 safe_eval(
                     self.configuration_step_id.applied_domain,
