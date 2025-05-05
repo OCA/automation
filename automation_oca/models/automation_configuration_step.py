@@ -81,7 +81,7 @@ class AutomationConfigurationStep(models.Model):
     trigger_child_types = fields.Json(compute="_compute_trigger_child_types")
     trigger_type_data = fields.Json(compute="_compute_trigger_type_data")
     mail_author_id = fields.Many2one(
-        "res.partner", required=True, default=lambda r: r.env.user.id
+        "res.partner", required=True, default=lambda r: r.env.user.partner_id.id
     )
     mail_template_id = fields.Many2one(
         "mail.template", domain="[('model_id', '=', model_id)]"

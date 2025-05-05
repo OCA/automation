@@ -279,22 +279,8 @@ class AutomationConfiguration(models.Model):
                 [Record._name, self.id],
             )
             query.add_where(f"{alias2}.id is NULL")
-            from_clause, where_clause, params = query.get_sql()
-            # We also need to find with a group by in order to avoid duplication
-            # when we have both records created between two executions
-            # (first one has priority)
-            # Asegurarnos de que tenemos un nombre de tabla válido para el GROUP BY
-            table_name = Record._table
-
-            query_str = f"""
-                SELECT MIN("{table_name}".id) as id
-                FROM {from_clause}
-                WHERE {where_clause or 'TRUE'}
-                {(" ORDER BY %s" % query.order) if query.order else ""}
-                {(" LIMIT %d" % query.limit) if query.limit else ""}
-                {(" OFFSET %d" % query.offset) if query.offset else ""}
-                GROUP BY "{table_name}".{self.field_id.name}
-            """
+            query.group_by = f'"{Record._table}".{self.field_id.name}'
+            query_str, params = query.select(f'MIN("{Record._table}".id)')
         else:
             query_str, params = query.select()
         self.env.cr.execute(query_str, params)

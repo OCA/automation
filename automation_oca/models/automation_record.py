@@ -140,6 +140,14 @@ class AutomationRecord(models.Model):
                         res_id,
                         list(targets[res_id]),
                     )
+                    self.sudo().search(
+                        [("model", "=", model), ("res_id", "=", res_id)]
+                    ).write(
+                        {
+                            "is_orphan_record": True,
+                            "res_id": False,
+                        }
+                    )
                 recs = recs - missing
             allowed = list(
                 self.env[model]
@@ -171,13 +179,13 @@ class AutomationRecord(models.Model):
     def read(self, fields=None, load="_classic_read"):
         """Override to explicitely call check_access_rule, that is not called
         by the ORM. It instead directly fetches ir.rules and apply them."""
-        self.check_access_rule("read")
+        self.check_access("read")
         return super().read(fields=fields, load=load)
 
-    def check_access_rule(self, operation):
+    def check_access(self, operation):
         """In order to check if we can access a record, we are checking if we can access
         the related document"""
-        super().check_access_rule(operation)
+        super().check_access(operation)
         if self.env.is_superuser():
             return
         default_checker = self.env["mail.thread"].get_automation_access
@@ -197,9 +205,8 @@ class AutomationRecord(models.Model):
                 check_operation = checker(
                     [record.id], operation, model_name=record._name
                 )
-                record.check_access_rights(check_operation)
-                record.check_access_rule(check_operation)
+                record.check_access(check_operation)
 
     def write(self, vals):
-        self.check_access_rule("write")
+        self.check_access("write")
         return super().write(vals)

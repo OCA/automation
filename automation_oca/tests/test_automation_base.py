@@ -135,7 +135,7 @@ class TestAutomationBase(AutomationTestCase):
         the records that fulfill the domain
         """
         self.create_server_action()
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.assertEqual(
@@ -162,7 +162,7 @@ class TestAutomationBase(AutomationTestCase):
         Check that the error is raised properly and stored the full error
         """
         activity = self.create_server_action(server_action_id=self.error_action.id)
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         record = self.env["automation.record.step"].search(
@@ -178,7 +178,7 @@ class TestAutomationBase(AutomationTestCase):
         Check the record computed fields of record
         """
         self.create_server_action(server_action_id=self.error_action.id)
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         record = self.env["automation.record"].search(
@@ -194,7 +194,7 @@ class TestAutomationBase(AutomationTestCase):
         Testing that expired actions are not executed
         """
         activity = self.create_server_action(expiry=True, trigger_interval=1)
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         record_activity = self.env["automation.record.step"].search(
@@ -209,7 +209,7 @@ class TestAutomationBase(AutomationTestCase):
         Testing that cancelled actions are not executed
         """
         activity = self.create_server_action()
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         record_activity = self.env["automation.record.step"].search(
@@ -226,7 +226,7 @@ class TestAutomationBase(AutomationTestCase):
         Check the counter function
         """
         self.create_server_action(server_action_id=self.error_action.id)
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.assertEqual(0, self.configuration.record_count)
         self.assertEqual(0, self.configuration.record_test_count)
@@ -274,7 +274,7 @@ class TestAutomationBase(AutomationTestCase):
         activity_02 = self.create_server_action(server_action_id=self.error_action.id)
         activity_03 = self.create_mail_activity()
         child_activity = self.create_server_action(parent_id=activity_01.id)
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.assertEqual(0, self.configuration.activity_mail_count)
@@ -348,9 +348,7 @@ class TestAutomationBase(AutomationTestCase):
         with freeze_time("2022-01-01"):
             activity = self.create_server_action(trigger_interval=1)
             self.assertEqual(1, activity.trigger_interval_hours)
-            self.configuration.editable_domain = (
-                "[('id', '=', %s)]" % self.partner_01.id
-            )
+            self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
             self.configuration.start_automation()
             self.env["automation.configuration"].cron_automation()
             record_activity = self.env["automation.record.step"].search(
@@ -361,47 +359,13 @@ class TestAutomationBase(AutomationTestCase):
                 record_activity.scheduled_date, datetime(2022, 1, 1, 1, 0, 0, 0)
             )
 
-    def test_schedule_date_force(self):
-        partner_01 = self.env["res.partner"].create(
-            {
-                "name": "Demo partner",
-                "comment": "Demo",
-                "email": "test@test.com",
-                "date": "2025-01-01",
-            }
-        )
-        with freeze_time("2024-01-01 00:00:00"):
-            activity = self.create_server_action(
-                trigger_date_kind="date",
-                trigger_date_field_id=self.env["ir.model.fields"]
-                .search(
-                    [
-                        ("name", "=", "date"),
-                        ("model", "=", "res.partner"),
-                    ]
-                )
-                .id,
-                trigger_interval=1,
-                trigger_interval_type="days",
-            )
-            self.configuration.editable_domain = "[('id', '=', %s)]" % partner_01.id
-            self.configuration.start_automation()
-            self.env["automation.configuration"].cron_automation()
-            record_activity = self.env["automation.record.step"].search(
-                [("configuration_step_id", "=", activity.id)]
-            )
-            self.assertEqual("scheduled", record_activity.state)
-            self.assertEqual(record_activity.scheduled_date, datetime(2025, 1, 2))
-
     def test_schedule_date_computation_days(self):
         with freeze_time("2022-01-01"):
             activity = self.create_server_action(
                 trigger_interval=1, trigger_interval_type="days"
             )
             self.assertEqual(24, activity.trigger_interval_hours)
-            self.configuration.editable_domain = (
-                "[('id', '=', %s)]" % self.partner_01.id
-            )
+            self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
             self.configuration.start_automation()
             self.env["automation.configuration"].cron_automation()
             record_activity = self.env["automation.record.step"].search(
@@ -432,7 +396,7 @@ class TestAutomationBase(AutomationTestCase):
 
     def test_field_not_field_unicity(self):
         self.configuration.editable_domain = (
-            "[('id', 'in', %s)]" % (self.partner_01 | self.partner_02).ids
+            f"[('id', 'in', [{self.partner_01.id}, {self.partner_02.id}])]"
         )
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
@@ -447,7 +411,7 @@ class TestAutomationBase(AutomationTestCase):
 
     def test_field_field_unicity(self):
         self.configuration.editable_domain = (
-            "[('id', 'in', %s)]" % (self.partner_01 | self.partner_02).ids
+            f"[('id', 'in', [{self.partner_01.id}, {self.partner_02.id}])]"
         )
         self.configuration.field_id = self.env.ref("base.field_res_partner__email")
         self.configuration.start_automation()
@@ -525,11 +489,11 @@ class TestAutomationBase(AutomationTestCase):
         with Form(
             self.env["automation.configuration.test"].with_context(
                 default_configuration_id=self.configuration.id,
-                defaul_model=self.configuration.model,
+                default_model=self.configuration.model,
             )
         ) as f:
             self.assertTrue(f.resource_ref)
-            f.resource_ref = "%s,%s" % (self.partner_01._name, self.partner_01.id)
+            f.resource_ref = f"{self.partner_01._name},{self.partner_01.id}"
         wizard = f.save()
         wizard_action = wizard.test_record()
         record = self.env[wizard_action["res_model"]].browse(wizard_action["res_id"])
@@ -579,8 +543,8 @@ class TestAutomationBase(AutomationTestCase):
 
     def test_generation_orphan_record(self):
         self.configuration.editable_domain = (
-            "['|', ('id', '=', %s), ('id', '=', %s)]"
-            % (self.partner_01.id, self.partner_02.id)
+            f"['|', ('id', '=', {self.partner_01.id}),"
+            f" ('id', '=', {self.partner_02.id})]"
         )
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()

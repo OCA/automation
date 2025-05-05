@@ -13,7 +13,7 @@ class TestAutomationActivity(AutomationTestCase):
         We will check the execution of activity tasks (generation of an activity)
         """
         activity = self.create_activity_action()
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.assertFalse(self.partner_01.activity_ids)
@@ -53,7 +53,7 @@ class TestAutomationActivity(AutomationTestCase):
             activity_verification_domain="[('name', '=', 'My Expected Name')]"
         )
         self.partner_01.name = "Not My Expected Name"
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.assertFalse(self.partner_01.activity_ids)
@@ -90,7 +90,7 @@ class TestAutomationActivity(AutomationTestCase):
         child_activity = self.create_server_action(
             parent_id=activity.id, trigger_type="activity_done"
         )
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.env["automation.record.step"]._cron_automation_steps()
@@ -118,7 +118,7 @@ class TestAutomationActivity(AutomationTestCase):
         child_activity = self.create_server_action(
             parent_id=activity.id, trigger_type="activity_done"
         )
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.env["automation.record.step"]._cron_automation_steps()
@@ -140,14 +140,14 @@ class TestAutomationActivity(AutomationTestCase):
 
     def test_activity_execution_cancel_child(self):
         """
-        We will check the execution of the child task (activity_cancel) is only scheduled
-        after the activity is cancel
+        We will check the execution of the child task (activity_cancel) is
+        only scheduled after the activity is cancelled
         """
         activity = self.create_activity_action()
         child_activity = self.create_server_action(
             parent_id=activity.id, trigger_type="activity_cancel"
         )
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.env["automation.record.step"]._cron_automation_steps()
@@ -175,7 +175,7 @@ class TestAutomationActivity(AutomationTestCase):
         child_activity = self.create_server_action(
             parent_id=activity.id, trigger_type="activity_cancel"
         )
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.env["automation.record.step"]._cron_automation_steps()
@@ -204,7 +204,7 @@ class TestAutomationActivity(AutomationTestCase):
         child_activity = self.create_server_action(
             parent_id=activity.id, trigger_type="activity_not_done"
         )
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.env["automation.record.step"]._cron_automation_steps()
@@ -235,7 +235,7 @@ class TestAutomationActivity(AutomationTestCase):
         child_activity = self.create_server_action(
             parent_id=activity.id, trigger_type="activity_not_done"
         )
-        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.env["automation.record.step"]._cron_automation_steps()
