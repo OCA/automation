@@ -9,6 +9,8 @@ from odoo.exceptions import ValidationError
 from odoo.tests import Form
 from odoo.tools.safe_eval import safe_eval
 
+from odoo.addons.mail.tests.common import mail_new_test_user
+
 from .common import AutomationTestCase
 
 
@@ -542,6 +544,15 @@ class TestAutomationBase(AutomationTestCase):
         )
 
     def test_generation_orphan_record(self):
+        self.user_automation = mail_new_test_user(
+            self.env,
+            login="user_automation",
+            name="User automation",
+            email="user_automation@test.example.com",
+            company_id=self.env.user.company_id.id,
+            notification_type="inbox",
+            groups="base.user_admin, automation_oca.group_automation_manager",
+        )
         self.configuration.editable_domain = (
             f"['|', ('id', '=', {self.partner_01.id}),"
             f" ('id', '=', {self.partner_02.id})]"
@@ -549,6 +560,17 @@ class TestAutomationBase(AutomationTestCase):
         self.configuration.start_automation()
         self.env["automation.configuration"].cron_automation()
         self.partner_01.unlink()
+        # We need two searches because in the first one, we access as a non-superuser to
+        # avoid the first return of the private method _search of automation.record and
+        # thus be able to access the part where orphaned records are filtered. The
+        # second search is to finally get the query we need, which is the one performed
+        # by accessing as a superuser.
+        automation_record_obj = self.env["automation.record"].with_user(
+            self.user_automation.id
+        )
+        records = automation_record_obj.search(
+            [("configuration_id", "=", self.configuration.id), ("is_test", "=", False)]
+        )
         records = self.env["automation.record"].search(
             [("configuration_id", "=", self.configuration.id), ("is_test", "=", False)]
         )
