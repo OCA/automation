@@ -25,14 +25,14 @@ export class AutomationGraph extends Component {
         return {
             type: "line",
             data: {
-                labels: this.props.record.data.graph_data.done.map(function (pt) {
+                labels: this.props.record.data[this.props.name].done.map(function (pt) {
                     return pt.x;
                 }),
                 datasets: [
                     {
                         backgroundColor: "#4CAF5080",
                         borderColor: "#4CAF50",
-                        data: this.props.record.data.graph_data.done,
+                        data: this.props.record.data[this.props.name].done,
                         fill: "start",
                         label: _t("Done"),
                         borderWidth: 2,
@@ -40,7 +40,7 @@ export class AutomationGraph extends Component {
                     {
                         backgroundColor: "#F4433680",
                         borderColor: "#F44336",
-                        data: this.props.record.data.graph_data.error,
+                        data: this.props.record.data[this.props.name].error,
                         fill: "start",
                         label: _t("Error"),
                         borderWidth: 2,

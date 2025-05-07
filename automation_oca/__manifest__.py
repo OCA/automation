@@ -31,6 +31,9 @@
             "automation_oca/static/src/**/*.xml",
             "automation_oca/static/src/**/*.scss",
         ],
+        "web.assets_unit_tests": [
+            "automation_oca/static/tests/**/*.test.js",
+        ],
     },
     "demo": [
         "demo/demo.xml",
