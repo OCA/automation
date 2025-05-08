@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import users
+from odoo.tools import mute_logger
 
 from odoo.addons.mail.tests.common import mail_new_test_user
 
@@ -92,6 +93,7 @@ class TestAutomationSecurity(AutomationTestCase):
         self.assertEqual(self.partner_01, record.resource_ref)
 
     @users("user_automation_01")
+    @mute_logger("odoo.addons.automation_oca.models.automation_record")
     def test_security_deleted_record(self):
         self.env.user.groups_id = [(4, self.env.ref("base.group_system").id)]
         original_record = self.env["automation.record"].search(

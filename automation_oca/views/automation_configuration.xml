@@ -202,10 +202,7 @@
                             <field name="step_icon" />
                             <field name="step_name" />
                             <templates>
-                                <div
-                                    t-name="kanban-box"
-                                    class="o_automation_kanban_box p-2"
-                                >
+                                <div t-name="card" class="o_automation_kanban_box p-2">
                                     <div
                                         class="o_automation_kanban_extra"
                                         t-foreach="[...Array(record.parent_position.raw_value).keys()]"
@@ -424,7 +421,7 @@
             <kanban default_group_by="state" quick_create="false">
                 <field name="state" readonly="1" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_card oe_kanban_global_click">
                             <div class="row">
                                 <field name="name" class="o_text_overflow" />

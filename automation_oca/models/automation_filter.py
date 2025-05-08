@@ -15,8 +15,12 @@ class AutomationFilter(models.Model):
         required=True,
         ondelete="cascade",
         help="Model where the configuration is applied",
+        string="Model ID",
     )
-    model = fields.Char(related="model_id.model")
+    model = fields.Char(
+        related="model_id.model",
+        string="Model",
+    )
     domain = fields.Char(required=True, default="[]", help="Filter to apply")
 
     @api.onchange("model_id")

@@ -31,8 +31,8 @@ class AutomationConfigurationStep(models.Model):
         recursive=True,
     )
     parent_id = fields.Many2one("automation.configuration.step", ondelete="cascade")
-    model_id = fields.Many2one(related="configuration_id.model_id")
-    model = fields.Char(related="model_id.model")
+    model_id = fields.Many2one(string="Model ID", related="configuration_id.model_id")
+    model = fields.Char(string="Model", related="model_id.model")
     child_ids = fields.One2many(
         "automation.configuration.step", inverse_name="parent_id"
     )

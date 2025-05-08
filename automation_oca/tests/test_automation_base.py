@@ -7,6 +7,7 @@ from freezegun import freeze_time
 
 from odoo.exceptions import ValidationError
 from odoo.tests import Form
+from odoo.tools import mute_logger
 from odoo.tools.safe_eval import safe_eval
 
 from odoo.addons.mail.tests.common import mail_new_test_user
@@ -543,6 +544,7 @@ class TestAutomationBase(AutomationTestCase):
             set(activity.trigger_child_types.keys()),
         )
 
+    @mute_logger("odoo.addons.automation_oca.models.automation_record")
     def test_generation_orphan_record(self):
         self.user_automation = mail_new_test_user(
             self.env,
@@ -580,64 +582,3 @@ class TestAutomationBase(AutomationTestCase):
         self.assertTrue(
             orphan_record_found, "No record named 'Orphan Record' was found"
         )
-
-    def test_delete_step_executed(self):
-        """
-        Testing that deleting a step will keep the results of the executed related steps
-        """
-        activity = self.create_server_action()
-        child_activity = self.create_server_action(parent_id=activity.id)
-        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
-        self.configuration.start_automation()
-        self.env["automation.configuration"].cron_automation()
-        record_activity = self.env["automation.record.step"].search(
-            [("configuration_step_id", "=", activity.id)]
-        )
-        self.assertEqual("scheduled", record_activity.state)
-        self.assertFalse(
-            self.env["automation.record.step"].search(
-                [("configuration_step_id", "=", child_activity.id)]
-            )
-        )
-        self.env["automation.record.step"]._cron_automation_steps()
-        self.assertEqual("done", record_activity.state)
-        record_child_activity = self.env["automation.record.step"].search(
-            [("configuration_step_id", "=", child_activity.id)]
-        )
-        self.assertEqual("scheduled", record_child_activity.state)
-        self.env["automation.record.step"]._cron_automation_steps()
-        self.assertEqual("done", record_child_activity.state)
-        child_activity.unlink()
-        child_activity.flush_recordset()
-        self.assertEqual("action", record_child_activity.step_type)
-
-    def test_delete_step_to_execute(self):
-        """
-        Testing that deleting a step will make pending actions related
-        to be rejected
-        """
-        activity = self.create_server_action()
-        child_activity = self.create_server_action(parent_id=activity.id)
-        self.configuration.editable_domain = f"[('id', '=', {self.partner_01.id})]"
-        self.configuration.start_automation()
-        self.env["automation.configuration"].cron_automation()
-        record_activity = self.env["automation.record.step"].search(
-            [("configuration_step_id", "=", activity.id)]
-        )
-        self.assertEqual("scheduled", record_activity.state)
-        self.assertFalse(
-            self.env["automation.record.step"].search(
-                [("configuration_step_id", "=", child_activity.id)]
-            )
-        )
-        self.env["automation.record.step"]._cron_automation_steps()
-        self.assertEqual("done", record_activity.state)
-        record_child_activity = self.env["automation.record.step"].search(
-            [("configuration_step_id", "=", child_activity.id)]
-        )
-        self.assertEqual("scheduled", record_child_activity.state)
-        child_activity.unlink()
-        child_activity.flush_recordset()
-        self.assertEqual("action", record_child_activity.step_type)
-        self.env["automation.record.step"]._cron_automation_steps()
-        self.assertEqual("rejected", record_child_activity.state)

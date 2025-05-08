@@ -62,10 +62,7 @@
                             <field name="step_name" />
                             <field name="step_actions" />
                             <templates>
-                                <div
-                                    t-name="kanban-box"
-                                    class="o_automation_kanban_box p-2"
-                                >
+                                <div t-name="card" class="o_automation_kanban_box p-2">
                                     <div
                                         class="o_automation_kanban_extra"
                                         t-foreach="[...Array(record.parent_position.raw_value).keys()]"

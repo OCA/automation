@@ -60,10 +60,11 @@ class AutomationConfiguration(models.Model):
         required=True,
         ondelete="cascade",
         help="Model where the configuration is applied",
+        string="Model ID",
     )
     filter_id = fields.Many2one("automation.filter")
     filter_domain = fields.Binary(compute="_compute_filter_domain")
-    model = fields.Char(related="model_id.model")
+    model = fields.Char(string="Model", related="model_id.model")
     field_id = fields.Many2one(
         "ir.model.fields",
         domain="[('model_id', '=', model_id), "
