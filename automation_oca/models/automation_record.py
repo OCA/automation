@@ -158,7 +158,7 @@ class AutomationRecord(models.Model):
                 # Group "Settings" can list exchanges where record is deleted
                 allowed.extend(missing.ids)
             for target_id in allowed:
-                result += list(targets[target_id])
+                result += list(targets.get(target_id, {}))
         if len(orig_ids) == limit and len(result) < len(orig_ids):
             extend_query = self._search(
                 domain,
