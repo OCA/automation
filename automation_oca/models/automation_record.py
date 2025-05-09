@@ -107,29 +107,26 @@ class AutomationRecord(models.Model):
         for sub_ids in self._cr.split_for_in_conditions(ids):
             self._cr.execute(
                 """
-                            SELECT id, res_id, model, configuration_id
+                            SELECT id, res_id, model
                             FROM "%s"
                             WHERE id = ANY (%%(ids)s)"""
                 % self._table,
                 dict(ids=list(sub_ids)),
             )
-            for eid, res_id, model, config_id in self._cr.fetchall():
-                model_data[model][(res_id, config_id)].add(eid)
-
+            for eid, res_id, model in self._cr.fetchall():
+                model_data[model][res_id].add(eid)
         for model, targets in model_data.items():
             if not self.env[model].check_access_rights("read", False):
                 continue
-            res_ids = [res_id for res_id, _ in targets]
+            res_ids = targets.keys()
             recs = self.env[model].browse(res_ids)
             missing = recs - recs.exists()
             if len(missing) > 0:
-                for (res_id, config_id) in [
-                    (res_id, config_id)
-                    for (res_id, config_id) in targets.keys()
-                    if res_id is None or res_id in missing.ids
-                ]:
+                for res_id in targets.keys():
+                    if res_id and res_id not in missing.ids:
+                        continue
                     automation_record = self.env["automation.record"].browse(
-                        list(targets[(res_id, config_id)])
+                        list(targets[res_id])
                     )
                     if not automation_record.is_orphan_record:
                         _logger.info(
@@ -144,14 +141,14 @@ class AutomationRecord(models.Model):
                                 "res_id": False,
                             }
                         )
-                    result += list(targets[(res_id, config_id)])
+                    result += list(targets[res_id])
             allowed = (
                 self.env[model]
                 .with_context(active_test=False)
                 ._search([("id", "in", recs.ids)])
             )
             for target_id in allowed:
-                result += list(targets.get((target_id, config_id), []))
+                result += list(targets.get(target_id, {}))
         if len(orig_ids) == limit and len(result) < len(orig_ids):
             result.extend(
                 self._search(
