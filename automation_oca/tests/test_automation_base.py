@@ -545,6 +545,26 @@ class TestAutomationBase(AutomationTestCase):
             set(activity.trigger_child_types.keys()),
         )
 
+    def test_search(self):
+        configuration_2 = self.env["automation.configuration"].create(
+            {
+                "name": "Test configuration",
+                "model_id": self.env.ref("base.model_res_partner").id,
+                "is_periodic": True,
+            }
+        )
+        self.create_server_action()
+        self.create_server_action(configuration_id=configuration_2.id)
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        configuration_2.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        configuration_2.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        record_activity = self.env["automation.record"].search(
+            [("model", "=", self.partner_01._name), ("res_id", "=", self.partner_01.id)]
+        )
+        self.assertEqual(2, len(record_activity))
+
     def test_generation_orphan_record(self):
         self.configuration.editable_domain = (
             "['|', ('id', '=', %s), ('id', '=', %s)]"
