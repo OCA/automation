@@ -1236,8 +1236,21 @@ msgstr "Enviado"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_action_id
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__action
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
 msgid "Server Action"
 msgstr "Acción de servidor"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_context
+msgid "Server Context"
+msgstr ""
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Server Context is not wellformed"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__trigger_interval
