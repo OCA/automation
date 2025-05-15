@@ -167,6 +167,11 @@
                                 <field name="activity_note" />
                             </group>
                         </page>
+                        <page name="action" string="Server Action">
+                            <group>
+                                <field name="server_context" />
+                            </group>
+                        </page>
                     </notebook>
 
                 </sheet>
