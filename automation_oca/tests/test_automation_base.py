@@ -485,6 +485,10 @@ class TestAutomationBase(AutomationTestCase):
         with self.assertRaises(ValidationError):
             self.create_server_action(parent_id=False, trigger_type="after_step")
 
+    def test_constrains_wrong_context(self):
+        with self.assertRaises(ValidationError):
+            self.create_server_action(server_context="{not a json}")
+
     def test_is_test_behavior(self):
         """
         We want to ensure that no mails are sent on tests

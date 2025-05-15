@@ -219,3 +219,17 @@ class TestAutomationAction(AutomationTestCase):
                 ]
             ),
         )
+
+    def test_context(self):
+        """
+        We will check that the context is modified and passed on server actions
+        """
+        self.create_server_action(server_context='{"key_value": "My Value"}')
+        self.partner_01.comment = False
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+
+        self.assertFalse(self.partner_01.comment)
+        self.env["automation.record.step"]._cron_automation_steps()
+        self.assertIn("My Value", self.partner_01.comment)
