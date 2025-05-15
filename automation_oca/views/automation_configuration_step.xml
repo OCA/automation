@@ -206,6 +206,11 @@
                                 <field name="activity_verification_domain_error" />
                             </group>
                         </page>
+                        <page name="action" string="Server Action">
+                            <group>
+                                <field name="server_context" />
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
