@@ -1,5 +1,6 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import json
 import threading
 import traceback
 from io import StringIO
@@ -185,7 +186,7 @@ class AutomationRecordStep(models.Model):
                     self.record_id.resource_ref,
                     parent_id=self.id,
                     record_id=self.record_id.id,
-                    **kwargs
+                    **kwargs,
                 )
                 for activity in self.configuration_step_id.child_ids
             ]
@@ -264,7 +265,11 @@ class AutomationRecordStep(models.Model):
         return {}
 
     def _run_action(self):
+        context = {}
+        if self.configuration_step_id.server_context:
+            context.update(json.loads(self.configuration_step_id.server_context))
         self.configuration_step_id.server_action_id.with_context(
+            **context,
             active_model=self.record_id.model,
             active_ids=[self.record_id.res_id],
         ).run()

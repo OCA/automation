@@ -1,6 +1,7 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import json
 from collections import defaultdict
 
 import babel.dates
@@ -77,6 +78,7 @@ class AutomationConfigurationStep(models.Model):
     server_action_id = fields.Many2one(
         "ir.actions.server", domain="[('model_id', '=', model_id)]"
     )
+    server_context = fields.Text(default="{}")
     activity_type_id = fields.Many2one(
         "mail.activity.type",
         string="Activity",
@@ -135,6 +137,15 @@ class AutomationConfigurationStep(models.Model):
     graph_data = fields.Json(compute="_compute_graph_data")
     graph_done = fields.Integer(compute="_compute_total_graph_data")
     graph_error = fields.Integer(compute="_compute_total_graph_data")
+
+    @api.constrains("server_context")
+    def _check_server_context(self):
+        for record in self:
+            if record.server_context:
+                try:
+                    json.loads(record.server_context)
+                except Exception as e:
+                    raise ValidationError(_("Server Context is not wellformed")) from e
 
     @api.onchange("trigger_type")
     def _onchange_trigger_type(self):
