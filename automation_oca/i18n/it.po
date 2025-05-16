@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-06 11:24+0000\n"
+"PO-Revision-Date: 2025-05-16 09:24+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -1246,14 +1246,14 @@ msgstr "Azione server"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_context
 msgid "Server Context"
-msgstr ""
+msgstr "Contex del server"
 
 #. module: automation_oca
 #. odoo-python
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
 msgid "Server Context is not wellformed"
-msgstr ""
+msgstr "Il context del server non è formato correttamente"
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__trigger_interval
