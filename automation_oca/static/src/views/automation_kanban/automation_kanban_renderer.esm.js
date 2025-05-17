@@ -1,3 +1,4 @@
+/* @odoo-module */
 import {AutomationKanbanRecord} from "./automation_kanban_record.esm";
 import {KanbanRenderer} from "@web/views/kanban/kanban_renderer";
 

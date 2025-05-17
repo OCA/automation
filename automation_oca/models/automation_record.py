@@ -127,7 +127,7 @@ class AutomationRecord(models.Model):
 
         for model, targets in model_data.items():
             try:
-                self.env[model].check_access("read")
+                self.env[model].check_access_rights("read")
             except AccessError:  # no read access rights
                 continue
             recs = self.env[model].browse(list(targets))
@@ -179,13 +179,13 @@ class AutomationRecord(models.Model):
     def read(self, fields=None, load="_classic_read"):
         """Override to explicitely call check_access_rule, that is not called
         by the ORM. It instead directly fetches ir.rules and apply them."""
-        self.check_access("read")
+        self.check_access_rule("read")
         return super().read(fields=fields, load=load)
 
-    def check_access(self, operation):
+    def check_access_rule(self, operation):
         """In order to check if we can access a record, we are checking if we can access
         the related document"""
-        super().check_access(operation)
+        super().check_access_rule(operation)
         if self.env.is_superuser():
             return
         default_checker = self.env["mail.thread"].get_automation_access
@@ -205,8 +205,9 @@ class AutomationRecord(models.Model):
                 check_operation = checker(
                     [record.id], operation, model_name=record._name
                 )
-                record.check_access(check_operation)
+                record.check_access_rights(check_operation)
+                record.check_access_rule(check_operation)
 
     def write(self, vals):
-        self.check_access("write")
+        self.check_access_rule("write")
         return super().write(vals)

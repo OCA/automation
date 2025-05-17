@@ -5,7 +5,7 @@
     "name": "Automation Oca",
     "summary": """
         Automate actions in threaded models""",
-    "version": "18.0.1.4.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "category": "Automation",
     "author": "Dixmit,Odoo Community Association (OCA)",
@@ -30,9 +30,6 @@
             "automation_oca/static/src/**/*.js",
             "automation_oca/static/src/**/*.xml",
             "automation_oca/static/src/**/*.scss",
-        ],
-        "web.assets_unit_tests": [
-            "automation_oca/static/tests/**/*.test.js",
         ],
     },
     "demo": [

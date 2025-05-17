@@ -29,7 +29,7 @@
     <record model="ir.ui.view" id="automation_record_step_tree_view">
         <field name="model">automation.record.step</field>
         <field name="arch" type="xml">
-            <list create="0">
+            <tree create="0">
                 <field name="name" />
                 <field name="state" />
                 <button
@@ -38,7 +38,7 @@
                     string="Run"
                     invisible="state != 'scheduled'"
                 />
-            </list>
+            </tree>
         </field>
     </record>
 

@@ -62,7 +62,10 @@
                             <field name="step_name" />
                             <field name="step_actions" />
                             <templates>
-                                <div t-name="card" class="o_automation_kanban_box p-2">
+                                <div
+                                    t-name="kanban-box"
+                                    class="o_automation_kanban_box p-2"
+                                >
                                     <div
                                         class="o_automation_kanban_extra"
                                         t-foreach="[...Array(record.parent_position.raw_value).keys()]"
@@ -232,7 +235,7 @@
     <record model="ir.ui.view" id="automation_record_tree_view">
         <field name="model">automation.record</field>
         <field name="arch" type="xml">
-            <list create="0">
+            <tree create="0">
                 <field name="name" />
                 <field name="configuration_id" />
                 <field name="create_date" />
@@ -242,7 +245,7 @@
                     decoration-info="state == 'periodic'"
                     decoration-success="state == 'done'"
                 />
-            </list>
+            </tree>
         </field>
     </record>
 

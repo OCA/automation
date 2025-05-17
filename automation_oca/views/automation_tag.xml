@@ -14,10 +14,10 @@
     <record model="ir.ui.view" id="automation_tag_tree_view">
         <field name="model">automation.tag</field>
         <field name="arch" type="xml">
-            <list editable="bottom">
+            <tree editable="bottom">
                 <field name="name" />
                 <field name="color" />
-            </list>
+            </tree>
         </field>
     </record>
 

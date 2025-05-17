@@ -1,4 +1,3 @@
-from . import test_js
 from . import test_automation_action
 from . import test_automation_activity
 from . import test_automation_base

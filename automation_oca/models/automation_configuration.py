@@ -280,8 +280,8 @@ class AutomationConfiguration(models.Model):
                 [Record._name, self.id],
             )
             query.add_where(f"{alias2}.id is NULL")
-            query.group_by = f'"{Record._table}".{self.field_id.name}'
             query_str, params = query.select(f'MIN("{Record._table}".id)')
+            query_str += f' GROUP BY "{Record._table}".{self.field_id.name}'
         else:
             query_str, params = query.select()
         self.env.cr.execute(query_str, params)
@@ -313,7 +313,7 @@ class AutomationConfiguration(models.Model):
             ],
         }
 
-    def _group_expand_states(self, states, domain):
+    def _group_expand_states(self, states, domain, order):
         """
         This is used to show all the states on the kanban view
         """
