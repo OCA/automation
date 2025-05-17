@@ -95,32 +95,32 @@
                                                     t-elif="record.state.raw_value == 'expired'"
                                                 >
                                                     Expired <field
-                                                    name="processed_on"
-                                                />
+                                                        name="processed_on"
+                                                    />
                                                 </span>
                                                 <span
                                                     class="text-info"
                                                     t-elif="record.state.raw_value == 'rejected'"
                                                 >
                                                     Rejected <field
-                                                    name="processed_on"
-                                                />
+                                                        name="processed_on"
+                                                    />
                                                 </span>
                                                 <span
                                                     class="text-danger"
                                                     t-elif="record.state.raw_value == 'error'"
                                                 >
                                                     Error on <field
-                                                    name="processed_on"
-                                                />
+                                                        name="processed_on"
+                                                    />
                                                 </span>
                                                 <span
                                                     class="text-warning"
                                                     t-elif="record.state.raw_value == 'cancel'"
                                                 >
                                                     Cancelled <field
-                                                    name="processed_on"
-                                                />
+                                                        name="processed_on"
+                                                    />
                                                 </span>
                                                 <field
                                                     name="scheduled_date"

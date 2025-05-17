@@ -55,12 +55,12 @@
                 <div class="alert alert-info" role="alert" invisible="state != 'draft'">
                     <div class="px-4" invisible="not is_periodic">
                         On <b
-                    >periodical configurations</b>, the records are created automatically by a cron job.
+                        >periodical configurations</b>, the records are created automatically by a cron job.
                         It is great for tasks that don't need user validation.
                     </div>
                     <div class="px-4" invisible="is_periodic">
                         On <b
-                    >on demand configurations</b>, the records are created only by pressing the run button.
+                        >on demand configurations</b>, the records are created only by pressing the run button.
                         It is useful if you want to control the execution and created records manually.
                     </div>
                 </div>
@@ -81,8 +81,8 @@
                     <div class="px-4">
                         This a periodical configuration. New records are generated automatically.
                         Next execution is programed for <field
-                        name="next_execution_date"
-                    />
+                            name="next_execution_date"
+                        />
                     </div>
                 </div>
                 <sheet>
@@ -351,8 +351,8 @@
                                                 class="o_automation_kanban_child_add_title card-footer"
                                             >
                                                 <i
-                                                class="fa fa-plus-circle"
-                                            /> Add child activity
+                                                    class="fa fa-plus-circle"
+                                                /> Add child activity
                                             </div>
                                             <div
                                                 class="o_automation_kanban_child_add_buttons"

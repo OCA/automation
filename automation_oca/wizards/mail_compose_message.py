@@ -13,7 +13,7 @@ class MailComposeMessage(models.TransientModel):
         result = super()._prepare_mail_values(res_ids)
         if self.automation_record_step_id:
             for res_id in res_ids:
-                result[res_id]["automation_record_step_id"] = (
-                    self.automation_record_step_id.id
-                )
+                result[res_id][
+                    "automation_record_step_id"
+                ] = self.automation_record_step_id.id
         return result

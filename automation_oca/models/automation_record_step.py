@@ -227,9 +227,9 @@ class AutomationRecordStep(models.Model):
         }
         if self.configuration_step_id.mail_author_id:
             composer_values["author_id"] = self.configuration_step_id.mail_author_id.id
-            composer_values["email_from"] = (
-                self.configuration_step_id.mail_author_id.email_formatted
-            )
+            composer_values[
+                "email_from"
+            ] = self.configuration_step_id.mail_author_id.email_formatted
         res_ids = [self.record_id.res_id]
         composer = (
             self.env["mail.compose.message"]
