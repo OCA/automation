@@ -456,3 +456,16 @@ class AutomationRecordStep(models.Model):
                 },
             ]
         return []
+
+    def retry(self):
+        """
+        Retry the record step
+        """
+        if self.state not in ["error", "rejected", "expired", "cancel"]:
+            raise ValidationError(
+                _(
+                    "You can only retry a record step in a rejected, "
+                    "expired, cancelled or error state."
+                )
+            )
+        self.write({"state": "scheduled", "processed_on": False})
