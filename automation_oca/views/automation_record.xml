@@ -177,6 +177,13 @@
                                                     title="Cancel"
                                                     t-if="record.state.raw_value == 'scheduled'"
                                                 />
+                                                <button
+                                                    type="object"
+                                                    name="retry"
+                                                    class="fa fa-refresh btn-warning o_automation_kanban_header_icon"
+                                                    title="Retry"
+                                                    t-if="record.state.raw_value  == 'cancel' || record.state.raw_value  == 'rejected' || record.state.raw_value  ==  'error' || record.state.raw_value  ==  'expired'"
+                                                />
                                             </div>
                                         </div>
                                         <div
