@@ -198,7 +198,7 @@
                         mode="kanban"
                         class="o_automation_kanban"
                     >
-                        <kanban>
+                        <kanban limit="1000">
                             <field name="id" />
                             <field name="name" />
                             <field name="step_type" />
