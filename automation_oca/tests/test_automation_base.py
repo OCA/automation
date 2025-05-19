@@ -221,6 +221,38 @@ class TestAutomationBase(AutomationTestCase):
         self.env["automation.record.step"]._cron_automation_steps()
         self.assertEqual("cancel", record_activity.state)
 
+    def test_retry_exception(self):
+        """
+        Testing that cancelled actions are not executed
+        """
+        activity = self.create_server_action()
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        record_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", activity.id)]
+        )
+        self.assertEqual("scheduled", record_activity.state)
+        with self.assertRaises(ValidationError):
+            record_activity.retry()
+
+    def test_retry(self):
+        """
+        Testing that cancelled actions are not executed
+        """
+        activity = self.create_server_action()
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        record_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", activity.id)]
+        )
+        self.assertEqual("scheduled", record_activity.state)
+        record_activity.cancel()
+        self.assertEqual("cancel", record_activity.state)
+        record_activity.retry()
+        self.assertEqual("scheduled", record_activity.state)
+
     def test_counter(self):
         """
         Check the counter function
