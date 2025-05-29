@@ -11,7 +11,7 @@ class MailActivity(models.Model):
 
     def _action_done(self, *args, **kwargs):
         if self.automation_record_step_id:
-            self.automation_record_step_id._set_activity_done()
+            self.automation_record_step_id.sudo()._set_activity_done()
         return super(
             MailActivity,
             self.with_context(
@@ -23,5 +23,5 @@ class MailActivity(models.Model):
         if self.automation_record_step_id and not self.env.context.get(
             "automation_done"
         ):
-            self.automation_record_step_id._set_activity_cancel()
+            self.automation_record_step_id.sudo()._set_activity_cancel()
         return super(MailActivity, self).unlink()
