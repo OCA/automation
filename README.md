@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[automation_oca](automation_oca/) | 16.0.1.5.2 |  | Automate actions in threaded models
+[automation_oca](automation_oca/) | 16.0.1.5.3 |  | Automate actions in threaded models
 
 [//]: # (end addons)
 
