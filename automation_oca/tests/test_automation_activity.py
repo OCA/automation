@@ -1,12 +1,20 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
-from odoo.tests import Form
+from odoo.tests import Form, new_test_user
 
 from .common import AutomationTestCase
 
 
 class TestAutomationActivity(AutomationTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user = new_test_user(
+            cls.env,
+            login="test_user_automation",
+            groups="base.group_user,base.group_partner_manager",
+        )
+
     def test_activity_execution(self):
         """
         We will check the execution of activity tasks (generation of an activity)
@@ -34,6 +42,43 @@ class TestAutomationActivity(AutomationTestCase):
             ]
         )
         self.partner_01.activity_ids.action_feedback()
+        self.assertTrue(record_activity.activity_done_on)
+        record_activity.invalidate_recordset()
+        self.assertTrue(
+            [
+                step
+                for step in record_activity.step_actions
+                if step["done"] and step["icon"] == "fa fa-clock-o"
+            ]
+        )
+
+    def test_activity_execution_permission(self):
+        """
+        We will check the execution of activity tasks (generation of an activity)
+        """
+        activity = self.create_activity_action()
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        self.assertFalse(self.partner_01.activity_ids)
+        self.env["automation.record.step"]._cron_automation_steps()
+        self.assertTrue(self.partner_01.activity_ids)
+        record_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", activity.id)]
+        )
+        self.assertEqual(
+            record_activity, self.partner_01.activity_ids.automation_record_step_id
+        )
+        self.assertFalse(record_activity.activity_done_on)
+        record_activity.invalidate_recordset()
+        self.assertFalse(
+            [
+                step
+                for step in record_activity.step_actions
+                if step["done"] and step["icon"] == "fa fa-clock-o"
+            ]
+        )
+        self.partner_01.activity_ids.with_user(self.user.id).action_feedback()
         self.assertTrue(record_activity.activity_done_on)
         record_activity.invalidate_recordset()
         self.assertTrue(
@@ -97,6 +142,35 @@ class TestAutomationActivity(AutomationTestCase):
         self.assertFalse(record_activity.activity_done_on)
         self.assertFalse(record_child_activity.scheduled_date)
         self.partner_01.activity_ids.unlink()
+        self.assertFalse(record_activity.activity_done_on)
+        self.assertFalse(record_child_activity.scheduled_date)
+        self.assertEqual(record_child_activity.state, "rejected")
+
+    def test_activity_execution_on_cancel_permission(self):
+        """
+        We will check the execution of the child task (activity_done) is only scheduled
+        after the activity is done
+        """
+        activity = self.create_activity_action()
+        child_activity = self.create_server_action(
+            parent_id=activity.id, trigger_type="activity_done"
+        )
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        self.env["automation.record.step"]._cron_automation_steps()
+        record_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", activity.id)]
+        )
+        record_child_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", child_activity.id)]
+        )
+        self.assertEqual(
+            record_activity, self.partner_01.activity_ids.automation_record_step_id
+        )
+        self.assertFalse(record_activity.activity_done_on)
+        self.assertFalse(record_child_activity.scheduled_date)
+        self.partner_01.activity_ids.with_user(self.user.id).unlink()
         self.assertFalse(record_activity.activity_done_on)
         self.assertFalse(record_child_activity.scheduled_date)
         self.assertEqual(record_child_activity.state, "rejected")
