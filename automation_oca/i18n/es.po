@@ -1,0 +1,1509 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* automation_oca
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-04-08 07:24+0000\n"
+"Last-Translator: Enric Tobella <etobella@creublanca.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
+msgid ""
+"\n"
+"        Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
+"\n"
+"        Filtros a aplicar\n"
+"        Las siguientes variables pueden ser usadas en el filtro :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "%s configurations needs a parent"
+msgstr "%s configuraciones necesitan un padre"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Select time\" "
+"title=\"Select time\"/>"
+msgstr ""
+"<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Seleccionar hora\" "
+"title=\"Seleccionar hora\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-cogs\" title=\"Actions\"/>"
+msgstr "<i class=\"fa fa-cogs\" title=\"Acciones\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-envelope\" title=\"Mails\"/>"
+msgstr "<i class=\"fa fa-envelope\" title=\"Correos\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-hand-pointer-o\" title=\"Clicks\"/>"
+msgstr "<i class=\"fa fa-hand-pointer-o\" title=\"Clicks\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<i class=\"fa fa-plus-circle\"/> Add child activity"
+msgstr "<i class=\"fa fa-plus-circle\"/> Añadir actividad hija"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid ""
+"<i class=\"o_automation_kanban_card_position fa fa-circle text-info text-"
+"right\" title=\"Run on\"/>"
+msgstr ""
+"<i class=\"o_automation_kanban_card_position fa fa-circle text-info text-"
+"right\" title=\"Ejecutar en\"/>"
+
+#. module: automation_oca
+#: model:mail.template,body_html:automation_oca.demo_welcome_template
+msgid ""
+"<p>Welcome!</p>\n"
+"            <p>Thanks <t t-out=\"object.name\"></t> for becoming a contact.</"
+"p>\n"
+"            <p>Kind regards,</p>\n"
+"        "
+msgstr ""
+"<p>¡Bienvenido!</p>\n"
+"            <p>Gracias <t t-out=\"object.name\"></t> por convertirte en un "
+"contacto.</p>\n"
+"            <p>Saludos cordiales,</p>\n"
+"        "
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "<span class=\"col-2\">after</span>"
+msgstr "<span class=\"col-2\">después</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "<span class=\"col-2\">of</span>"
+msgstr "<span class=\"col-2\">de</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<span class=\"pe-1\">Immediatly</span>"
+msgstr "<span class=\"pe-1\">Immediatamente</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "<span>This record is an orphan record</span>"
+msgstr "<span>Este registro es huérfano</span>"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction
+msgid "Action Needed"
+msgstr "Acción necesaria"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__active
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_step_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_record_step_menu
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_record_step
+msgid "Activities done on the record"
+msgstr "Actividades realizadas en el registro"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_activity
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_type_id
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__activity
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Activity"
+msgstr "Actividad"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__activity_action_count
+msgid "Activity Action Count"
+msgstr "Número de acciones de actividad"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__activity_cancel_on
+msgid "Activity Cancel On"
+msgstr ""
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#, python-format
+msgid "Activity Done"
+msgstr "Actividad realizada"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__activity_done_on
+msgid "Activity Done On"
+msgstr "Actividad realizada en"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__activity_mail_count
+msgid "Activity Mail Count"
+msgstr "Número de correos de actividad"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_type
+msgid "Activity User Type"
+msgstr "Actividad tipo de usuario"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Activity has been cancelled"
+msgstr ""
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Activity has been finished"
+msgstr "La actividad ha sido finalizada"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Activity has not been finished"
+msgstr "La actividad no ha sido finalizada"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Activity not cancelled"
+msgstr ""
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Activity not done"
+msgstr "La actividad no ha sido realizada"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "After finished"
+msgstr "Después de finalizar"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__allow_expiry
+msgid "Allow Expiry"
+msgstr "Permitir vencimiento"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__applied_domain
+msgid "Applied Domain"
+msgstr "Dominio aplicado"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__apply_parent_domain
+msgid "Apply Parent Domain"
+msgstr "Aplicar el dominio anterior"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+msgid "Archived"
+msgstr "Archivado"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_attachment_count
+msgid "Attachment Count"
+msgstr "Número de adjuntos"
+
+#. module: automation_oca
+#: model:ir.ui.menu,name:automation_oca.automation_root_menu
+msgid "Automation"
+msgstr "Automatización"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_act_window
+#: model:ir.model,name:automation_oca.model_automation_configuration
+#: model:ir.ui.menu,name:automation_oca.automation_configuration_menu
+msgid "Automation Configuration"
+msgstr "Configuración de automatización"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__automation_direct_step_ids
+msgid "Automation Direct Step"
+msgstr "Paso directo de automatización"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_filter
+msgid "Automation Filter"
+msgstr "Filtro de automatización"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_act_window
+#: model:ir.model,name:automation_oca.model_automation_record
+msgid "Automation Record"
+msgstr "Registro de automatización"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_activity__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_compose_message__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_mail__automation_record_step_id
+msgid "Automation Record Step"
+msgstr "Paso de registro de automatización"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__automation_step_ids
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__automation_step_ids
+msgid "Automation Step"
+msgstr "Paso de automatización"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_step
+msgid "Automation Steps"
+msgstr "Pasos de automatización"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_tag
+msgid "Automation Tag"
+msgstr "Etiqueta de automatización"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.link_tracker_click_search_view
+msgid "Automation configuration"
+msgstr "Configuración de automatización"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.cron_configuration_run_ir_actions_server
+#: model:ir.cron,cron_name:automation_oca.cron_configuration_run
+msgid "Automation: Create records"
+msgstr "Automatización: Crear registros"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.cron_step_execute_ir_actions_server
+#: model:ir.cron,cron_name:automation_oca.cron_step_execute
+msgid "Automation: Execute scheduled activities"
+msgstr "Automatización: Ejecutar actividades programadas"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Back to draft"
+msgstr "Volver a borrador"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.demo_bounce_action
+msgid "Blacklist Partner"
+msgstr "Contacto en lista negra"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__bounce
+#, python-format
+msgid "Bounced"
+msgstr "Rebotado"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Bounced after"
+msgstr "Rebotado después"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Canceled"
+msgstr "Cancelado"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__cancel
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__child_ids
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__child_ids
+msgid "Child"
+msgstr "Hijo"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__click_count
+msgid "Click Count"
+msgstr "Número de clics"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#, python-format
+msgid "Clicked"
+msgstr "Clicado"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Clicked after"
+msgstr "Clicado después"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.link_tracker_click_act_window
+#: model:ir.ui.menu,name:automation_oca.link_tracker_click_menu
+msgid "Clicks"
+msgstr "Clics"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__color
+msgid "Color"
+msgstr "Color"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_configuration_id
+#: model:ir.ui.menu,name:automation_oca.automation_config_root_menu
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__configuration_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_configuration_step_id
+msgid "Configuration Step"
+msgstr "Etapa de configuración"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__create_date
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_search_view
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__days
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__days
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__days
+msgid "Day(s)"
+msgstr "Día(s)"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Deadline"
+msgstr "Fecha límite"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Delete"
+msgstr "Borrar"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__do_not_wait
+msgid "Do Not Wait"
+msgstr "No esperar"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__domain
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__domain
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__domain
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Domain"
+msgstr "Dominio"
+
+#. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/fields/automation_graph/automation_graph.esm.js:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__done
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record__state__done
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__done
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+#, python-format
+msgid "Done"
+msgstr "Hecho"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__draft
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_date_deadline_range
+msgid "Due Date In"
+msgstr "Fecha de vencimiento en"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_date_deadline_range_type
+msgid "Due type"
+msgstr "Tipo de vencimiento"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Edit"
+msgstr "Editar"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__editable_domain
+msgid "Editable Domain"
+msgstr "Dominio editable"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_thread
+msgid "Email Thread"
+msgstr "Hilo de correo electrónico"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Asistente de composición de correo electrónico"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Enforce generation"
+msgstr "Forzar generación"
+
+#. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/fields/automation_graph/automation_graph.esm.js:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__error
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__error_trace
+msgid "Error Trace"
+msgstr "Traza de error"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Error on"
+msgstr "Error en"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__expired
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Expired"
+msgstr "Expirado"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry
+msgid "Expiry"
+msgstr "Expiración"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__expiry_date
+msgid "Expiry Date"
+msgstr "Fecha de expiración"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry_interval
+msgid "Expiry Interval"
+msgstr "Intervalo de expiración"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry_interval_type
+msgid "Expiry Interval Type"
+msgstr "Tipo de intervalo de expiración"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__field_id
+msgid "Field"
+msgstr "Campo"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_id
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Filter"
+msgstr "Filtro"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_domain
+msgid "Filter Domain"
+msgstr "Filtro de dominio"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_filter__domain
+msgid "Filter to apply"
+msgstr "Filtro a aplicar"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__editable_domain
+msgid ""
+"Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
+"Filtros a aplicar\n"
+"        Las siguientes variables puede ser usadas en el filtro :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__domain
+msgid "Filter to apply specifically"
+msgstr "Filtro a aplicar específicamente"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_filter_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_filter_menu
+msgid "Filters"
+msgstr "Filtros"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Final Domain"
+msgstr "Dominio final"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Generate new records"
+msgstr "Generar nuevos registros"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_user_type__generic
+msgid "Generic User From Record"
+msgstr "Usuario genérico del registro"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_data
+msgid "Graph Data"
+msgstr "Datos del Gráfico"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_done
+msgid "Graph Done"
+msgstr "Gráfico de Realización"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_error
+msgid "Graph Error"
+msgstr "Gráfico de Error"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__has_message
+msgid "Has Message"
+msgstr "Tiene mensaje"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__hours
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__hours
+msgid "Hour(s)"
+msgstr "Hora(s)"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__id
+msgid "ID"
+msgstr "ID"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, los nuevos mensajes requieren su atención."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"In this case, the task will be executed automatically when we create it in "
+"the same process."
+msgstr ""
+"En este caso, la tarea se ejecutará inmediatamente cuando se cree la acción."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_record__is_orphan_record
+msgid "Indicates if this record is a placeholder for a missing resource."
+msgstr "Indica si este registro está relacionada con un registro desaparecido."
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__is_orphan_record
+msgid "Is Orphan Record"
+msgstr "Es un Registro Huérfano"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__is_periodic
+msgid "Is Periodic"
+msgstr "Es periódico"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__is_test
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__is_test
+msgid "Is Test"
+msgstr "Es prueba"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration____last_update
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step____last_update
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test____last_update
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter____last_update
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record____last_update
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step____last_update
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_link_tracker_click
+msgid "Link Tracker Click"
+msgstr "Rastreador de clics"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__mail
+msgid "Mail"
+msgstr "Correo"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__mail_author_id
+msgid "Mail Author"
+msgstr "Autor del correo"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_clicked_on
+msgid "Mail Clicked On"
+msgstr "Correo clicado en"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_opened_on
+msgid "Mail Opened On"
+msgstr "Correo abierto en"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_replied_on
+msgid "Mail Replied On"
+msgstr "Correo respondido en"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_status
+msgid "Mail Status"
+msgstr "Estado del correo"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__mail_template_id
+msgid "Mail Template"
+msgstr "Plantilla de correo"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Mail bounced"
+msgstr "Correo rebotado"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Mail clicked"
+msgstr "Correo clicado"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Mail not clicked"
+msgstr "Correo no clicado"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Mail not opened"
+msgstr "Correo no abierto"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Mail not replied"
+msgstr "Correo no respondido"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Mail opened"
+msgstr "Correo abierto"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Mail replied"
+msgstr "Correo respondido"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjunto principal"
+
+#. module: automation_oca
+#: model:res.groups,name:automation_oca.group_automation_manager
+msgid "Manager"
+msgstr "Gerente"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Mark as done"
+msgstr "Marcar como hecho"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__is_periodic
+msgid "Mark it if you want to make the execution periodic"
+msgstr "Marcar si desea hacer la ejecución periódica"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__message_id
+msgid "Message"
+msgstr "Mensaje"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega de mensaje"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__model
+msgid "Model"
+msgstr "Modelo"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__model_id
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__model_id
+#: model:ir.model.fields,help:automation_oca.field_automation_filter__model_id
+msgid "Model where the configuration is applied"
+msgstr "Modelo donde se aplica la configuración"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__months
+msgid "Month(s)"
+msgstr "Mes(es)"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__next_execution_date
+msgid "Next Execution Date"
+msgstr "Fecha de próxima ejecución"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Not bounced yet"
+msgstr "No rebotado aún"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Not clicked within"
+msgstr "No clicado en"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Not clicked yet"
+msgstr "No clicado aún"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Not finished within"
+msgstr "No finalizado en"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Not opened within"
+msgstr "No abierto en"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Not opened yet"
+msgstr "No abierto aún"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Not replied within"
+msgstr "No respondido en"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Not replied yet"
+msgstr "No respondido aún"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_note
+msgid "Note"
+msgstr "Nota"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren acción"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"On <b>on demand configurations</b>, the records are created only by pressing "
+"the run button.\n"
+"                        It is useful if you want to control the execution "
+"and created records manually."
+msgstr ""
+"En <b>configuraciones bajo demanda</b>, los registros se crean solo "
+"presionando el botón de ejecución.\n"
+"                        Es útil si desea controlar la ejecución y los "
+"registros creados manualmente."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"On <b>periodical configurations</b>, the records are created automatically "
+"by a cron job.\n"
+"                        It is great for tasks that don't need user "
+"validation."
+msgstr ""
+"En <b>configuraciones periódicas</b>, los registros se crean automáticamente "
+"mediante un trabajo cron.\n"
+"                        Es ideal para tareas que no necesitan validación del "
+"usuario."
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__ondemand
+msgid "On demand"
+msgstr "Bajo demanda"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+msgid ""
+"On tests, mails will not be sent, but templates will be generated and "
+"actions will be executed."
+msgstr ""
+"En las pruebas, los correos no se enviarán, pero las plantillas se generarán "
+"y las acciones se ejecutarán."
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__open
+#, python-format
+msgid "Opened"
+msgstr "Abierto"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Opened after"
+msgstr "Abierto después"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record.py:0
+#, python-format
+msgid "Orphan Record"
+msgstr "Registro Huérfano"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Correos salientes"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__parent_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__parent_id
+msgid "Parent"
+msgstr "Padre"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__parent_position
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__parent_position
+msgid "Parent Position"
+msgstr "Posición del padre"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__periodic
+msgid "Periodic"
+msgstr "Periódico"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Processed"
+msgstr "Procesado"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__processed_on
+msgid "Processed On"
+msgstr "Procesado en"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Processed on"
+msgstr "Procesado en"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__res_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__record_id
+msgid "Record"
+msgstr "Registro"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_count
+msgid "Record Count"
+msgstr "Número de registros"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_done_count
+msgid "Record Done Count"
+msgstr "Número de registros hechos"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_run_count
+msgid "Record Run Count"
+msgstr "Número de registros ejecutados"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_test_count
+msgid "Record Test Count"
+msgstr "Número de registros de prueba"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_configuration_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_record_menu
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_graph_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_pivot_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_graph_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_pivot_view
+msgid "Records"
+msgstr "Registros"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__rejected
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Rejected"
+msgstr "Rechazado"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__reply
+#, python-format
+msgid "Replied"
+msgstr "Contestado"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Replied after"
+msgstr "Contestado después"
+
+#. module: automation_oca
+#: model:ir.ui.menu,name:automation_oca.automation_reporting_root_menu
+msgid "Reporting"
+msgstr "Informes"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__resource_ref
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__resource_ref
+msgid "Resource Ref"
+msgstr "Referencia de recurso"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_tree_view
+msgid "Run"
+msgstr "Ejecutar"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record__state__run
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "Running"
+msgstr "Ejecutando"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Save filter"
+msgstr "Guardar filtro"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__scheduled
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Scheduled"
+msgstr "Programado"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__scheduled_date
+msgid "Scheduled Date"
+msgstr "Fecha programada"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Scheduled date"
+msgstr "Fecha programada"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__sent
+#, python-format
+msgid "Sent"
+msgstr "Enviado"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_action_id
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__action
+msgid "Server Action"
+msgstr "Acción de servidor"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__trigger_interval
+msgid ""
+"Set a negative time trigger if you want the step to be executed\n"
+"        immediately, in parallel with the previous step, without waiting for "
+"it to\n"
+"        finish."
+msgstr ""
+"Define un un tiempo negativo si quieres que el registro se ejecute\n"
+"        inmediatamente, en paralelo, sin esperar que acabe el \n"
+"        anterior."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Specific Domain"
+msgstr "Dominio específico"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_user_type__specific
+msgid "Specific User"
+msgstr "Usuario específico"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Start"
+msgstr "Iniciar"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__state
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__state
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__state
+msgid "State"
+msgstr "Estado"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration.py:0
+#, python-format
+msgid "State must be in draft in order to start"
+msgstr "El estado debe estar en borrador para iniciar"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_actions
+msgid "Step Actions"
+msgstr "Acciones de paso"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_icon
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_icon
+msgid "Step Icon"
+msgstr "Icono de paso"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_name
+msgid "Step Name"
+msgstr "Nombre de paso"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_type
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_type
+msgid "Step Type"
+msgstr "Tipo de paso"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_summary
+msgid "Summary"
+msgstr "Resumen"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__tag_ids
+msgid "Tag"
+msgstr "Etiqueta"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_tag_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_tag_menu
+msgid "Tags"
+msgstr "Etiquetas"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Test"
+msgstr "Prueba"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_test_act_window
+msgid "Test Configuration"
+msgstr "Configuración de prueba"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_configuration_test_act_window
+msgid "Test Records"
+msgstr "Registros de prueba"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_test
+msgid "Test automation configuration"
+msgstr "Configuración de automatización de prueba"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+msgid "Test configuration"
+msgstr "Configuración de prueba"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Tests"
+msgstr "Pruebas"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"This a periodical configuration. New records are generated automatically.\n"
+"                        Next execution is programed for"
+msgstr ""
+"Esta es una configuración periódica. Los nuevos registros se generan "
+"automáticamente.\n"
+"                        La próxima ejecución está programada para"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"This is configuration only generates new records on demand. Press the button "
+"in order to execute them manually."
+msgstr ""
+"Esta configuración solo genera nuevos registros bajo demanda. Presione el "
+"botón para ejecutarlos manualmente."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"This is the final domain that will be applied to the records.\n"
+"                                Consists in the join of the specific domain "
+"of the step and the domain of the records."
+msgstr ""
+"Este es el dominio final que se aplicará a los registros.\n"
+"                                Consiste en la unión del dominio específico "
+"del paso y el dominio de los registros."
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "To use a %(name)s trigger type we need a parent of type %(parents)s"
+msgstr ""
+"Para usar un tipo de disparador %(name)s necesitamos un padre de tipo "
+"%(parents)s"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Trigger"
+msgstr "Disparador"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_child_types
+msgid "Trigger Child Types"
+msgstr "Tipos de hijos de disparador"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval
+msgid "Trigger Interval"
+msgstr "Intervalo de disparador"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval_hours
+msgid "Trigger Interval Hours"
+msgstr "Intervalo de disparador en horas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval_type
+msgid "Trigger Interval Type"
+msgstr "Tipo de intervalo de disparador"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_type
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__trigger_type
+msgid "Trigger Type"
+msgstr "Tipo de disparador"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_type_data
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__trigger_type_data
+msgid "Trigger Type Data"
+msgstr "Datos de tipo de disparador"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Unicity based on"
+msgstr "Unicidad basada en"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_user_type
+msgid ""
+"Use 'Specific User' to always assign the same user on the next activity.\n"
+"        Use 'Generic User From Record' to specify the field name of the "
+"user\n"
+"        to choose on the record."
+msgstr ""
+"Use 'Usuario específico' para asignar siempre el mismo usuario en la próxima "
+"actividad.\n"
+"        Use 'Usuario genérico del registro' para especificar el nombre del "
+"campo del usuario\n"
+"        a elegir en el registro."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__field_id
+msgid "Used to avoid duplicates"
+msgstr "Usado para evitar duplicados"
+
+#. module: automation_oca
+#: model:res.groups,name:automation_oca.group_automation_user
+msgid "User"
+msgstr "Usuario"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_field_id
+msgid "User field name"
+msgstr "Nombre del campo de usuario"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__weeks
+msgid "Week(s)"
+msgstr "Semana(s)"
+
+#. module: automation_oca
+#: model:mail.template,name:automation_oca.demo_welcome_template
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#. module: automation_oca
+#: model:mail.template,subject:automation_oca.demo_welcome_template
+msgid "Welcome! Thanks for being part of our database"
+msgstr "¡Bienvenido! Gracias por ser parte de nuestra base de datos"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "e.g. Remember unpaid invoices"
+msgstr "p. ej. Recordar facturas impagas"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "execution of another step"
+msgstr "ejecución de otro paso"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "start of workflow"
+msgstr "inicio de flujo de trabajo"
+
+#~ msgid "Days"
+#~ msgstr "Días"
+
+#~ msgid "Hours"
+#~ msgstr "Horas"
+
+#~ msgid "Months"
+#~ msgstr "Meses"
+
+#~ msgid "Weeks"
+#~ msgstr "Semanas"
