@@ -240,7 +240,17 @@ class AutomationRecordStep(models.Model):
                 self.record_id.res_id,
             )["value"]
         )
-        # composer.body =
+        values = composer.generate_email_for_composer(
+            self.configuration_step_id.mail_template_id.id,
+            [self.record_id.res_id],
+            ["subject", "body_html"],
+        )[self.record_id.res_id]
+        if values.get("body_html"):
+            values["body"] = values.pop("body_html")
+
+        # This onchange should return command instead of ids for x2many field.
+        values = composer._convert_to_write(values)
+        composer.write(values)
         extra_context = self._run_mail_context()
         composer = composer.with_context(active_ids=res_ids, **extra_context)
         # auto-commit except in testing mode
