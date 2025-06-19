@@ -320,10 +320,17 @@ class AutomationRecordStep(models.Model):
 
     def _activate(self):
         todo = self.filtered(lambda r: not r.scheduled_date)
+        current_date = fields.Datetime.now()
         for record in todo:
             config = record.configuration_step_id
-            record.scheduled_date = fields.Datetime.now() + relativedelta(
+            scheduled_date = fields.Datetime.now() + relativedelta(
                 **{config.trigger_interval_type: config.trigger_interval}
+            )
+            record.write(
+                {
+                    "scheduled_date": scheduled_date,
+                    "do_not_wait": scheduled_date < current_date,
+                }
             )
         todo._trigger_activities()
 
