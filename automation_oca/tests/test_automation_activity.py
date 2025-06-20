@@ -116,6 +116,36 @@ class TestAutomationActivity(AutomationTestCase):
         self.partner_01.activity_ids.action_feedback()
         self.assertTrue(record_activity.activity_done_on)
         self.assertTrue(record_child_activity.scheduled_date)
+        self.assertFalse(record_child_activity.processed_on)
+
+    def test_activity_execution_child_immediate(self):
+        """
+        We will check the execution of the child task (activity_done) is only scheduled
+        after the activity is done
+        """
+        activity = self.create_activity_action()
+        child_activity = self.create_server_action(
+            parent_id=activity.id, trigger_type="activity_done", trigger_interval=-1
+        )
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        self.env["automation.record.step"]._cron_automation_steps()
+        record_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", activity.id)]
+        )
+        record_child_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", child_activity.id)]
+        )
+        self.assertEqual(
+            record_activity, self.partner_01.activity_ids.automation_record_step_id
+        )
+        self.assertFalse(record_activity.activity_done_on)
+        self.assertFalse(record_child_activity.scheduled_date)
+        self.partner_01.activity_ids.action_feedback()
+        self.assertTrue(record_activity.activity_done_on)
+        self.assertTrue(record_child_activity.scheduled_date)
+        self.assertTrue(record_child_activity.processed_on)
 
     def test_activity_execution_on_cancel(self):
         """
