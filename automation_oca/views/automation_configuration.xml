@@ -99,6 +99,13 @@
                 <sheet>
                     <div name="button_box">
                         <button
+                            name="export_configuration"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-download"
+                            string="Export"
+                        />
+                        <button
                             name="%(automation_record_configuration_act_window)s"
                             type="action"
                             class="oe_stat_button"
@@ -414,7 +421,11 @@
     <record model="ir.ui.view" id="automation_configuration_kanban_view">
         <field name="model">automation.configuration</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="state" quick_create="false">
+            <kanban
+                js_class="automation_upload_kanban"
+                default_group_by="state"
+                quick_create="false"
+            >
                 <field name="state" readonly="1" />
                 <templates>
                     <t t-name="kanban-box">
