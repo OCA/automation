@@ -1,6 +1,9 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import base64
+import json
+import uuid
 from collections import defaultdict
 
 from odoo import _, api, fields, models
@@ -326,3 +329,291 @@ class AutomationConfiguration(models.Model):
                 "model_id": self.model_id.id,
             }
         )
+
+    def export_configuration(self):
+        """
+        Export the configuration to a JSON format.
+        This method is used to export the configuration for external use.
+        """
+        self.ensure_one()
+        data = self._export_configuration()
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "automation_oca.automation_configuration_export_act_window"
+        )
+        action["res_id"] = (
+            self.env["automation.configuration.export"]
+            .create(
+                {
+                    "configuration_id": self.id,
+                    "file_name": f"automation_configuration_{self.name or 'export'}.json",
+                    "file_content": base64.b64encode(
+                        json.dumps(data).encode()
+                    ).decode(),
+                }
+            )
+            .id
+        )
+        return action
+
+    def _export_configuration(self):
+        self.ensure_one()
+        data = {
+            "id": self._get_external_xmlid(self),
+            "name": self.name,
+            "domain": self.domain,
+            "model_id": self._get_external_xmlid(self.model_id),
+            "field_id": self._get_external_xmlid(self.field_id),
+            "is_periodic": self.is_periodic,
+            "steps": [],
+        }
+        extra_data = defaultdict(lambda: {})
+        for step in self.automation_direct_step_ids:
+            step_data = step._export_step(extra_data)
+            if step_data:
+                data["steps"].append(step_data)
+        data["activity_types"] = extra_data["activity_types"]
+        data["mail_templates"] = extra_data["mail_templates"]
+        data["server_actions"] = extra_data["server_actions"]
+        return data
+
+    def _get_external_xmlid(self, record, module="__export__", name=None):
+        if not record:
+            return False
+        result = record.get_external_id()[record.id]
+        if result:
+            return result
+        if not name:
+            name = f"{record._table}_{record.id}_{uuid.uuid4().hex[:8]}"
+        self.env["ir.model.data"].create(
+            {
+                "name": name,
+                "model": record._name,
+                "res_id": record.id,
+                "module": module,
+            }
+        )
+        return f"__export__.{name}"
+
+    def create_document_from_attachment(self, b64_data):
+        data = json.loads(base64.b64decode(b64_data))
+        return self._create_document_from_data(data).get_formview_action()
+
+    def _create_document_from_data(self, data):
+        record = self.create(self._create_document_from_data_vals(data))
+        langs = [lang[0] for lang in self.env["res.lang"].get_installed()]
+        for activity_type_id, activity_type in data.get("activity_types", {}).items():
+            if not self.env.ref(activity_type_id, raise_if_not_found=False):
+                self._create_document_add_activity_type(
+                    activity_type_id, activity_type, langs
+                )
+        for mail_template_id, mail_template in data.get("mail_templates", {}).items():
+            if not self.env.ref(mail_template_id, raise_if_not_found=False):
+                self._create_document_add_mail_template(
+                    mail_template_id, mail_template, langs
+                )
+        for server_action_id, server_action in data.get("server_actions", {}).items():
+            if not self.env.ref(server_action_id, raise_if_not_found=False):
+                self._create_document_add_server_action(
+                    server_action_id, server_action, langs
+                )
+        for step_data in data.get("steps", []):
+            record._create_document_step_from_data(step_data)
+        return record
+
+    def _create_document_step_from_data(self, step_data, parent=False):
+        step = self.env["automation.configuration.step"].create(
+            self._create_step_vals(step_data, parent=parent)
+        )
+        for child_step in step_data.get("steps", []):
+            self._create_document_step_from_data(child_step, parent=step)
+        return step
+
+    def _create_document_add_activity_type(
+        self, activity_type_id, activity_data, langs
+    ):
+        activity_type = self.env["mail.activity.type"].create(
+            self._create_activity_vals(activity_data)
+        )
+        activity_fields = self._get_activity_type_translatable_fields()
+        for lang in langs:
+            vals = {}
+            for field in activity_fields:
+                if activity_data.get(field) and lang in activity_data[field]:
+                    vals[field] = activity_data[field][lang]
+            if vals:
+                activity_type.with_context(lang=lang).write(vals)
+        self._get_external_xmlid(
+            activity_type,
+            module=activity_type_id.split(".")[0],
+            name=activity_type_id.split(".")[1],
+        )
+
+    def _get_activity_type_translatable_fields(self):
+        """Return the fields that are translatable for activity types."""
+        return ["name", "summary"]
+
+    def _create_activity_vals(self, activity_data):
+        return {
+            "name": (activity_data.get("name") or {}).get(
+                "en_US", "Imported activity type"
+            ),
+            "summary": (activity_data.get("summary") or {}).get(
+                "en_US", "Imported activity summary"
+            ),
+            "sequence": activity_data.get("sequence", 10),
+            "delay_count": activity_data.get("delay_count", 0),
+            "delay_unit": activity_data.get("delay_unit", "minutes"),
+            "delay_from": activity_data.get("delay_from", "now"),
+            "icon": activity_data.get("icon", "fa-clock"),
+            "decoration_type": activity_data.get("decoration_type"),
+            "res_model": activity_data.get("res_model"),
+            "triggered_next_type_id": activity_data.get("triggered_next_type_id")
+            and (
+                self.env.ref(
+                    activity_data["triggered_next_type_id"], raise_if_not_found=False
+                )
+                or self.env["mail.activity.type"]
+            ).id
+            or False,
+            "chaining_type": activity_data.get("chaining_type"),
+            "category": activity_data.get("category"),
+            "default_note": activity_data.get("default_note"),
+        }
+
+    def _create_document_add_mail_template(
+        self, mail_template_id, mail_template_data, langs
+    ):
+        mail_template = self.env["mail.template"].create(
+            self._create_mail_template_vals(mail_template_data)
+        )
+        mail_template_fields = self._get_mail_template_translatable_fields()
+        for lang in langs:
+            vals = {}
+            for field in mail_template_fields:
+                if mail_template_data.get(field) and lang in mail_template_data[field]:
+                    vals[field] = mail_template_data[field][lang]
+            if vals:
+                mail_template.with_context(lang=lang).write(vals)
+        self._get_external_xmlid(
+            mail_template,
+            module=mail_template_id.split(".")[0],
+            name=mail_template_id.split(".")[1],
+        )
+
+    def _get_mail_template_translatable_fields(self):
+        """Return the fields that are translatable for mail templates."""
+        return [
+            "name",
+            "subject",
+            "body_html",
+        ]
+
+    def _create_mail_template_vals(self, mail_template_data):
+        return {
+            "name": (mail_template_data.get("name") or {}).get(
+                "en_US", "Imported mail template"
+            ),
+            "subject": (mail_template_data.get("subject") or {}).get("en_US", ""),
+            "body_html": (mail_template_data.get("body_html") or {}).get("en_US", ""),
+            "model_id": self.env.ref(mail_template_data["model_id"]).id
+            if mail_template_data.get("model_id")
+            else False,
+            "auto_delete": mail_template_data.get("auto_delete", False),
+            "lang": mail_template_data.get("lang", False),
+            "email_from": mail_template_data.get("email_from", False),
+            "email_to": mail_template_data.get("email_to", False),
+            "partner_to": mail_template_data.get("partner_to", False),
+            "reply_to": mail_template_data.get("reply_to", False),
+        }
+
+    def _create_document_add_server_action(
+        self, server_action_id, server_action_data, langs
+    ):
+        server_action = self.env["ir.actions.server"].create(
+            self._create_server_action_vals(server_action_data)
+        )
+        server_action_fields = self._get_server_action_translatable_fields()
+        for lang in langs:
+            vals = {}
+            for field in server_action_fields:
+                if server_action_data.get(field) and lang in server_action_data[field]:
+                    vals[field] = server_action_data[field][lang]
+            if vals:
+                server_action.with_context(lang=lang).write(vals)
+        self._get_external_xmlid(
+            server_action,
+            module=server_action_id.split(".")[0],
+            name=server_action_id.split(".")[1],
+        )
+
+    def _get_server_action_translatable_fields(self):
+        """Return the fields that are translatable for server actions."""
+        return [
+            "name",
+        ]
+
+    def _create_server_action_vals(self, server_action_data):
+        return {
+            "name": server_action_data.get("name", {}).get(
+                "en_US", "Imported server action"
+            ),
+            "state": server_action_data.get("state"),
+            "model_id": self.env.ref(server_action_data.get("model_id")).id,
+            "binding_model_id": server_action_data.get("binding_model_id")
+            and self.env.ref(server_action_data.get("binding_model_id")),
+            "binding_type": server_action_data.get("binding_type"),
+            "code": server_action_data.get("code"),
+        }
+
+    def _create_step_vals(self, step_data, parent=False):
+        return {
+            "name": step_data.get("name", ""),
+            "step_type": step_data.get("step_type", "mail"),
+            "configuration_id": self.id,
+            "parent_id": parent.id if parent else False,
+            "domain": step_data.get("domain", "[]"),
+            "apply_parent_domain": step_data.get("apply_parent_domain", True),
+            "trigger_interval": step_data.get("trigger_interval", 0),
+            "trigger_interval_type": step_data.get("trigger_interval_type", "seconds"),
+            "expiry": step_data.get("expiry", False),
+            "expiry_interval": step_data.get("expiry_interval", 0),
+            "trigger_type": step_data.get("trigger_type"),
+            "mail_author_id": step_data.get("mail_author_id")
+            and (
+                self.env.ref(step_data.get("mail_author_id"), raise_if_not_found=False)
+                or self.env.user
+            ).id,
+            "mail_template_id": step_data.get("mail_template_id")
+            and self.env.ref(step_data.get("mail_template_id")).id,
+            "server_action_id": step_data.get("server_action_id")
+            and self.env.ref(step_data.get("server_action_id")).id,
+            "server_context": step_data.get("server_context", "{}"),
+            "activity_type_id": step_data.get("activity_type_id")
+            and self.env.ref(step_data.get("activity_type_id")).id,
+            "activity_summary": step_data.get("activity_summary", ""),
+            "activity_note": step_data.get("activity_note", ""),
+            "activity_date_deadline_range": step_data.get(
+                "activity_date_deadline_range"
+            ),
+            "activity_date_deadline_range_type": step_data.get(
+                "activity_date_deadline_range_type"
+            ),
+            "activity_user_type": step_data.get("activity_user_type"),
+            "activity_user_id": step_data.get("activity_user_id")
+            and (
+                self.env.ref(
+                    step_data.get("activity_user_id"), raise_if_not_found=False
+                )
+                or self.env.user
+            ).id,
+            "activity_user_field_id": step_data.get("activity_user_field_id")
+            and self.env.ref(step_data.get("activity_user_field_id")).id,
+        }
+
+    def _create_document_from_data_vals(self, data):
+        return {
+            "name": data.get("name", ""),
+            "model_id": self.env.ref(data.get("model_id")).id,
+            "field_id": data.get("field_id") and self.env.ref(data.get("field_id")).id,
+            "is_periodic": data.get("is_periodic"),
+        }

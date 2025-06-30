@@ -543,3 +543,131 @@ class AutomationConfigurationStep(models.Model):
             "scheduled_date": scheduled_date,
             **kwargs,
         }
+
+    def _export_step(self, extra_data):
+        activity_type_id = self.configuration_id._get_external_xmlid(
+            self.activity_type_id
+        )
+        server_action_id = self.configuration_id._get_external_xmlid(
+            self.server_action_id
+        )
+        mail_template_id = self.configuration_id._get_external_xmlid(
+            self.mail_template_id
+        )
+        data = {
+            "name": self.name,
+            "domain": self.domain,
+            "apply_parent_domain": self.apply_parent_domain,
+            "step_type": self.step_type,
+            "trigger_interval": self.trigger_interval,
+            "trigger_interval_type": self.trigger_interval_type,
+            "expiry": self.expiry,
+            "expiry_interval": self.expiry_interval,
+            "trigger_type": self.trigger_type,
+            "mail_author_id": self.configuration_id._get_external_xmlid(
+                self.mail_author_id
+            ),
+            "mail_template_id": mail_template_id,
+            "server_action_id": server_action_id,
+            "server_context": self.server_context,
+            "activity_type_id": activity_type_id,
+            "activity_summary": self.activity_summary,
+            "activity_note": self.activity_note,
+            "activity_date_deadline_range": self.activity_date_deadline_range,
+            "activity_date_deadline_range_type": self.activity_date_deadline_range_type,
+            "activity_user_type": self.activity_user_type,
+            "activity_user_id": self.configuration_id._get_external_xmlid(
+                self.activity_user_id
+            ),
+            "activity_user_field_id": self.configuration_id._get_external_xmlid(
+                self.activity_user_field_id
+            ),
+            "steps": [],
+        }
+        if (
+            self.activity_type_id
+            and activity_type_id not in extra_data["activity_types"]
+        ):
+            extra_data["activity_types"][
+                activity_type_id
+            ] = self._export_activity_values(self.activity_type_id)
+        if (
+            self.mail_template_id
+            and mail_template_id not in extra_data["mail_templates"]
+        ):
+            extra_data["mail_templates"][
+                mail_template_id
+            ] = self._export_mail_template_values(self.mail_template_id)
+        if (
+            self.server_action_id
+            and server_action_id not in extra_data["server_actions"]
+        ):
+            extra_data["server_actions"][
+                server_action_id
+            ] = self._export_server_action_values(self.server_action_id)
+        for step in self.child_ids:
+            step_data = step._export_step(extra_data)
+            if step_data:
+                data["steps"].append(step_data)
+        return data
+
+    def _export_activity_values(self, activity_type):
+        return {
+            "name": activity_type._fields["name"]._get_stored_translations(
+                activity_type
+            ),
+            "summary": activity_type._fields["summary"]._get_stored_translations(
+                activity_type
+            ),
+            "sequence": activity_type.sequence,
+            "delay_count": activity_type.delay_count,
+            "delay_unit": activity_type.delay_unit,
+            "delay_from": activity_type.delay_from,
+            "icon": activity_type.icon,
+            "decoration_type": activity_type.decoration_type,
+            "res_model": activity_type.res_model,
+            "triggered_next_type_id": self.configuration_id._get_external_xmlid(
+                activity_type.triggered_next_type_id
+            ),
+            "chaining_type": activity_type.chaining_type,
+            "category": activity_type.category,
+            "default_note": activity_type.default_note,
+        }
+
+    def _export_mail_template_values(self, mail_template):
+        return {
+            "name": mail_template._fields["name"]._get_stored_translations(
+                mail_template
+            ),
+            "subject": mail_template._fields["subject"]._get_stored_translations(
+                mail_template
+            ),
+            "body_html": mail_template._fields["body_html"]._get_stored_translations(
+                mail_template
+            ),
+            "model_id": self.configuration_id._get_external_xmlid(
+                mail_template.model_id
+            ),
+            "auto_delete": mail_template.auto_delete,
+            "lang": mail_template.lang,
+            "email_from": mail_template.email_from,
+            "email_to": mail_template.email_to,
+            "partner_to": mail_template.partner_to,
+            "reply_to": mail_template.reply_to,
+        }
+
+    def _export_server_action_values(self, server_action):
+        return {
+            "name": server_action._fields["name"]._get_stored_translations(
+                server_action
+            ),
+            "state": server_action.state,
+            "model_id": self.configuration_id._get_external_xmlid(
+                server_action.model_id
+            ),
+            "binding_model_id": self.configuration_id._get_external_xmlid(
+                server_action.binding_model_id
+            ),
+            "binding_type": server_action.binding_type,
+            "code": server_action.code,
+        }
