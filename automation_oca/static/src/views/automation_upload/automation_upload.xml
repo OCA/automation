@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="automation_oca.AutomationFileUploader" owl="1">
+        <div
+            t-att-class="props.record and props.record.data ? 'oe_kanban_color_' + props.record.data.color : ''"
+        >
+            <FileUploader
+                acceptedFileExtensions="props.acceptedFileExtensions"
+                fileUploadClass="'account_file_uploader'"
+                multiUpload="false"
+                onUploaded.bind="onFileUploaded"
+            >
+                <t t-set-slot="toggler">
+                    <t
+                        t-if="props.togglerTemplate"
+                        t-call="{{ props.togglerTemplate }}"
+                    />
+                    <t t-else="" t-slot="default" />
+                </t>
+                <t t-slot="extra" />
+            </FileUploader>
+        </div>
+    </t>
+
+    <t
+        t-name="automation_oca.KanbanView.Buttons"
+        t-inherit="web.KanbanView.Buttons"
+        t-inherit-mode="primary"
+        owl="1"
+    >
+        <xpath expr="//div[hasclass('o_cp_buttons')]" position="inside">
+            <AutomationFileUploader>
+                <t t-set-slot="default">
+                    <button
+                        type="button"
+                        class="btn btn-secondary o_button_upload_bill"
+                    >
+                        Upload
+                    </button>
+                </t>
+            </AutomationFileUploader>
+        </xpath>
+    </t>
+</templates>
