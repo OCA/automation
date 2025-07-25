@@ -32,8 +32,8 @@ class AutomationConfigurationStep(models.Model):
         recursive=True,
     )
     parent_id = fields.Many2one("automation.configuration.step", ondelete="cascade")
-    model_id = fields.Many2one(related="configuration_id.model_id")
-    model = fields.Char(related="model_id.model")
+    model_id = fields.Many2one(string="Model ID", related="configuration_id.model_id")
+    model = fields.Char(string="Model", related="model_id.model")
     child_ids = fields.One2many(
         "automation.configuration.step", inverse_name="parent_id"
     )
@@ -82,7 +82,7 @@ class AutomationConfigurationStep(models.Model):
     trigger_child_types = fields.Json(compute="_compute_trigger_child_types")
     trigger_type_data = fields.Json(compute="_compute_trigger_type_data")
     mail_author_id = fields.Many2one(
-        "res.partner", required=True, default=lambda r: r.env.user.id
+        "res.partner", required=True, default=lambda r: r.env.user.partner_id.id
     )
     mail_template_id = fields.Many2one(
         "mail.template", domain="[('model_id', '=', model_id)]"
@@ -329,8 +329,8 @@ class AutomationConfigurationStep(models.Model):
     @api.model
     def _trigger_types(self):
         """
-        This function will return a dictionary that map trigger_types to its configurations.
-        Each trigger_type can contain:
+        This function will return a dictionary that map trigger_types to its
+        configurations. Each trigger_type can contain:
         - name (Required field)
         - step type: List of step types that succeed after this.
           If it is false, it will work for all step types,
@@ -524,7 +524,7 @@ class AutomationConfigurationStep(models.Model):
                 }
             )
 
-    @api.constrains("parent_id", "parent_id.step_type", "trigger_type")
+    @api.constrains("parent_id", "trigger_type")
     def _check_parent_configuration(self):
         for record in self:
             record._check_configuration()

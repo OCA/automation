@@ -157,7 +157,7 @@ class AutomationRecordStep(models.Model):
             self._reject()
             return self.browse()
         try:
-            result = getattr(self, "_run_%s" % self.configuration_step_id.step_type)()
+            result = getattr(self, f"_run_{self.configuration_step_id.step_type}")()
             self.write({"state": "done", "processed_on": fields.Datetime.now()})
             if result:
                 childs = self._fill_childs()
@@ -218,40 +218,24 @@ class AutomationRecordStep(models.Model):
         return True
 
     def _run_mail(self):
-        author_id = self.configuration_step_id.mail_author_id.id
         composer_values = {
-            "author_id": author_id,
             "record_name": False,
             "model": self.record_id.model,
             "composition_mode": "mass_mail",
             "template_id": self.configuration_step_id.mail_template_id.id,
             "automation_record_step_id": self.id,
         }
+        if self.configuration_step_id.mail_author_id:
+            composer_values["author_id"] = self.configuration_step_id.mail_author_id.id
+            composer_values["email_from"] = (
+                self.configuration_step_id.mail_author_id.email_formatted
+            )
         res_ids = [self.record_id.res_id]
         composer = (
             self.env["mail.compose.message"]
             .with_context(active_ids=res_ids)
             .create(composer_values)
         )
-        composer.write(
-            composer._onchange_template_id(
-                self.configuration_step_id.mail_template_id.id,
-                "mass_mail",
-                self.record_id.model,
-                self.record_id.res_id,
-            )["value"]
-        )
-        values = composer.generate_email_for_composer(
-            self.configuration_step_id.mail_template_id.id,
-            [self.record_id.res_id],
-            ["subject", "body_html"],
-        )[self.record_id.res_id]
-        if values.get("body_html"):
-            values["body"] = values.pop("body_html")
-
-        # This onchange should return command instead of ids for x2many field.
-        values = composer._convert_to_write(values)
-        composer.write(values)
         extra_context = self._run_mail_context()
         composer = composer.with_context(active_ids=res_ids, **extra_context)
         # auto-commit except in testing mode
@@ -268,8 +252,7 @@ class AutomationRecordStep(models.Model):
     def _get_mail_tracking_url(self):
         return werkzeug.urls.url_join(
             self.get_base_url(),
-            "automation_oca/track/%s/%s/blank.gif"
-            % (self.id, self._get_mail_tracking_token()),
+            f"automation_oca/track/{self.id}/{self._get_mail_tracking_token()}/blank.gif",
         )
 
     def _run_mail_context(self):

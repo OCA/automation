@@ -32,7 +32,7 @@ class AutomationConfigurationTest(models.TransientModel):
         for record in self:
             if record.model and record.model in self.env:
                 res = self.env[record.model].search([], limit=1)
-                record.resource_ref = "%s,%s" % (record.model, res.id)
+                record.resource_ref = f"{record.model},{res.id}"
             else:
                 record.resource_ref = None
 

@@ -12,13 +12,13 @@
                         type="object"
                         name="start_automation"
                         string="Start"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         class="btn btn-primary"
                         type="object"
                         name="run_automation"
-                        attrs="{'invisible': [('state', '!=', 'ondemand')]}"
+                        invisible="state != 'ondemand'"
                         string="Generate new records"
                     />
                     <button
@@ -26,14 +26,14 @@
                         name="done_automation"
                         class="btn-secondary"
                         string="Mark as done"
-                        attrs="{'invisible': [('state', 'not in', ['periodic','ondemand'])]}"
+                        invisible="state not in ['periodic','ondemand']"
                     />
                     <button
                         type="object"
                         name="back_to_draft"
                         class="btn-secondary"
                         string="Back to draft"
-                        attrs="{'invisible': [('state', '!=', 'done')]}"
+                        invisible="state != 'done'"
                     />
                     <button
                         type="action"
@@ -47,28 +47,18 @@
                         name="run_automation"
                         class="btn-info"
                         string="Enforce generation"
-                        attrs="{'invisible': [('state', '!=', 'periodic')]}"
+                        invisible="state != 'periodic'"
                     />
 
                     <field name="state" widget="statusbar" />
                 </header>
-                <div
-                    class="alert alert-info"
-                    role="alert"
-                    attrs="{'invisible': [('state', '!=', 'draft')]}"
-                >
-                    <div
-                        class="px-4"
-                        attrs="{'invisible': [('is_periodic', '=', False)]}"
-                    >
+                <div class="alert alert-info" role="alert" invisible="state != 'draft'">
+                    <div class="px-4" invisible="not is_periodic">
                         On <b
                     >periodical configurations</b>, the records are created automatically by a cron job.
                         It is great for tasks that don't need user validation.
                     </div>
-                    <div
-                        class="px-4"
-                        attrs="{'invisible': [('is_periodic', '=', True)]}"
-                    >
+                    <div class="px-4" invisible="is_periodic">
                         On <b
                     >on demand configurations</b>, the records are created only by pressing the run button.
                         It is useful if you want to control the execution and created records manually.
@@ -77,7 +67,7 @@
                 <div
                     class="alert alert-info"
                     role="alert"
-                    attrs="{'invisible': [('state', '!=', 'ondemand')]}"
+                    invisible="state != 'ondemand'"
                 >
                     <div class="px-4">
                         This is configuration only generates new records on demand. Press the button in order to execute them manually.
@@ -86,7 +76,7 @@
                 <div
                     class="alert alert-info"
                     role="alert"
-                    attrs="{'invisible': [('state', '!=', 'periodic')]}"
+                    invisible="state != 'periodic'"
                 >
                     <div class="px-4">
                         This a periodical configuration. New records are generated automatically.
@@ -109,7 +99,7 @@
                             type="action"
                             class="oe_stat_button"
                             icon="fa-envelope"
-                            attrs="{'invisible': [('record_count', '=', 0)]}"
+                            invisible="record_count == 0"
                         >
                             <field
                                 name="record_count"
@@ -122,7 +112,7 @@
                             type="action"
                             class="oe_stat_button"
                             icon="fa-flask"
-                            attrs="{'invisible': [('record_test_count', '=', 0)]}"
+                            invisible="record_test_count == 0"
                         >
                             <field
                                 name="record_test_count"
@@ -135,7 +125,7 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="text-bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <div class="oe_title">
                         <h1>
@@ -149,7 +139,7 @@
                         <field name="active" invisible="1" />
                         <field
                             name="is_periodic"
-                            attrs="{'readonly': [('state', '!=', 'draft')]}"
+                            readonly="state != 'draft'"
                             widget="boolean_toggle"
                         />
                         <field
@@ -179,7 +169,7 @@
                                     string="Save filter"
                                     icon="fa-save"
                                     class="text-primary filter-left col-7"
-                                    attrs="{'invisible': [('filter_id', '!=', False)]}"
+                                    invisible="filter_id"
                                 />
                             </div>
                         </div>
@@ -188,14 +178,14 @@
                             name="domain"
                             string="Domain"
                             widget="domain"
-                            attrs="{'invisible': [('filter_id', '=', False)]}"
+                            invisible="not filter_id"
                             options="{'foldable': True, 'model': 'model'}"
                         />
                         <field
                             name="editable_domain"
                             string="Domain"
                             widget="domain"
-                            attrs="{'invisible': [('filter_id', '!=', False)]}"
+                            invisible="filter_id"
                             options="{'foldable': True, 'model': 'model'}"
                         />
                         <field name="company_id" groups="base.group_multi_company" />
@@ -219,10 +209,7 @@
                             <field name="step_icon" />
                             <field name="step_name" />
                             <templates>
-                                <div
-                                    t-name="kanban-box"
-                                    class="o_automation_kanban_box p-2"
-                                >
+                                <div t-name="card" class="o_automation_kanban_box p-2">
                                     <div
                                         class="o_automation_kanban_extra"
                                         t-foreach="[...Array(record.parent_position.raw_value).keys()]"
@@ -406,10 +393,7 @@
                         </kanban>
                     </field>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -448,7 +432,7 @@
             >
                 <field name="state" readonly="1" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_card oe_kanban_global_click">
                             <div class="row">
                                 <field name="name" class="o_text_overflow" />
@@ -505,10 +489,10 @@
     <record model="ir.ui.view" id="automation_configuration_tree_view">
         <field name="model">automation.configuration</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <!-- TODO -->
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -516,7 +500,7 @@
         <field name="name">Automation Configuration</field>
         <!-- TODO -->
         <field name="res_model">automation.configuration</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

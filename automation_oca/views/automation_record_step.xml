@@ -16,16 +16,9 @@
                         <field name="scheduled_date" />
                         <field name="processed_on" />
                         <field name="step_type" />
-                        <field
-                            name="message_id"
-                            attrs="{'invisible': [('message_id', '=', False)]}"
-                        />
+                        <field name="message_id" invisible="not message_id" />
                     </group>
-                    <group
-                        name="error"
-                        string="Error"
-                        attrs="{'invisible': [('state', '!=', 'error')]}"
-                    >
+                    <group name="error" string="Error" invisible="state != 'error'">
                         <field name="error_trace" nolabel="1" />
                     </group>
                 </sheet>
@@ -36,16 +29,16 @@
     <record model="ir.ui.view" id="automation_record_step_tree_view">
         <field name="model">automation.record.step</field>
         <field name="arch" type="xml">
-            <tree create="0">
+            <list create="0">
                 <field name="name" />
                 <field name="state" />
                 <button
                     name="run"
                     type="object"
                     string="Run"
-                    attrs="{'invisible': [('state', '!=', 'scheduled')]}"
+                    invisible="state != 'scheduled'"
                 />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -125,7 +118,7 @@
     <record model="ir.actions.act_window" id="automation_record_step_act_window">
         <field name="name">Activities</field>
         <field name="res_model">automation.record.step</field>
-        <field name="view_mode">graph,pivot,tree,form</field>
+        <field name="view_mode">graph,pivot,list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
