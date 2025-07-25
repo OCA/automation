@@ -6,6 +6,7 @@ from odoo import fields, models
 
 class AutomationConfigurationExport(models.TransientModel):
     _name = "automation.configuration.export"
+    _description = "Export Automation Configuration"
 
     configuration_id = fields.Many2one(
         comodel_name="automation.configuration",

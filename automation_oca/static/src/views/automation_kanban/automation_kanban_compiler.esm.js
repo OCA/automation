@@ -1,5 +1,3 @@
-/** @odoo-module */
-
 import {KanbanCompiler} from "@web/views/kanban/kanban_compiler";
 
 export class AutomationKanbanCompiler extends KanbanCompiler {
@@ -13,7 +11,7 @@ export class AutomationKanbanCompiler extends KanbanCompiler {
     compileHierarchyAddButton(el) {
         el.setAttribute(
             "t-on-click",
-            "() => this.addNewChild({trigger_type: " +
+            "() => __comp__.addNewChild({trigger_type: " +
                 el.getAttribute("t-att-trigger-type") +
                 "})"
         );

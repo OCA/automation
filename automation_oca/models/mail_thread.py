@@ -11,10 +11,10 @@ class MailThread(models.AbstractModel):
     def _routing_handle_bounce(self, email_message, message_dict):
         """We want to mark the bounced email"""
         result = super()._routing_handle_bounce(email_message, message_dict)
-        bounced_msg_id = message_dict.get("bounced_msg_id")
-        if bounced_msg_id:
+        bounced_msg_ids = message_dict["bounced_msg_ids"]
+        if bounced_msg_ids:
             self.env["automation.record.step"].search(
-                [("message_id", "in", bounced_msg_id)]
+                [("message_id", "in", bounced_msg_ids)]
             )._set_mail_bounced()
         return result
 
@@ -27,7 +27,7 @@ class MailThread(models.AbstractModel):
             thread_references = (
                 message_dict["references"] or message_dict["in_reply_to"]
             )
-            msg_references = tools.mail_header_msgid_re.findall(thread_references)
+            msg_references = tools.mail.mail_header_msgid_re.findall(thread_references)
             if msg_references:
                 records = self.env["automation.record.step"].search(
                     [("message_id", "in", msg_references)]

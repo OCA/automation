@@ -21,6 +21,8 @@ from odoo.tools.safe_eval import (
     time as safe_time,
 )
 
+from ..utils.query import add_complex_left_join
+
 
 class AutomationConfiguration(models.Model):
     _name = "automation.configuration"
@@ -61,10 +63,11 @@ class AutomationConfiguration(models.Model):
         required=True,
         ondelete="cascade",
         help="Model where the configuration is applied",
+        string="Model ID",
     )
     filter_id = fields.Many2one("automation.filter")
     filter_domain = fields.Binary(compute="_compute_filter_domain")
-    model = fields.Char(related="model_id.model")
+    model = fields.Char(string="Model", related="model_id.model")
     field_id = fields.Many2one(
         "ir.model.fields",
         domain="[('model_id', '=', model_id), "
@@ -231,8 +234,8 @@ class AutomationConfiguration(models.Model):
 
     def _get_automation_records_to_create(self):
         """
-        We will find all the records that fulfill the domain but don't have a record created.
-        Also, we need to check by autencity field if defined.
+        We will find all the records that fulfill the domain but don't have a
+        record created. Also, we need to check by autencity field if defined.
 
         In order to do this, we will add some extra joins on the query of the domain
         """
@@ -243,28 +246,33 @@ class AutomationConfiguration(models.Model):
             # In case of company defined, we add only if the records have company field
             domain += [("company_id", "=", self.company_id.id)]
         query = Record._where_calc(domain)
-        alias = query.left_join(
-            query._tables[Record._table],
+        alias = add_complex_left_join(
+            query,
+            Record._table,
             "id",
             "automation_record",
             "res_id",
             "automation_record",
             "{rhs}.model = %s AND {rhs}.configuration_id = %s AND "
             "({rhs}.is_test IS NULL OR NOT {rhs}.is_test)",
-            (Record._name, self.id),
+            [Record._name, self.id],
         )
         query.add_where(f"{alias}.id is NULL")
         if self.field_id:
             # In case of unicity field defined, we need to add this
             # left join to find already created records
-            linked_tab = query.left_join(
-                query._tables[Record._table],
+            linked_tab = add_complex_left_join(
+                query,
+                Record._table,
                 self.field_id.name,
                 Record._table,
                 self.field_id.name,
                 "linked",
+                "",
+                [],
             )
-            alias2 = query.left_join(
+            alias2 = add_complex_left_join(
+                query,
                 linked_tab,
                 "id",
                 "automation_record",
@@ -272,22 +280,11 @@ class AutomationConfiguration(models.Model):
                 "automation_record_linked",
                 "{rhs}.model = %s AND {rhs}.configuration_id = %s AND "
                 "({rhs}.is_test IS NULL OR NOT {rhs}.is_test)",
-                (Record._name, self.id),
+                [Record._name, self.id],
             )
             query.add_where(f"{alias2}.id is NULL")
-            from_clause, where_clause, params = query.get_sql()
-            # We also need to find with a group by in order to avoid duplication
-            # when we have both records created between two executions
-            # (first one has priority)
-            query_str = "SELECT {} FROM {} WHERE {}{}{}{} GROUP BY {}".format(
-                ", ".join([f'MIN("{next(iter(query._tables))}".id) as id']),
-                from_clause,
-                where_clause or "TRUE",
-                (" ORDER BY %s" % self.order) if query.order else "",
-                (" LIMIT %d" % self.limit) if query.limit else "",
-                (" OFFSET %d" % self.offset) if query.offset else "",
-                "%s.%s" % (query._tables[Record._table], self.field_id.name),
-            )
+            query.group_by = f'"{Record._table}".{self.field_id.name}'
+            query_str, params = query.select(f'MIN("{Record._table}".id)')
         else:
             query_str, params = query.select()
         self.env.cr.execute(query_str, params)
@@ -319,7 +316,7 @@ class AutomationConfiguration(models.Model):
             ],
         }
 
-    def _group_expand_states(self, states, domain, order):
+    def _group_expand_states(self, states, domain):
         """
         This is used to show all the states on the kanban view
         """
@@ -345,12 +342,13 @@ class AutomationConfiguration(models.Model):
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "automation_oca.automation_configuration_export_act_window"
         )
+        file_name = f"automation_configuration_{self.name or 'export'}.json"
         action["res_id"] = (
             self.env["automation.configuration.export"]
             .create(
                 {
                     "configuration_id": self.id,
-                    "file_name": f"automation_configuration_{self.name or 'export'}.json",
+                    "file_name": file_name,
                     "file_content": base64.b64encode(
                         json.dumps(data).encode()
                     ).decode(),

@@ -1,8 +1,8 @@
-/** @odoo-module **/
-import {useOpenX2ManyRecord, useX2ManyCrud} from "@web/views/fields/relational_utils";
+/* global document */
 
+import {X2ManyField, x2ManyField} from "@web/views/fields/x2many/x2many_field";
+import {useOpenX2ManyRecord, useX2ManyCrud} from "@web/views/fields/relational_utils";
 import {AutomationKanbanRenderer} from "../../views/automation_kanban/automation_kanban_renderer.esm";
-import {X2ManyField} from "@web/views/fields/x2many/x2many_field";
 import {registry} from "@web/core/registry";
 
 const {useSubEnv} = owl;
@@ -50,4 +50,5 @@ AutomationActivity.components = {
     KanbanRenderer: AutomationKanbanRenderer,
 };
 
-registry.category("fields").add("automation_step", AutomationActivity);
+export const AutomationActivityField = {...x2ManyField, component: AutomationActivity};
+registry.category("fields").add("automation_step", AutomationActivityField);

@@ -3,7 +3,6 @@
 
 import re
 
-import markupsafe
 import werkzeug.urls
 
 from odoo import api, fields, models, tools
@@ -21,12 +20,17 @@ class MailMail(models.Model):
             record.automation_record_step_id.message_id = record.message_id
         return records
 
-    def _send_prepare_body(self):
-        body = super()._send_prepare_body()
-        if self.automation_record_step_id:
-            body = self.env["mail.render.mixin"]._shorten_links(body, {}, blacklist=[])
+    def _prepare_outgoing_body(self):
+        """Override to add the tracking URL to the body and to add trace ID in
+        shortened urls"""
+        self.ensure_one()
+        # super() already cleans pseudo-void content from editor
+        body = super()._prepare_outgoing_body()
+        if body and self.automation_record_step_id:
+            body = self.env["mail.render.mixin"]._shorten_links(body, {})
+            Wrapper = body.__class__
             token = self.automation_record_step_id._get_mail_tracking_token()
-            for match in set(re.findall(tools.URL_REGEX, body)):
+            for match in set(re.findall(tools.mail.URL_REGEX, body)):
                 href = match[0]
                 url = match[1]
 
@@ -35,16 +39,15 @@ class MailMail(models.Model):
                 if parsed.scheme.startswith("http") and parsed.path.startswith("/r/"):
                     new_href = href.replace(
                         url,
-                        "%s/au/%s/%s"
-                        % (url, str(self.automation_record_step_id.id), token),
+                        f"{url}/au/{str(self.automation_record_step_id.id)}/{token}",
                     )
-                    body = body.replace(
-                        markupsafe.Markup(href), markupsafe.Markup(new_href)
-                    )
-            body = tools.append_content_to_html(
+                    body = body.replace(Wrapper(href), Wrapper(new_href))
+
+            # generate tracking URL
+            tracking_url = self.automation_record_step_id._get_mail_tracking_url()
+            body = tools.mail.append_content_to_html(
                 body,
-                '<img src="%s"/>'
-                % self.automation_record_step_id._get_mail_tracking_url(),
+                f'<img src="{tracking_url}"/>',
                 plaintext=False,
             )
         return body

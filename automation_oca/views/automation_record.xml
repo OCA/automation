@@ -14,11 +14,11 @@
                         name="web_ribbon"
                         title="Test"
                         bg_color="text-bg-danger"
-                        attrs="{'invisible': [('is_test', '=', False)]}"
+                        invisible="not is_test"
                     />
 
                     <div class="oe_title">
-                        <div attrs="{'invisible': [('is_orphan_record', '=', False)]}">
+                        <div invisible="not is_orphan_record">
                             <field name="is_orphan_record" invisible="1" />
                             <h1>
                                 <span>This record is an orphan record</span>
@@ -28,7 +28,7 @@
                             </group>
                         </div>
 
-                        <h1 attrs="{'invisible': [('is_orphan_record', '=', True)]}">
+                        <h1 invisible="is_orphan_record">
                             <field
                                 name="resource_ref"
                                 required="1"
@@ -62,10 +62,7 @@
                             <field name="step_name" />
                             <field name="step_actions" />
                             <templates>
-                                <div
-                                    t-name="kanban-box"
-                                    class="o_automation_kanban_box p-2"
-                                >
+                                <div t-name="card" class="o_automation_kanban_box p-2">
                                     <div
                                         class="o_automation_kanban_extra"
                                         t-foreach="[...Array(record.parent_position.raw_value).keys()]"
@@ -242,7 +239,7 @@
     <record model="ir.ui.view" id="automation_record_tree_view">
         <field name="model">automation.record</field>
         <field name="arch" type="xml">
-            <tree create="0">
+            <list create="0">
                 <field name="name" />
                 <field name="configuration_id" />
                 <field name="create_date" />
@@ -252,7 +249,7 @@
                     decoration-info="state == 'periodic'"
                     decoration-success="state == 'done'"
                 />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -281,7 +278,7 @@
         <field name="name">Automation Record</field>
         <!-- TODO -->
         <field name="res_model">automation.record</field>
-        <field name="view_mode">graph,pivot,tree,form</field>
+        <field name="view_mode">graph,pivot,list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
@@ -292,7 +289,7 @@
     >
         <field name="name">Records</field>
         <field name="res_model">automation.record</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field
             name="domain"
         >[('configuration_id', '=', active_id), ('is_test', '=', False)]</field>
@@ -304,7 +301,7 @@
     >
         <field name="name">Test Records</field>
         <field name="res_model">automation.record</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field
             name="domain"
         >[('configuration_id', '=', active_id), ('is_test', '=', True)]</field>

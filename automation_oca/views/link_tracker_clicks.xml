@@ -21,7 +21,7 @@
     <record model="ir.actions.act_window" id="link_tracker_click_act_window">
         <field name="name">Clicks</field>
         <field name="res_model">link.tracker.click</field>
-        <field name="view_mode">graph,pivot,tree</field>
+        <field name="view_mode">graph,pivot,list</field>
         <field name="domain">[('automation_record_step_id', '!=', False)]</field>
         <field
             name="context"

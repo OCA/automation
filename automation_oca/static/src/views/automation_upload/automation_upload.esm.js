@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {Component} from "@odoo/owl";
 import {FileUploader} from "@web/views/fields/file_handler";
 import {KanbanController} from "@web/views/kanban/kanban_controller";
@@ -48,9 +46,13 @@ AutomationFileUploader.defaultProps = {
     acceptedFileExtensions: ".json",
 };
 
+export const automationFileUploader = {
+    component: AutomationFileUploader,
+};
+
 registry
     .category("view_widgets")
-    .add("automation_oca_file_uploader", AutomationFileUploader);
+    .add("automation_oca_file_uploader", automationFileUploader);
 
 export class AutomationKanbanController extends KanbanController {}
 AutomationKanbanController.components = {

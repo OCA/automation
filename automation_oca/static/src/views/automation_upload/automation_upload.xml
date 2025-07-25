@@ -28,10 +28,7 @@
         t-inherit-mode="primary"
         owl="1"
     >
-        <xpath
-            expr="//*[@class='btn btn-primary o-kanban-button-new']"
-            position="after"
-        >
+        <xpath expr="//div[hasclass('o_cp_buttons')]" position="inside">
             <AutomationFileUploader>
                 <t t-set-slot="default">
                     <button

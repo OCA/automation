@@ -126,3 +126,6 @@
 .filter-left {
     text-align: left;
 }
+.o_kanban_renderer .o_kanban_record:not(.o_legacy_kanban_record):not(.o_kanban_ghost) {
+    border: none !important;
+}

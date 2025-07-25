@@ -19,7 +19,7 @@
                     <div
                         class="alert alert-warning"
                         role="alert"
-                        attrs="{'invisible': [('trigger_interval', '>=', 0)]}"
+                        invisible="trigger_interval >= 0"
                     >
                         In this case, the task will be executed automatically when we create it in the same process.
                     </div>
@@ -47,34 +47,31 @@
                                 </div>
                                 <div
                                     class="row"
-                                    attrs="{'invisible': [('trigger_date_kind', '!=', 'date')]}"
+                                    invisible="trigger_date_kind != 'date'"
                                 >
                                     <span class="col-2">after</span>
                                     <div class="col-10">
                                         <field
                                             name="trigger_date_field_id"
                                             nolabel="1"
-                                            attrs="{'required': [('trigger_date_kind', '=', 'date')]}"
+                                            required="trigger_date_kind == 'date'"
                                         />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <span
                                         class="col-2"
-                                        attrs="{'invisible': [('trigger_date_kind', '!=', 'offset')]}"
+                                        invisible="trigger_date_kind != 'offset'"
                                     >after</span>
                                     <span
                                         class="col-2"
-                                        attrs="{'invisible': [('trigger_date_kind', '=', 'offset')]}"
+                                        invisible="trigger_date_kind == 'offset'"
                                     >when</span>
                                     <div class="col-10">
                                         <field name="trigger_type" nolabel="1" />
                                     </div>
                                 </div>
-                                <div
-                                    class="row"
-                                    attrs="{'invisible': [('trigger_type', '=', 'start')]}"
-                                >
+                                <div class="row" invisible="trigger_type == 'start'">
                                     <span class="col-2">of</span>
                                     <div class="col-10">
                                         <field
@@ -87,61 +84,56 @@
                             <field name="allow_expiry" invisible="1" />
                             <div
                                 class="container ps-0 alert alert-warning"
+                                role="alert"
                                 colspan="2"
-                                attrs="{'invisible': [('trigger_date_kind', '!=', 'date')]}"
+                                invisible="trigger_date_kind != 'date'"
                             >
                                 The scheduled date will be the date of the record at the moment we generate the new record.
                                 Later changes of the field will not affect the scheduled date.
                             </div>
-                            <field
-                                name="expiry"
-                                attrs="{'invisible': [('allow_expiry', '=', False)]}"
-                            />
+                            <field name="expiry" invisible="not allow_expiry" />
                             <label
                                 for="expiry_interval"
                                 string="Trigger"
-                                attrs="{'invisible': [('expiry', '=', False)]}"
+                                invisible="not expiry"
                             />
-                            <div
-                                class="container ps-0"
-                                attrs="{'invisible': [('expiry', '=', False)]}"
-                            >
+                            <div class="container ps-0" invisible="not expiry">
                                 <div class="row">
                                     <div class="col-2">
                                         <field
                                             name="expiry_interval"
-                                            attrs="{'required': [('expiry', '=', True)]}"
+                                            required="expiry"
                                             nolabel="1"
                                         />
                                     </div>
                                     <div class="col-10">
                                         <field
                                             name="expiry_interval_type"
-                                            attrs="{'required': [('expiry', '=', True)]}"
+                                            required="expiry"
                                             nolabel="1"
                                         />
                                     </div>
                                 </div>
                             </div>
                         </group>
-                        <group attrs="{'invisible':[('step_type', '!=', 'action')]}">
+                        <group invisible="step_type != 'action'">
                             <field
                                 name="server_action_id"
                                 context="{'default_model_id': model_id}"
-                                attrs="{'required': [('step_type', '=', 'action')]}"
+                                required="step_type == 'action'"
                             />
                         </group>
-                        <group attrs="{'invisible':[('step_type', '!=', 'mail')]}">
+                        <group invisible="step_type != 'mail'">
                             <field
                                 name="mail_template_id"
-                                attrs="{'required': [('step_type', '=', 'mail')]}"
+                                required="step_type == 'mail'"
                             />
                             <field name="mail_author_id" />
                         </group>
-                        <group attrs="{'invisible':[('step_type', '!=', 'activity')]}">
+                        <group invisible="step_type != 'activity'">
                             <field
                                 name="activity_type_id"
-                                attrs="{'required': [('step_type', '=', 'activity')]}"
+                                required="step_type == 'activity'"
                             />
                             <label
                                 for="activity_date_deadline_range"
@@ -166,12 +158,14 @@
                             <field name="activity_user_type" />
                             <field
                                 name="activity_user_id"
-                                attrs="{'invisible': [('activity_user_type', '!=', 'specific')], 'required': [('activity_user_type', '=', 'specific')]}"
+                                invisible="activity_user_type != 'specific'"
+                                required="activity_user_type == 'specific'"
                             />
                             <field
                                 name="activity_user_field_id"
                                 domain="[('model_id', '=', model_id)]"
-                                attrs="{'invisible': [('activity_user_type', '!=', 'generic')], 'required': [('activity_user_type', '=', 'generic')]}"
+                                invisible="activity_user_type != 'generic'"
+                                required="activity_user_type == 'generic'"
                             />
                         </group>
                     </group>
@@ -199,7 +193,7 @@
                         <page
                             string="Activity"
                             name="activity"
-                            attrs="{'invisible':[('step_type', '!=', 'activity')]}"
+                            invisible="step_type != 'activity'"
                         >
                             <group>
                                 <field name="activity_summary" />
@@ -212,7 +206,11 @@
                                 <field name="activity_verification_domain_error" />
                             </group>
                         </page>
-                        <page name="action" string="Server Action">
+                        <page
+                            name="action"
+                            string="Server Action"
+                            invisible="step_type != 'action'"
+                        >
                             <group>
                                 <field name="server_context" />
                             </group>
@@ -235,10 +233,10 @@
     <record model="ir.ui.view" id="automation_configuration_step_tree_view">
         <field name="model">automation.configuration.step</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <!-- TODO -->
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
 </odoo>
