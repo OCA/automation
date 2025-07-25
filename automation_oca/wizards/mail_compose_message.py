@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class MailComposeMessage(models.TransientModel):
-
     _inherit = "mail.compose.message"
 
     automation_record_step_id = fields.Many2one("automation.record.step")
@@ -14,7 +13,7 @@ class MailComposeMessage(models.TransientModel):
         result = super().get_mail_values(res_ids)
         if self.automation_record_step_id:
             for res_id in res_ids:
-                result[res_id][
-                    "automation_record_step_id"
-                ] = self.automation_record_step_id.id
+                result[res_id]["automation_record_step_id"] = (
+                    self.automation_record_step_id.id
+                )
         return result

@@ -10,7 +10,6 @@ _logger = logging.getLogger(__name__)
 
 
 class AutomationRecord(models.Model):
-
     _name = "automation.record"
     _description = "Automation Record"
 

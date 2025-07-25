@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Dixmit
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="automation_tag_search_view">
         <field name="model">automation.tag</field>
         <field name="arch" type="xml">
@@ -23,7 +22,8 @@
     </record>
 
     <record model="ir.actions.act_window" id="automation_tag_act_window">
-        <field name="name">Tags</field> <!-- TODO -->
+        <field name="name">Tags</field>
+        <!-- TODO -->
         <field name="res_model">automation.tag</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
@@ -36,5 +36,4 @@
         <field name="action" ref="automation_tag_act_window" />
         <field name="sequence" eval="40" />
     </record>
-
 </odoo>

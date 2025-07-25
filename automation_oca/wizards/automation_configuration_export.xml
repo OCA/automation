@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Dixmit
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="automation_configuration_export_form_view">
         <field name="model">automation.configuration.export</field>
         <field name="arch" type="xml">
@@ -24,12 +23,11 @@
         model="ir.actions.act_window"
         id="automation_configuration_export_act_window"
     >
-        <field name="name">Automation Configuration Export</field> <!-- TODO -->
+        <field name="name">Automation Configuration Export</field>
+        <!-- TODO -->
         <field name="res_model">automation.configuration.export</field>
         <field name="view_mode">form</field>
         <field name="context">{'default_configuration_id': active_id}</field>
         <field name="target">new</field>
     </record>
-
-
 </odoo>
