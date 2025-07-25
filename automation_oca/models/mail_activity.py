@@ -24,4 +24,4 @@ class MailActivity(models.Model):
             "automation_done"
         ):
             self.automation_record_step_id.sudo()._set_activity_cancel()
-        return super(MailActivity, self).unlink()
+        return super().unlink()

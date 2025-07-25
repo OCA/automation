@@ -2,19 +2,19 @@
 <!-- Copyright 2024 Dixmit
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="automation_configuration_test_form_view">
         <field name="model">automation.configuration.test</field>
         <field name="arch" type="xml">
             <form string="Test configuration">
                 <sheet>
-
                     <div class="oe_title">
-                        <h2><field
+                        <h2>
+                            <field
                                 name="resource_ref"
                                 required="1"
                                 options="{'hide_model': True}"
-                            /></h2>
+                            />
+                        </h2>
                     </div>
                     <div class="row text-center">
                         On tests, mails will not be sent, but templates will be generated and actions will be executed.
@@ -44,6 +44,4 @@
         <field name="context">{'default_configuration_id': active_id}</field>
         <field name="target">new</field>
     </record>
-
-
 </odoo>

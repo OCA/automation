@@ -15,7 +15,6 @@ from odoo.tools.safe_eval import safe_eval
 
 
 class AutomationConfigurationStep(models.Model):
-
     _name = "automation.configuration.step"
     _description = "Automation Steps"
     _order = "trigger_interval_hours ASC"
@@ -616,23 +615,23 @@ class AutomationConfigurationStep(models.Model):
             self.activity_type_id
             and activity_type_id not in extra_data["activity_types"]
         ):
-            extra_data["activity_types"][
-                activity_type_id
-            ] = self._export_activity_values(self.activity_type_id)
+            extra_data["activity_types"][activity_type_id] = (
+                self._export_activity_values(self.activity_type_id)
+            )
         if (
             self.mail_template_id
             and mail_template_id not in extra_data["mail_templates"]
         ):
-            extra_data["mail_templates"][
-                mail_template_id
-            ] = self._export_mail_template_values(self.mail_template_id)
+            extra_data["mail_templates"][mail_template_id] = (
+                self._export_mail_template_values(self.mail_template_id)
+            )
         if (
             self.server_action_id
             and server_action_id not in extra_data["server_actions"]
         ):
-            extra_data["server_actions"][
-                server_action_id
-            ] = self._export_server_action_values(self.server_action_id)
+            extra_data["server_actions"][server_action_id] = (
+                self._export_server_action_values(self.server_action_id)
+            )
         for step in self.child_ids:
             step_data = step._export_step(extra_data)
             if step_data:

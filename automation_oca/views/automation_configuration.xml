@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Dixmit
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="automation_configuration_form_view">
         <field name="model">automation.configuration</field>
         <field name="arch" type="xml">
@@ -63,7 +62,7 @@
                         attrs="{'invisible': [('is_periodic', '=', False)]}"
                     >
                         On <b
-                        >periodical configurations</b>, the records are created automatically by a cron job.
+                    >periodical configurations</b>, the records are created automatically by a cron job.
                         It is great for tasks that don't need user validation.
                     </div>
                     <div
@@ -71,7 +70,7 @@
                         attrs="{'invisible': [('is_periodic', '=', True)]}"
                     >
                         On <b
-                        >on demand configurations</b>, the records are created only by pressing the run button.
+                    >on demand configurations</b>, the records are created only by pressing the run button.
                         It is useful if you want to control the execution and created records manually.
                     </div>
                 </div>
@@ -92,8 +91,8 @@
                     <div class="px-4">
                         This a periodical configuration. New records are generated automatically.
                         Next execution is programed for <field
-                            name="next_execution_date"
-                        />
+                        name="next_execution_date"
+                    />
                     </div>
                 </div>
                 <sheet>
@@ -139,10 +138,12 @@
                         attrs="{'invisible': [('active', '=', True)]}"
                     />
                     <div class="oe_title">
-                        <h1><field
+                        <h1>
+                            <field
                                 name="name"
                                 placeholder="e.g. Remember unpaid invoices"
-                            /></h1>
+                            />
+                        </h1>
                     </div>
                     <group>
                         <field name="active" invisible="1" />
@@ -249,7 +250,8 @@
                                             >
                                                 <i
                                                     t-att-class="record.trigger_type_data.raw_value.icon"
-                                                /> <t
+                                                />
+                                                <t
                                                     t-esc="record.trigger_type_data.raw_value.message_configuration"
                                                 />
                                             </div>
@@ -274,9 +276,11 @@
                                                 <t
                                                     t-if="record.trigger_interval.raw_value >= 0"
                                                 >
-                                                    <span class="pe-1"><field
+                                                    <span class="pe-1">
+                                                        <field
                                                             name="trigger_interval"
-                                                        /></span>
+                                                        />
+                                                    </span>
                                                     <field
                                                         name="trigger_interval_type"
                                                     />
@@ -303,11 +307,15 @@
                                             <div
                                                 class="o_automation_kanban_header_title"
                                             >
-                                                <h3 class="mb0 mt0"><a
+                                                <h3 class="mb0 mt0">
+                                                    <a
                                                         type="edit"
                                                         class="oe_kanban_action oe_kanban_action_a"
                                                         t-att-title="record.name.raw_value"
-                                                    ><field name="name" /></a></h3>
+                                                    >
+                                                        <field name="name" />
+                                                    </a>
+                                                </h3>
                                                 <div t-esc="record.step_type.value" />
                                             </div>
                                             <div
@@ -363,8 +371,8 @@
                                                 class="o_automation_kanban_child_add_title card-footer"
                                             >
                                                 <i
-                                                    class="fa fa-plus-circle"
-                                                /> Add child activity
+                                                class="fa fa-plus-circle"
+                                            /> Add child activity
                                             </div>
                                             <div
                                                 class="o_automation_kanban_child_add_buttons"
@@ -382,7 +390,7 @@
                                                         t-att-trigger-type="trigger_type_id"
                                                         class="o_automation_kanban_child_add_button"
                                                     >
-                                                    <i
+                                                        <i
                                                             t-attf-class="{{trigger_type.icon}} {{trigger_type.color}}"
                                                             t-att-title="trigger_type.name"
                                                             role="img"
@@ -466,21 +474,24 @@
                             </div>
                             <div class="row mt8">
                                 <div class="col-4 text-center text-black-50">
-                                    <div><i
-                                            class="fa fa-envelope"
-                                            title="Mails"
-                                        /></div>
+                                    <div>
+                                        <i class="fa fa-envelope" title="Mails" />
+                                    </div>
                                     <field name="activity_mail_count" class="h2" />
                                 </div>
                                 <div class="col-4 text-center text-black-50">
-                                    <div><i class="fa fa-cogs" title="Actions" /></div>
+                                    <div>
+                                        <i class="fa fa-cogs" title="Actions" />
+                                    </div>
                                     <field name="activity_action_count" class="h2" />
                                 </div>
                                 <div class="col-4 text-center text-black-50">
-                                    <div><i
+                                    <div>
+                                        <i
                                             class="fa fa-hand-pointer-o"
                                             title="Clicks"
-                                        /></div>
+                                        />
+                                    </div>
                                     <field name="click_count" class="h2" />
                                 </div>
                             </div>
@@ -490,7 +501,6 @@
             </kanban>
         </field>
     </record>
-
 
     <record model="ir.ui.view" id="automation_configuration_tree_view">
         <field name="model">automation.configuration</field>
@@ -503,7 +513,8 @@
     </record>
 
     <record model="ir.actions.act_window" id="automation_configuration_act_window">
-        <field name="name">Automation Configuration</field> <!-- TODO -->
+        <field name="name">Automation Configuration</field>
+        <!-- TODO -->
         <field name="res_model">automation.configuration</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">[]</field>
@@ -516,5 +527,4 @@
         <field name="action" ref="automation_configuration_act_window" />
         <field name="sequence" eval="10" />
     </record>
-
 </odoo>

@@ -24,5 +24,4 @@
         <field name="active" eval="True" />
         <field name="doall" eval="False" />
     </record>
-
 </odoo>
