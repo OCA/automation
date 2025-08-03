@@ -39,6 +39,13 @@ msgstr ""
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
+"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/"
+">"
+msgstr ""
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
 "<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Select time\" "
 "title=\"Select time\"/>"
 msgstr ""
@@ -85,6 +92,15 @@ msgstr ""
 "de nos contacts.</p>\n"
 "            <p>Cordialement,</p>\n"
 "        "
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"<span class=\"col-2\" attrs=\"{'invisible': [('trigger_date_kind', '!=', "
+"'offset')]}\">after</span>\n"
+"                                    <span class=\"col-2\" "
+"attrs=\"{'invisible': [('trigger_date_kind', '=', 'offset')]}\">when</span>"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
@@ -576,6 +592,11 @@ msgid "Field"
 msgstr "Champ"
 
 #. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field
+msgid "Field Label"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_id
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid "Filter"
@@ -628,6 +649,11 @@ msgstr "Abonnés"
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Abonnés (partenaires)"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_date_kind__date
+msgid "Force on Record Date"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
@@ -997,6 +1023,11 @@ msgid "Number of messages with delivery error"
 msgstr "Nombre de messages avec une erreur de livraison"
 
 #. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_date_kind__offset
+msgid "Offset"
+msgstr ""
+
+#. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
 "On <b>on demand configurations</b>, the records are created only by pressing "
@@ -1342,6 +1373,15 @@ msgid "Tests"
 msgstr ""
 
 #. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"The scheduled date will be the date of the record at the moment we generate "
+"the new record.\n"
+"                                Later changes of the field will not affect "
+"the scheduled date."
+msgstr ""
+
+#. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
 "This a periodical configuration. New records are generated automatically.\n"
@@ -1383,6 +1423,16 @@ msgstr "Déclencheur"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_child_types
 msgid "Trigger Child Types"
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field_id
+msgid "Trigger Date Field"
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_kind
+msgid "Trigger Date Kind"
 msgstr ""
 
 #. module: automation_oca
