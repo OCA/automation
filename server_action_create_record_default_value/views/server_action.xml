@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_server_action_form_inherit_create_fields" model="ir.ui.view">
+        <field name="name">ir.actions.server.form.inherit.create.fields</field>
+        <field name="model">ir.actions.server</field>
+        <field name="inherit_id" ref="base.view_server_action_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='link_field_id']" position="after">
+                <field
+                    name="field_default_value_ids"
+                    invisible="state != 'object_create'"
+                >
+                    <list editable="bottom">
+                        <field name="field_id" />
+                        <field name="value" />
+                    </list>
+                </field>
+                <div
+                    class="alert alert-info o_form_info"
+                    role="alert"
+                    invisible="state != 'object_create'"
+                >
+                    <h3>How to write default values using Python expressions</h3>
+                    <p
+                    >You can use Python expressions to compute values dynamically based on the source record.</p>
+                    <ul>
+                        <li><strong>object:</strong> the source record (e.g., <code
+                        >object.name</code>, <code>object.user_id.id</code>)</li>
+                        <li><strong>context_today():</strong> current date (e.g., <code
+                        >context_today()</code>)</li>
+                        <li><strong>relativedelta:</strong> to shift dates (e.g., <code
+                        >context_today() + relativedelta(days=10)</code>)</li>
+                    </ul>
+                    <p>For Many2one fields, make sure to return the ID, e.g.:</p>
+                    <code>object.user_id.id</code>
+
+                    <h4>Examples</h4>
+                    <p>
+        1. Set name from the source record:<br />
+        <code>'Lead for ' + object.name</code>
+    </p>
+                    <p>
+        2. Set today's date:<br />
+        <code>context_today()</code>
+    </p>
+                    <p>
+        3. Set a future date (10 days from today):<br />
+        <code>context_today() + relativedelta(days=10)</code>
+    </p>
+                    <p>
+        4. Assign current user:<br />
+        <code>object.user_id.id</code>
+    </p>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
