@@ -619,4 +619,5 @@ class AutomationConfiguration(models.Model):
             "model_id": self.env.ref(data.get("model_id")).id,
             "field_id": data.get("field_id") and self.env.ref(data.get("field_id")).id,
             "is_periodic": data.get("is_periodic"),
+            "editable_domain": data.get("domain", "[]"),
         }
