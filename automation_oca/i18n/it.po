@@ -51,8 +51,8 @@ msgid ""
 "<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/"
 ">"
 msgstr ""
-"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title="
-"\"Alle\"/>"
+"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" "
+"title=\"Alle\"/>"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
@@ -116,10 +116,10 @@ msgid ""
 "                                    <span class=\"col-2\" "
 "attrs=\"{'invisible': [('trigger_date_kind', '=', 'offset')]}\">when</span>"
 msgstr ""
-"<span class=\"col-2\" attrs="
-"\"{'invisible': [('trigger_date_kind', '!=', 'offset')]}\">dopo</span>\n"
-"                                    <span class=\"col-2\" attrs="
-"\"{'invisible': [('trigger_date_kind', '=', 'offset')]}\">quando</span>"
+"<span class=\"col-2\" attrs=\"{'invisible': [('trigger_date_kind', '!=', "
+"'offset')]}\">dopo</span>\n"
+"                                    <span class=\"col-2\" "
+"attrs=\"{'invisible': [('trigger_date_kind', '=', 'offset')]}\">quando</span>"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
@@ -202,6 +202,16 @@ msgstr "Conteggio e-mail attività"
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_type
 msgid "Activity User Type"
 msgstr "Tipo utente attività"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain
+msgid "Activity Verification Domain"
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain_error
+msgid "Activity Verification Domain Error"
+msgstr ""
 
 #. module: automation_oca
 #. odoo-python
@@ -657,6 +667,11 @@ msgid "Filter to apply specifically"
 msgstr "Filtro da applicare precisamente"
 
 #. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain
+msgid "Filter to verify when the activity is done"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.actions.act_window,name:automation_oca.automation_filter_act_window
 #: model:ir.ui.menu,name:automation_oca.automation_filter_menu
 msgid "Filters"
@@ -925,6 +940,11 @@ msgstr "Messaggio"
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_has_error
 msgid "Message Delivery error"
 msgstr "Errore di consegna messaggio"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain_error
+msgid "Message to show when the activity domain is not as expected"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_ids
@@ -1404,6 +1424,15 @@ msgstr "Configurazione test"
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid "Tests"
 msgstr "Test"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#, python-format
+msgid ""
+"The record does not fulfill the expected domain:\n"
+"%(domain)s"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
