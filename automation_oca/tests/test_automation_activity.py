@@ -1,5 +1,6 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo.exceptions import ValidationError
 from odoo.tests import Form, new_test_user
 
 from .common import AutomationTestCase
@@ -88,6 +89,42 @@ class TestAutomationActivity(AutomationTestCase):
                 if step["done"] and step["icon"] == "fa fa-clock-o"
             ]
         )
+
+    def test_activity_execution_check_domain(self):
+        """
+        We will check the execution of activity tasks (generation of an activity)
+        """
+        activity = self.create_activity_action(
+            activity_verification_domain="[('name', '=', 'My Expected Name')]"
+        )
+        self.partner_01.name = "Not My Expected Name"
+        self.configuration.editable_domain = "[('id', '=', %s)]" % self.partner_01.id
+        self.configuration.start_automation()
+        self.env["automation.configuration"].cron_automation()
+        self.assertFalse(self.partner_01.activity_ids)
+        self.env["automation.record.step"]._cron_automation_steps()
+        self.assertTrue(self.partner_01.activity_ids)
+        record_activity = self.env["automation.record.step"].search(
+            [("configuration_step_id", "=", activity.id)]
+        )
+        self.assertEqual(
+            record_activity, self.partner_01.activity_ids.automation_record_step_id
+        )
+        self.assertFalse(record_activity.activity_done_on)
+        record_activity.invalidate_recordset()
+        self.assertFalse(
+            [
+                step
+                for step in record_activity.step_actions
+                if step["done"] and step["icon"] == "fa fa-clock-o"
+            ]
+        )
+        with self.assertRaises(ValidationError):
+            self.partner_01.activity_ids.action_feedback()
+        self.assertFalse(record_activity.activity_done_on)
+        self.partner_01.name = "My Expected Name"
+        self.partner_01.activity_ids.action_feedback()
+        self.assertTrue(record_activity.activity_done_on)
 
     def test_activity_execution_child(self):
         """
