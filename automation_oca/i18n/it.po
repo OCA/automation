@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-08-04 13:25+0000\n"
+"PO-Revision-Date: 2025-12-02 15:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -206,12 +206,12 @@ msgstr "Tipo utente attività"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain
 msgid "Activity Verification Domain"
-msgstr ""
+msgstr "Dominio verifica attività"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain_error
 msgid "Activity Verification Domain Error"
-msgstr ""
+msgstr "Errore dominio verifica attività"
 
 #. module: automation_oca
 #. odoo-python
@@ -669,7 +669,7 @@ msgstr "Filtro da applicare precisamente"
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain
 msgid "Filter to verify when the activity is done"
-msgstr ""
+msgstr "Filtro per determinare quando l'attività è eseguita"
 
 #. module: automation_oca
 #: model:ir.actions.act_window,name:automation_oca.automation_filter_act_window
@@ -945,6 +945,7 @@ msgstr "Errore di consegna messaggio"
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain_error
 msgid "Message to show when the activity domain is not as expected"
 msgstr ""
+"Messaggio da visualizzare quando il dominio dell'attività non è come previsto"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_ids
@@ -1433,6 +1434,8 @@ msgid ""
 "The record does not fulfill the expected domain:\n"
 "%(domain)s"
 msgstr ""
+"Il record non rispetta il dominio previsto:\n"
+"%(domain)s"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
