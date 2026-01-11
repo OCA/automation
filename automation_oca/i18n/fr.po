@@ -275,6 +275,12 @@ msgid "Automation Configuration"
 msgstr "Configuration d'automatisation"
 
 #. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_export_act_window
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_export_form_view
+msgid "Automation Configuration Export"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__automation_direct_step_ids
 msgid "Automation Direct Step"
 msgstr ""
@@ -357,6 +363,7 @@ msgid "Bounced after"
 msgstr "Rejeté après"
 
 #. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_export_form_view
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
 msgid "Cancel"
@@ -415,6 +422,7 @@ msgid "Company"
 msgstr "Société"
 
 #. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__configuration_id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__configuration_id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__configuration_id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_record__configuration_id
@@ -432,6 +440,7 @@ msgstr "Étape de configuration"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__create_uid
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__create_uid
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__create_uid
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter__create_uid
@@ -443,6 +452,7 @@ msgstr "Créé par"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__create_date
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__create_date
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__create_date
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter__create_date
@@ -472,6 +482,7 @@ msgstr "Supprimer"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__display_name
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__display_name
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__display_name
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter__display_name
@@ -597,6 +608,11 @@ msgid "Expiry Interval Type"
 msgstr ""
 
 #. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Export"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__field_id
 msgid "Field"
 msgstr "Champ"
@@ -604,6 +620,16 @@ msgstr "Champ"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field
 msgid "Field Label"
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__file_content
+msgid "File Content"
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__file_name
+msgid "File Name"
 msgstr ""
 
 #. module: automation_oca
@@ -708,6 +734,7 @@ msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter__id
@@ -762,6 +789,7 @@ msgstr "Est un test"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration____last_update
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export____last_update
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step____last_update
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test____last_update
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter____last_update
@@ -773,6 +801,7 @@ msgstr "Dernière modification le"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__write_uid
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__write_uid
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__write_uid
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter__write_uid
@@ -784,6 +813,7 @@ msgstr "Dernière modification par"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__write_date
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__write_date
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__write_date
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter__write_date
@@ -1497,6 +1527,13 @@ msgid "Unicity based on"
 msgstr ""
 
 #. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/views/automation_upload/automation_upload.xml:0
+#, python-format
+msgid "Upload"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_user_type
 msgid ""
 "Use 'Specific User' to always assign the same user on the next activity.\n"
@@ -1534,6 +1571,11 @@ msgstr "Bienvenue"
 #: model:mail.template,subject:automation_oca.demo_welcome_template
 msgid "Welcome! Thanks for being part of our database"
 msgstr "Bienvenue ! Merci de faire partie de notre base de données"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_export
+msgid "automation.configuration.export"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
