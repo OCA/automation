@@ -14,6 +14,7 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "wizards/automation_configuration_export.xml",
         "views/menu.xml",
         "wizards/automation_configuration_test.xml",
         "views/automation_record.xml",

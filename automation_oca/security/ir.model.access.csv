@@ -12,3 +12,4 @@ manage_automation_tag,Access Automation tag,model_automation_tag,group_automatio
 access_automation_record_step,Access Automation Record Activity,model_automation_record_step,group_automation_user,1,0,0,0
 manage_automation_record_step,Access Automation Record Activity,model_automation_record_step,group_automation_manager,1,1,1,1
 manage_automation_configuration_test,Access Automation Configuration Test,model_automation_configuration_test,group_automation_manager,1,1,1,1
+manage_automation_configuration_export,Access Automation Configuration Test,model_automation_configuration_export,group_automation_manager,1,1,1,1
