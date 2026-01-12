@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-12-02 15:42+0000\n"
+"PO-Revision-Date: 2026-01-12 10:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -297,7 +297,7 @@ msgstr "Configurazione automazione"
 #: model:ir.actions.act_window,name:automation_oca.automation_configuration_export_act_window
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_export_form_view
 msgid "Automation Configuration Export"
-msgstr ""
+msgstr "Esportazione configurazione automazione"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__automation_direct_step_ids
@@ -629,7 +629,7 @@ msgstr "Tipo intervallo scadenza"
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid "Export"
-msgstr ""
+msgstr "Esporta"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__field_id
@@ -644,12 +644,12 @@ msgstr "Etichetta campo"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__file_content
 msgid "File Content"
-msgstr ""
+msgstr "Contenuto file"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__file_name
 msgid "File Name"
-msgstr ""
+msgstr "Nome file"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_id
@@ -1576,7 +1576,7 @@ msgstr "Unicità basata su"
 #: code:addons/automation_oca/static/src/views/automation_upload/automation_upload.xml:0
 #, python-format
 msgid "Upload"
-msgstr ""
+msgstr "Carica"
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_user_type
@@ -1625,7 +1625,7 @@ msgstr "Benvenuto! Grazie per far parte del nostro archivio"
 #. module: automation_oca
 #: model:ir.model,name:automation_oca.model_automation_configuration_export
 msgid "automation.configuration.export"
-msgstr ""
+msgstr "automation.configuration.export"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
