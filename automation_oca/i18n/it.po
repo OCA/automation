@@ -1283,6 +1283,11 @@ msgid "Responsible"
 msgstr "Responsabile"
 
 #. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Retry"
+msgstr ""
+
+#. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_tree_view
@@ -1621,6 +1626,15 @@ msgstr "Benvenuto"
 #: model:mail.template,subject:automation_oca.demo_welcome_template
 msgid "Welcome! Thanks for being part of our database"
 msgstr "Benvenuto! Grazie per far parte del nostro archivio"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#, python-format
+msgid ""
+"You can only retry a record step in a rejected, expired, cancelled or error "
+"state."
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model,name:automation_oca.model_automation_configuration_export
