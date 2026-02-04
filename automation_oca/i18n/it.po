@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-01-12 10:42+0000\n"
+"PO-Revision-Date: 2026-02-04 10:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
@@ -1285,7 +1285,7 @@ msgstr "Responsabile"
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
 msgid "Retry"
-msgstr ""
+msgstr "Riprova"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
@@ -1635,6 +1635,8 @@ msgid ""
 "You can only retry a record step in a rejected, expired, cancelled or error "
 "state."
 msgstr ""
+"In stato rifiutato, scaduto, annullato o errore si può ritentare solo un "
+"tentativo di registrazione."
 
 #. module: automation_oca
 #: model:ir.model,name:automation_oca.model_automation_configuration_export
