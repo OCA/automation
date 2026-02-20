@@ -10,21 +10,19 @@ from .common import AutomationTestCase
 
 
 class TestAutomationDate(AutomationTestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.loader = FakeModelLoader(cls.env, cls.__module__)
-        cls.loader.backup_registry()
+    def setUp(self):
+        super().setUp()
+        self.loader = FakeModelLoader(self.env, self.__module__)
+        self.loader.backup_registry()
 
         # The fake class is imported here !! After the backup_registry
         from .models import ResPartner
 
-        cls.loader.update_registry((ResPartner,))
+        self.loader.update_registry((ResPartner,))
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.loader.restore_registry()
-        super().tearDownClass()
+    def tearDown(self):
+        self.loader.restore_registry()
+        return super().tearDown()
 
     def test_schedule_date_force(self):
         partner_01 = self.env["res.partner"].create(
