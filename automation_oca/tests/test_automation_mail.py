@@ -200,7 +200,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         )
         self.assertEqual("reply", record_activity.mail_status)
         self.env["automation.record.step"]._cron_automation_steps()
-        self.assertEqual("rejected", record_child_activity.state)
+        self.assertEqual("skipped", record_child_activity.state)
 
     def test_open(self):
         """
@@ -300,9 +300,9 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         self.env["automation.record.step"]._cron_automation_steps()
         self.assertEqual("done", record_child_activity.state)
 
-    def test_no_open_rejected(self):
+    def test_no_open_skipped(self):
         """
-        Now we will check the not open validation when it was already opened (rejection)
+        Now we will check the not open validation when it was already opened (skipped)
         """
         activity = self.create_mail_activity()
         child_activity = self.create_mail_activity(
@@ -326,7 +326,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         self.url_open(record_activity._get_mail_tracking_url())
         self.assertEqual("open", record_activity.mail_status)
         self.env["automation.record.step"]._cron_automation_steps()
-        self.assertEqual("rejected", record_child_activity.state)
+        self.assertEqual("skipped", record_child_activity.state)
 
     def test_click(self):
         """
@@ -487,10 +487,8 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
         self.env["automation.record.step"]._cron_automation_steps()
         self.assertEqual("done", record_child_activity.state)
 
-    def test_no_click_rejected(self):
-        """
-        Checking the not clicked validation when it was already clicked
-        """
+    def test_no_click_skipped(self):
+        """Checking the not clicked validation when it was already clicked."""
         activity = self.create_mail_activity()
         child_activity = self.create_mail_activity(
             parent_id=activity.id, trigger_type="mail_not_clicked"
@@ -521,7 +519,7 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
             allow_redirects=False,
         )
         self.env["automation.record.step"]._cron_automation_steps()
-        self.assertEqual("rejected", record_child_activity.state)
+        self.assertEqual("skipped", record_child_activity.state)
 
     def test_is_test_behavior(self):
         """

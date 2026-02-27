@@ -54,7 +54,7 @@ class AutomationRecordStep(models.Model):
             ("scheduled", "Scheduled"),
             ("done", "Done"),
             ("expired", "Expired"),
-            ("rejected", "Rejected"),
+            ("skipped", "Skipped"),
             ("error", "Error"),
             ("cancel", "Cancelled"),
         ],
@@ -154,7 +154,7 @@ class AutomationRecordStep(models.Model):
             )
             or not self._check_to_execute()
         ):
-            self._reject()
+            self._skip()
             return self.browse()
         try:
             result = getattr(self, f"_run_{self.configuration_step_id.step_type}")()
@@ -177,8 +177,12 @@ class AutomationRecordStep(models.Model):
             )
         return self.browse()
 
+    def _skip(self):
+        self.write({"state": "skipped", "processed_on": fields.Datetime.now()})
+
     def _reject(self):
-        self.write({"state": "rejected", "processed_on": fields.Datetime.now()})
+        # FIXME: Kept for retro-compatibility
+        self._skip()
 
     def _fill_childs(self, **kwargs):
         return self.create(
@@ -344,7 +348,7 @@ class AutomationRecordStep(models.Model):
             lambda r: r.trigger_type == "activity_cancel"
             and not r.scheduled_date
             and r.state == "scheduled"
-        )._reject()
+        )._skip()
 
     def _set_activity_cancel(self):
         self.write({"activity_cancel_on": fields.Datetime.now()})
@@ -357,7 +361,7 @@ class AutomationRecordStep(models.Model):
             lambda r: r.trigger_type == "activity_done"
             and not r.scheduled_date
             and r.state == "scheduled"
-        )._reject()
+        )._skip()
 
     def _set_mail_bounced(self):
         self.write({"mail_status": "bounce"})
@@ -461,10 +465,10 @@ class AutomationRecordStep(models.Model):
         """
         Retry the record step
         """
-        if self.state not in ["error", "rejected", "expired", "cancel"]:
+        if self.state not in ["error", "skipped", "expired", "cancel"]:
             raise ValidationError(
                 _(
-                    "You can only retry a record step in a rejected, "
+                    "You can only retry a record step in a skipped, "
                     "expired, cancelled or error state."
                 )
             )
