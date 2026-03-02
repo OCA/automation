@@ -46,10 +46,12 @@ msgstr "%s configuraciones necesitan un padre"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
-msgid "<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/>"
+msgid ""
+"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/"
+">"
 msgstr ""
-"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\""
-"/>"
+"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/"
+">"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
@@ -87,15 +89,15 @@ msgid ""
 "<i class=\"o_automation_kanban_card_position fa fa-circle text-info text-"
 "right\" title=\"Run on\"/>"
 msgstr ""
-"<i class="
-"\"o_automation_kanban_card_position fa fa-circle text-info text-right\" "
-"title=\"Ejecutar en\"/>"
+"<i class=\"o_automation_kanban_card_position fa fa-circle text-info text-"
+"right\" title=\"Ejecutar en\"/>"
 
 #. module: automation_oca
 #: model:mail.template,body_html:automation_oca.demo_welcome_template
 msgid ""
 "<p>Welcome!</p>\n"
-"            <p>Thanks <t t-out=\"object.name\"></t> for becoming a contact.</p>\n"
+"            <p>Thanks <t t-out=\"object.name\"></t> for becoming a contact.</"
+"p>\n"
 "            <p>Kind regards,</p>\n"
 "        "
 msgstr ""
@@ -108,13 +110,15 @@ msgstr ""
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
 msgid ""
-"<span class=\"col-2\" invisible=\"trigger_date_kind != 'offset'\">after</span>\n"
-"                                    <span class=\"col-2\" invisible=\"trigger_date_kind == 'offset'\">when</span>"
+"<span class=\"col-2\" invisible=\"trigger_date_kind != 'offset'\">after</"
+"span>\n"
+"                                    <span class=\"col-2\" "
+"invisible=\"trigger_date_kind == 'offset'\">when</span>"
 msgstr ""
 "<span class=\"col-2\" invisible=\"trigger_date_kind != 'offset'\">después "
 "de</span>\n"
-"                                    <span class=\"col-2\" invisible="
-"\"trigger_date_kind == 'offset'\">cuando</span>"
+"                                    <span class=\"col-2\" "
+"invisible=\"trigger_date_kind == 'offset'\">cuando</span>"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
@@ -245,7 +249,6 @@ msgstr "La actividad no ha sido realizada"
 
 #. module: automation_oca
 #. odoo-python
-#: code:addons/automation_oca/models/automation_configuration_step.py:0
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
 msgid "After finished"
@@ -1059,8 +1062,10 @@ msgstr "Compensar"
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
-"On <b>on demand configurations</b>, the records are created only by pressing the run button.\n"
-"                        It is useful if you want to control the execution and created records manually."
+"On <b>on demand configurations</b>, the records are created only by pressing "
+"the run button.\n"
+"                        It is useful if you want to control the execution "
+"and created records manually."
 msgstr ""
 "En <b>configuraciones bajo demanda</b>, los registros se crean solo "
 "presionando el botón de ejecución.\n"
@@ -1070,8 +1075,10 @@ msgstr ""
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
-"On <b>periodical configurations</b>, the records are created automatically by a cron job.\n"
-"                        It is great for tasks that don't need user validation."
+"On <b>periodical configurations</b>, the records are created automatically "
+"by a cron job.\n"
+"                        It is great for tasks that don't need user "
+"validation."
 msgstr ""
 "En <b>configuraciones periódicas</b>, los registros se crean automáticamente "
 "mediante un trabajo cron.\n"
@@ -1290,7 +1297,8 @@ msgstr "El contexto del servidor no está bien formado"
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__trigger_interval
 msgid ""
 "Set a negative time trigger if you want the step to be executed\n"
-"        immediately, in parallel with the previous step, without waiting for it to\n"
+"        immediately, in parallel with the previous step, without waiting for "
+"it to\n"
 "        finish."
 msgstr ""
 "Define un tiempo negativo si quieres que el registro se ejecute\n"
@@ -1418,8 +1426,10 @@ msgstr ""
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
 msgid ""
-"The scheduled date will be the date of the record at the moment we generate the new record.\n"
-"                                Later changes of the field will not affect the scheduled date."
+"The scheduled date will be the date of the record at the moment we generate "
+"the new record.\n"
+"                                Later changes of the field will not affect "
+"the scheduled date."
 msgstr ""
 "La fecha programada será la fecha del registro en el momento en que "
 "generemos el nuevo registro.\n"
@@ -1439,8 +1449,8 @@ msgstr ""
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
-"This is configuration only generates new records on demand. Press the button"
-" in order to execute them manually."
+"This is configuration only generates new records on demand. Press the button "
+"in order to execute them manually."
 msgstr ""
 "Esta configuración solo genera nuevos registros bajo demanda. Presione el "
 "botón para ejecutarlos manualmente."
@@ -1449,7 +1459,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
 msgid ""
 "This is the final domain that will be applied to the records.\n"
-"                                Consists in the join of the specific domain of the step and the domain of the records."
+"                                Consists in the join of the specific domain "
+"of the step and the domain of the records."
 msgstr ""
 "Este es el dominio final que se aplicará a los registros.\n"
 "                                Consiste en la unión del dominio específico "
@@ -1520,7 +1531,8 @@ msgstr "Unicidad basada en"
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_user_type
 msgid ""
 "Use 'Specific User' to always assign the same user on the next activity.\n"
-"        Use 'Generic User From Record' to specify the field name of the user\n"
+"        Use 'Generic User From Record' to specify the field name of the "
+"user\n"
 "        to choose on the record."
 msgstr ""
 "Use 'Usuario específico' para asignar siempre el mismo usuario en la próxima "
@@ -1564,11 +1576,9 @@ msgstr "¡Bienvenido! Gracias por ser parte de nuestra base de datos"
 #: code:addons/automation_oca/models/automation_record_step.py:0
 #, python-format
 msgid ""
-"You can only retry a record step in a rejected, expired, cancelled or error "
+"You can only retry a record step in a skipped, expired, cancelled or error "
 "state."
 msgstr ""
-"Sólo se puede reintentar un paso de registro en caso de rechazo, caducidad, "
-"cancelación o estado de error."
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
@@ -1589,3 +1599,11 @@ msgstr "ejecución de otro paso"
 #, python-format
 msgid "start of workflow"
 msgstr "inicio de flujo de trabajo"
+
+#, python-format
+#~ msgid ""
+#~ "You can only retry a record step in a rejected, expired, cancelled or "
+#~ "error state."
+#~ msgstr ""
+#~ "Sólo se puede reintentar un paso de registro en caso de rechazo, "
+#~ "caducidad, cancelación o estado de error."

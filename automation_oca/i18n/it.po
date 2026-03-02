@@ -48,6 +48,13 @@ msgstr "La configurazione %s richiede un padre"
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
+"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/"
+">"
+msgstr ""
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
 "<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Select time\" "
 "title=\"Select time\"/>"
 msgstr ""
@@ -98,6 +105,15 @@ msgstr ""
 "contatto.</p>\n"
 "            <p>Cordiali saluti,</p>\n"
 "        "
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"<span class=\"col-2\" invisible=\"trigger_date_kind != 'offset'\">after</"
+"span>\n"
+"                                    <span class=\"col-2\" "
+"invisible=\"trigger_date_kind == 'offset'\">when</span>"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
@@ -180,6 +196,16 @@ msgstr "Conteggio e-mail attività"
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_type
 msgid "Activity User Type"
 msgstr "Tipo utente attività"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain
+msgid "Activity Verification Domain"
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain_error
+msgid "Activity Verification Domain Error"
+msgstr ""
 
 #. module: automation_oca
 #. odoo-python
@@ -308,13 +334,11 @@ msgstr "Configurazione automazione"
 
 #. module: automation_oca
 #: model:ir.actions.server,name:automation_oca.cron_configuration_run_ir_actions_server
-#: model:ir.cron,cron_name:automation_oca.cron_configuration_run
 msgid "Automation: Create records"
 msgstr "Automazione: crea record"
 
 #. module: automation_oca
 #: model:ir.actions.server,name:automation_oca.cron_step_execute_ir_actions_server
-#: model:ir.cron,cron_name:automation_oca.cron_step_execute
 msgid "Automation: Execute scheduled activities"
 msgstr "Automazione: esegui attività schedulate"
 
@@ -589,6 +613,11 @@ msgid "Field"
 msgstr "Campo"
 
 #. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field
+msgid "Field Label"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_id
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid "Filter"
@@ -630,6 +659,11 @@ msgid "Filter to apply specifically"
 msgstr "Filtro da applicare precisamente"
 
 #. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain
+msgid "Filter to verify when the activity is done"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.actions.act_window,name:automation_oca.automation_filter_act_window
 #: model:ir.ui.menu,name:automation_oca.automation_filter_menu
 msgid "Filters"
@@ -649,6 +683,11 @@ msgstr "Seguito da"
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Seguito da (partner)"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_date_kind__date
+msgid "Force on Record Date"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
@@ -741,17 +780,6 @@ msgstr "È periodico"
 #: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__is_test
 msgid "Is Test"
 msgstr "È test"
-
-#. module: automation_oca
-#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration____last_update
-#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step____last_update
-#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test____last_update
-#: model:ir.model.fields,field_description:automation_oca.field_automation_filter____last_update
-#: model:ir.model.fields,field_description:automation_oca.field_automation_record____last_update
-#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step____last_update
-#: model:ir.model.fields,field_description:automation_oca.field_automation_tag____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_uid
@@ -865,11 +893,6 @@ msgid "Mail replied"
 msgstr "E-mail con risposta"
 
 #. module: automation_oca
-#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Allegato principale"
-
-#. module: automation_oca
 #: model:res.groups,name:automation_oca.group_automation_manager
 msgid "Manager"
 msgstr "Supervisore"
@@ -895,21 +918,30 @@ msgid "Message Delivery error"
 msgstr "Errore di consegna messaggio"
 
 #. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain_error
+msgid "Message to show when the activity domain is not as expected"
+msgstr ""
+
+#. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_ids
 msgid "Messages"
 msgstr "Messaggi"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model
-#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model_id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model
-#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model_id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__model
 #: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model
-#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model_id
 #: model:ir.model.fields,field_description:automation_oca.field_automation_record__model
 msgid "Model"
 msgstr "Modello"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model_id
+msgid "Model ID"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration__model_id
@@ -1018,6 +1050,11 @@ msgstr "Numero di messaggi che richiedono un'azione"
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "Numero di messaggi con errore di consegna"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_date_kind__offset
+msgid "Offset"
+msgstr ""
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
@@ -1188,6 +1225,11 @@ msgid "Responsible"
 msgstr "Responsabile"
 
 #. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Retry"
+msgstr ""
+
+#. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_tree_view
@@ -1232,8 +1274,21 @@ msgstr "Inviata"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_action_id
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__action
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
 msgid "Server Action"
 msgstr "Azione server"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_context
+msgid "Server Context"
+msgstr ""
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+#, python-format
+msgid "Server Context is not wellformed"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__trigger_interval
@@ -1356,6 +1411,24 @@ msgid "Tests"
 msgstr "Test"
 
 #. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#, python-format
+msgid ""
+"The record does not fulfill the expected domain:\n"
+"%(domain)s"
+msgstr ""
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"The scheduled date will be the date of the record at the moment we generate "
+"the new record.\n"
+"                                Later changes of the field will not affect "
+"the scheduled date."
+msgstr ""
+
+#. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid ""
 "This a periodical configuration. New records are generated automatically.\n"
@@ -1403,6 +1476,16 @@ msgstr "Attivazione"
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_child_types
 msgid "Trigger Child Types"
 msgstr "Tipi figli attivazione"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field_id
+msgid "Trigger Date Field"
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_kind
+msgid "Trigger Date Kind"
+msgstr ""
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval
@@ -1481,6 +1564,15 @@ msgid "Welcome! Thanks for being part of our database"
 msgstr "Benvenuto! Grazie per far parte del nostro archivio"
 
 #. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#, python-format
+msgid ""
+"You can only retry a record step in a skipped, expired, cancelled or error "
+"state."
+msgstr ""
+
+#. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
 msgid "e.g. Remember unpaid invoices"
@@ -1499,6 +1591,12 @@ msgstr "esecuzione di un altro passo"
 #, python-format
 msgid "start of workflow"
 msgstr "inizio del flusso di lavoro"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Allegato principale"
 
 #~ msgid "Days"
 #~ msgstr "Giorni"
