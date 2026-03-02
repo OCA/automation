@@ -103,9 +103,9 @@
                                                 </span>
                                                 <span
                                                     class="text-info"
-                                                    t-elif="record.state.raw_value == 'rejected'"
+                                                    t-elif="record.state.raw_value == 'skipped'"
                                                 >
-                                                    Rejected <field
+                                                    Skipped <field
                                                         name="processed_on"
                                                     />
                                                 </span>
@@ -143,7 +143,7 @@
                                     <div class="o_automation_kanban_card">
                                         <div class="o_automation_kanban_header">
                                             <div
-                                                t-attf-class="o_automation_kanban_header_icon {{record.state.raw_value === 'done' ? 'btn-success': (record.state.raw_value === 'scheduled' ? 'btn-primary': (record.state.raw_value === 'error' ? 'btn-danger': (record.state.raw_value === 'rejected' ? 'btn-info': 'btn-warning')))}}"
+                                                t-attf-class="o_automation_kanban_header_icon {{record.state.raw_value === 'done' ? 'btn-success': (record.state.raw_value === 'scheduled' ? 'btn-primary': (record.state.raw_value === 'error' ? 'btn-danger': (record.state.raw_value === 'skipped' ? 'btn-info': 'btn-warning')))}}"
                                             >
                                                 <span
                                                     t-att-class="record.step_icon.raw_value"
@@ -188,7 +188,7 @@
                                                     name="retry"
                                                     class="fa fa-refresh btn-warning o_automation_kanban_header_icon"
                                                     title="Retry"
-                                                    t-if="record.state.raw_value  == 'cancel' || record.state.raw_value  == 'rejected' || record.state.raw_value  ==  'error' || record.state.raw_value  ==  'expired'"
+                                                    t-if="record.state.raw_value  == 'cancel' || record.state.raw_value  == 'skipped' || record.state.raw_value  ==  'error' || record.state.raw_value  ==  'expired'"
                                                 />
                                             </div>
                                         </div>

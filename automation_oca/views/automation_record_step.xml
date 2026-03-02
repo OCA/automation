@@ -63,9 +63,9 @@
                     domain="[('state', '=', 'expired')]"
                 />
                 <filter
-                    string="Rejected"
-                    name="rejected"
-                    domain="[('state', '=', 'rejected')]"
+                    string="Skipped"
+                    name="skipped"
+                    domain="[('state', '=', 'skipped')]"
                 />
                 <filter
                     string="Error"

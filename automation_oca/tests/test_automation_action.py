@@ -158,7 +158,7 @@ class TestAutomationAction(AutomationTestCase):
                 [
                     ("configuration_step_id", "=", activity_1_2.id),
                     ("record_id.res_id", "=", self.partner_01.id),
-                    ("state", "=", "rejected"),
+                    ("state", "=", "skipped"),
                 ]
             ),
         )
@@ -168,7 +168,7 @@ class TestAutomationAction(AutomationTestCase):
                 [
                     ("configuration_step_id", "=", activity_1_1.id),
                     ("record_id.res_id", "=", self.partner_02.id),
-                    ("state", "=", "rejected"),
+                    ("state", "=", "skipped"),
                 ]
             ),
         )

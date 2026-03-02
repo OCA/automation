@@ -1190,13 +1190,6 @@ msgid "Records"
 msgstr "Registros"
 
 #. module: automation_oca
-#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__rejected
-#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
-#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
-msgid "Rejected"
-msgstr "Rechazado"
-
-#. module: automation_oca
 #. odoo-python
 #: code:addons/automation_oca/models/automation_record_step.py:0
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__reply
@@ -1303,6 +1296,13 @@ msgstr ""
 "Define un tiempo negativo si quieres que el registro se ejecute\n"
 "        inmediatamente, en paralelo, sin esperar que acabe el \n"
 "        anterior."
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__skipped
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Skipped"
+msgstr "Saltado"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view

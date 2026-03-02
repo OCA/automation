@@ -257,7 +257,7 @@ class AutomationConfigurationStep(models.Model):
             record.graph_error = self.env["automation.record.step"].search_count(
                 [
                     ("configuration_step_id", "=", record.id),
-                    ("state", "in", ["expired", "rejected", "error", "cancel"]),
+                    ("state", "in", ["expired", "skipped", "error", "cancel"]),
                     ("is_test", "=", False),
                 ]
             )

@@ -182,7 +182,7 @@ class TestAutomationActivity(AutomationTestCase):
         self.partner_01.activity_ids.unlink()
         self.assertFalse(record_activity.activity_done_on)
         self.assertFalse(record_child_activity.scheduled_date)
-        self.assertEqual(record_child_activity.state, "rejected")
+        self.assertEqual(record_child_activity.state, "skipped")
 
     def test_activity_execution_on_cancel_permission(self):
         """
@@ -211,7 +211,7 @@ class TestAutomationActivity(AutomationTestCase):
         self.partner_01.activity_ids.with_user(self.user.id).unlink()
         self.assertFalse(record_activity.activity_done_on)
         self.assertFalse(record_child_activity.scheduled_date)
-        self.assertEqual(record_child_activity.state, "rejected")
+        self.assertEqual(record_child_activity.state, "skipped")
 
     def test_activity_execution_cancel_child(self):
         """
@@ -268,7 +268,7 @@ class TestAutomationActivity(AutomationTestCase):
         self.partner_01.activity_ids.action_feedback()
         self.assertFalse(record_activity.activity_cancel_on)
         self.assertFalse(record_child_activity.scheduled_date)
-        self.assertEqual(record_child_activity.state, "rejected")
+        self.assertEqual(record_child_activity.state, "skipped")
 
     def test_activity_execution_not_done_child_done(self):
         """
@@ -299,7 +299,7 @@ class TestAutomationActivity(AutomationTestCase):
         self.assertTrue(record_child_activity.scheduled_date)
         self.assertEqual("scheduled", record_child_activity.state)
         record_child_activity.run()
-        self.assertEqual("rejected", record_child_activity.state)
+        self.assertEqual("skipped", record_child_activity.state)
 
     def test_activity_execution_not_done_child_not_done(self):
         """

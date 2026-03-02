@@ -1145,13 +1145,6 @@ msgid "Records"
 msgstr ""
 
 #. module: automation_oca
-#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__rejected
-#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
-#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
-msgid "Rejected"
-msgstr ""
-
-#. module: automation_oca
 #. odoo-python
 #: code:addons/automation_oca/models/automation_record_step.py:0
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__reply
@@ -1254,6 +1247,13 @@ msgid ""
 "Set a negative time trigger if you want the step to be executed\n"
 "        immediately, in parallel with the previous step, without waiting for it to\n"
 "        finish."
+msgstr ""
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__skipped
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Skipped"
 msgstr ""
 
 #. module: automation_oca
@@ -1495,7 +1495,7 @@ msgstr ""
 #: code:addons/automation_oca/models/automation_record_step.py:0
 #, python-format
 msgid ""
-"You can only retry a record step in a rejected, expired, cancelled or error "
+"You can only retry a record step in a skipped, expired, cancelled or error "
 "state."
 msgstr ""
 
