@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ForgeFlow
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record
+        model="ir.ui.view"
+        id="automation_configuration_step_form_view_note_template"
+    >
+        <field name="model">automation.configuration.step</field>
+        <field
+            name="inherit_id"
+            ref="automation_oca.automation_configuration_step_form_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='activity_note']" position="after">
+                <field
+                    name="activity_note_template_id"
+                    context="{'default_model_id': model_id}"
+                />
+            </xpath>
+            <xpath expr="//field[@name='activity_summary']" position="attributes">
+                <attribute
+                    name="invisible"
+                >activity_note_template_id != False</attribute>
+                <attribute name="string">Summary (static)</attribute>
+            </xpath>
+            <xpath expr="//field[@name='activity_note']" position="attributes">
+                <attribute
+                    name="invisible"
+                >activity_note_template_id != False</attribute>
+                <attribute name="string">Note (static)</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
