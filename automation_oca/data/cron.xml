@@ -9,6 +9,7 @@
         <field name="interval_number">1</field>
         <field name="interval_type">hours</field>
         <field name="active" eval="True" />
+        <field name="numbercall" eval="-1" />
     </record>
     <record forcecreate="True" id="cron_configuration_run" model="ir.cron">
         <field name="name">Automation: Create records</field>
@@ -19,5 +20,6 @@
         <field name="interval_number">6</field>
         <field name="interval_type">hours</field>
         <field name="active" eval="True" />
+        <field name="numbercall" eval="-1" />
     </record>
 </odoo>
