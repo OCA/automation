@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-05-31 19:46+0000\n"
+"PO-Revision-Date: 2026-06-02 22:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -137,7 +137,7 @@ msgstr "<span>Ta zapis je osiroteli zapis</span>"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction
 msgid "Action Needed"
-msgstr "Potreba po ukrepu"
+msgstr "Potrebno ukrepanje"
 
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__active
