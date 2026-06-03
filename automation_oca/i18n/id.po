@@ -1,0 +1,1550 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* automation_oca
+#
+# Translators:
+# OCA Translation Contributors, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-06-03 04:23+0700\n"
+"Last-Translator: OCA Translation <translation@odoo-community.org>\n"
+"Language-Team: Indonesian <id@li.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
+msgid ""
+"\n"
+"        Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
+"\n"
+"        Filter yang diterapkan\n"
+"        Variabel khusus berikut dapat digunakan dalam filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "%s configurations needs a parent"
+msgstr "Konfigurasi %s membutuhkan induk"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/>"
+msgstr "<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"Pada\" title=\"Pada\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Select time\" title=\"Select time\"/>"
+msgstr "<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Pilih waktu\" title=\"Pilih waktu\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-cogs\" title=\"Actions\"/>"
+msgstr "<i class=\"fa fa-cogs\" title=\"Tindakan\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-envelope\" title=\"Mails\"/>"
+msgstr "<i class=\"fa fa-envelope\" title=\"Surat\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-hand-pointer-o\" title=\"Clicks\"/>"
+msgstr "<i class=\"fa fa-hand-pointer-o\" title=\"Klik\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<i class=\"fa fa-plus-circle\"/> Add child activity"
+msgstr "<i class=\"fa fa-plus-circle\"/> Tambah aktivitas anak"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "<i class=\"o_automation_kanban_card_position fa fa-circle text-info text-right\" title=\"Run on\"/>"
+msgstr "<i class=\"o_automation_kanban_card_position fa fa-circle text-info text-right\" title=\"Jalankan pada\"/>"
+
+#. module: automation_oca
+#: model:mail.template,body_html:automation_oca.demo_welcome_template
+msgid ""
+"<p>Welcome!</p>\n"
+"            <p>Thanks <t t-out=\"object.name\"/> for becoming a contact.</p>\n"
+"            <p>Kind regards,</p>\n"
+"        "
+msgstr ""
+"<p>Selamat datang!</p>\n"
+"            <p>Terima kasih <t t-out=\"object.name\"/> telah menjadi kontak kami.</p>\n"
+"            <p>Salam hangat,</p>\n"
+"        "
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"<span class=\"col-2\" invisible=\"trigger_date_kind != 'offset'\">after</span>\n"
+"                                    <span class=\"col-2\" invisible=\"trigger_date_kind == 'offset'\">when</span>"
+msgstr ""
+"<span class=\"col-2\" invisible=\"trigger_date_kind != 'offset'\">setelah</span>\n"
+"                                    <span class=\"col-2\" invisible=\"trigger_date_kind == 'offset'\">ketika</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "<span class=\"col-2\">after</span>"
+msgstr "<span class=\"col-2\">setelah</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "<span class=\"col-2\">of</span>"
+msgstr "<span class=\"col-2\">dari</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<span class=\"pe-1\">Immediatly</span>"
+msgstr "<span class=\"pe-1\">Segera</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "<span>This record is an orphan record</span>"
+msgstr "<span>Rekaman ini adalah rekaman yatim</span>"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction
+msgid "Action Needed"
+msgstr "Tindakan Diperlukan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__active
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__active
+msgid "Active"
+msgstr "Aktif"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_step_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_record_step_menu
+msgid "Activities"
+msgstr "Aktivitas"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_record_step
+msgid "Activities done on the record"
+msgstr "Aktivitas yang dilakukan pada rekaman"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_activity
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_type_id
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__activity
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Activity"
+msgstr "Aktivitas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__activity_action_count
+msgid "Activity Action Count"
+msgstr "Jumlah Tindakan Aktivitas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__activity_cancel_on
+msgid "Activity Cancel On"
+msgstr "Aktivitas Dibatalkan Pada"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+msgid "Activity Done"
+msgstr "Aktivitas Selesai"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__activity_done_on
+msgid "Activity Done On"
+msgstr "Aktivitas Selesai Pada"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__activity_mail_count
+msgid "Activity Mail Count"
+msgstr "Jumlah Surat Aktivitas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_type
+msgid "Activity User Type"
+msgstr "Tipe Pengguna Aktivitas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain
+msgid "Activity Verification Domain"
+msgstr "Domain Verifikasi Aktivitas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain_error
+msgid "Activity Verification Domain Error"
+msgstr "Kesalahan Domain Verifikasi Aktivitas"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity has been cancelled"
+msgstr "Aktivitas telah dibatalkan"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity has been finished"
+msgstr "Aktivitas telah selesai"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity has not been finished"
+msgstr "Aktivitas belum selesai"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity not cancelled"
+msgstr "Aktivitas tidak dibatalkan"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity not done"
+msgstr "Aktivitas belum selesai"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "After finished"
+msgstr "Setelah selesai"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__allow_expiry
+msgid "Allow Expiry"
+msgstr "Izinkan Kedaluwarsa"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__applied_domain
+msgid "Applied Domain"
+msgstr "Domain yang Diterapkan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__apply_parent_domain
+msgid "Apply Parent Domain"
+msgstr "Terapkan Domain Induk"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+msgid "Archived"
+msgstr "Diarsipkan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_attachment_count
+msgid "Attachment Count"
+msgstr "Jumlah Lampiran"
+
+#. module: automation_oca
+#: model:ir.ui.menu,name:automation_oca.automation_root_menu
+msgid "Automation"
+msgstr "Otomasi"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_act_window
+#: model:ir.model,name:automation_oca.model_automation_configuration
+#: model:ir.ui.menu,name:automation_oca.automation_configuration_menu
+msgid "Automation Configuration"
+msgstr "Konfigurasi Otomasi"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_export_act_window
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_export_form_view
+msgid "Automation Configuration Export"
+msgstr "Ekspor Konfigurasi Otomasi"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__automation_direct_step_ids
+msgid "Automation Direct Step"
+msgstr "Langkah Langsung Otomasi"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_filter
+msgid "Automation Filter"
+msgstr "Filter Otomasi"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_act_window
+#: model:ir.model,name:automation_oca.model_automation_record
+msgid "Automation Record"
+msgstr "Rekaman Otomasi"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_activity__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_compose_message__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_mail__automation_record_step_id
+msgid "Automation Record Step"
+msgstr "Langkah Rekaman Otomasi"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__automation_step_ids
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__automation_step_ids
+msgid "Automation Step"
+msgstr "Langkah Otomasi"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_step
+msgid "Automation Steps"
+msgstr "Langkah-langkah Otomasi"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_tag
+msgid "Automation Tag"
+msgstr "Label Otomasi"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.link_tracker_click_search_view
+msgid "Automation configuration"
+msgstr "Konfigurasi otomasi"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.cron_configuration_run_ir_actions_server
+msgid "Automation: Create records"
+msgstr "Otomasi: Buat rekaman"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.cron_step_execute_ir_actions_server
+msgid "Automation: Execute scheduled activities"
+msgstr "Otomasi: Jalankan aktivitas terjadwal"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Back to draft"
+msgstr "Kembali ke draf"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.demo_bounce_action
+msgid "Blacklist Partner"
+msgstr "Masukkan Mitra ke Daftar Hitam"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__bounce
+msgid "Bounced"
+msgstr "Bounced"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Bounced after"
+msgstr "Bounced setelah"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_export_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Cancel"
+msgstr "Batal"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Canceled"
+msgstr "Dibatalkan"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__cancel
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Cancelled"
+msgstr "Dibatalkan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__child_ids
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__child_ids
+msgid "Child"
+msgstr "Anak"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__click_count
+msgid "Click Count"
+msgstr "Jumlah Klik"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+msgid "Clicked"
+msgstr "Diklik"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Clicked after"
+msgstr "Diklik setelah"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.link_tracker_click_act_window
+#: model:ir.ui.menu,name:automation_oca.link_tracker_click_menu
+msgid "Clicks"
+msgstr "Klik"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__color
+msgid "Color"
+msgstr "Warna"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__company_id
+msgid "Company"
+msgstr "Perusahaan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_configuration_id
+#: model:ir.ui.menu,name:automation_oca.automation_config_root_menu
+msgid "Configuration"
+msgstr "Konfigurasi"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__configuration_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_configuration_step_id
+msgid "Configuration Step"
+msgstr "Langkah Konfigurasi"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__create_uid
+msgid "Created by"
+msgstr "Dibuat oleh"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__create_date
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_search_view
+msgid "Created on"
+msgstr "Dibuat pada"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__days
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__days
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__days
+msgid "Day(s)"
+msgstr "Hari"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Deadline"
+msgstr "Tenggat Waktu"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Delete"
+msgstr "Hapus"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__display_name
+msgid "Display Name"
+msgstr "Nama Tampilan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__do_not_wait
+msgid "Do Not Wait"
+msgstr "Jangan Tunggu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__domain
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__domain
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__domain
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Domain"
+msgstr "Domain"
+
+#. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/fields/automation_graph/automation_graph.esm.js:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__done
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record__state__done
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__done
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Done"
+msgstr "Selesai"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__draft
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+msgid "Draft"
+msgstr "Draf"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_date_deadline_range
+msgid "Due Date In"
+msgstr "Jatuh Tempo Dalam"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_date_deadline_range_type
+msgid "Due type"
+msgstr "Tipe jatuh tempo"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Edit"
+msgstr "Ubah"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__editable_domain
+msgid "Editable Domain"
+msgstr "Domain yang Dapat Diedit"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_thread
+msgid "Email Thread"
+msgstr "Utas Email"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Panduan komposisi email"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Enforce generation"
+msgstr "Paksa pembuatan"
+
+#. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/fields/automation_graph/automation_graph.esm.js:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__error
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Error"
+msgstr "Kesalahan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__error_trace
+msgid "Error Trace"
+msgstr "Jejak Kesalahan"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Error on"
+msgstr "Kesalahan pada"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__expired
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Expired"
+msgstr "Kedaluwarsa"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry
+msgid "Expiry"
+msgstr "Kedaluwarsa"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__expiry_date
+msgid "Expiry Date"
+msgstr "Tanggal Kedaluwarsa"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry_interval
+msgid "Expiry Interval"
+msgstr "Interval Kedaluwarsa"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry_interval_type
+msgid "Expiry Interval Type"
+msgstr "Tipe Interval Kedaluwarsa"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Export"
+msgstr "Ekspor"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_export
+msgid "Export Automation Configuration"
+msgstr "Ekspor Konfigurasi Otomasi"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__field_id
+msgid "Field"
+msgstr "Field"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field
+msgid "Field Label"
+msgstr "Label Field"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__file_content
+msgid "File Content"
+msgstr "Isi Berkas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__file_name
+msgid "File Name"
+msgstr "Nama Berkas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_id
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Filter"
+msgstr "Filter"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_domain
+msgid "Filter Domain"
+msgstr "Domain Filter"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_filter__domain
+msgid "Filter to apply"
+msgstr "Filter yang diterapkan"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__editable_domain
+msgid ""
+"Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
+"Filter yang diterapkan\n"
+"        Variabel khusus berikut dapat digunakan dalam filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__domain
+msgid "Filter to apply specifically"
+msgstr "Filter yang diterapkan secara khusus"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain
+msgid "Filter to verify when the activity is done"
+msgstr "Filter untuk memverifikasi ketika aktivitas selesai"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_filter_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_filter_menu
+msgid "Filters"
+msgstr "Filter"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Final Domain"
+msgstr "Domain Akhir"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_follower_ids
+msgid "Followers"
+msgstr "Pengikut"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Pengikut (Mitra)"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_date_kind__date
+msgid "Force on Record Date"
+msgstr "Paksa pada Tanggal Rekaman"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Generate new records"
+msgstr "Buat rekaman baru"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_user_type__generic
+msgid "Generic User From Record"
+msgstr "Pengguna Umum dari Rekaman"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_data
+msgid "Graph Data"
+msgstr "Data Grafik"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_done
+msgid "Graph Done"
+msgstr "Grafik Selesai"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_error
+msgid "Graph Error"
+msgstr "Grafik Kesalahan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__has_message
+msgid "Has Message"
+msgstr "Memiliki Pesan"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__hours
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__hours
+msgid "Hour(s)"
+msgstr "Jam"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__id
+msgid "ID"
+msgstr "ID"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Jika dicentang, pesan baru memerlukan perhatian Anda."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Jika dicentang, beberapa pesan memiliki kesalahan pengiriman."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "In this case, the task will be executed automatically when we create it in the same process."
+msgstr "Dalam kasus ini, tugas akan dijalankan secara otomatis ketika dibuat dalam proses yang sama."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_record__is_orphan_record
+msgid "Indicates if this record is a placeholder for a missing resource."
+msgstr "Menunjukkan apakah rekaman ini adalah pengganti untuk sumber daya yang hilang."
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_is_follower
+msgid "Is Follower"
+msgstr "Adalah Pengikut"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__is_orphan_record
+msgid "Is Orphan Record"
+msgstr "Adalah Rekaman Yatim"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__is_periodic
+msgid "Is Periodic"
+msgstr "Adalah Periodik"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__is_test
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__is_test
+msgid "Is Test"
+msgstr "Adalah Pengujian"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__write_uid
+msgid "Last Updated by"
+msgstr "Terakhir Diperbarui oleh"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__write_date
+msgid "Last Updated on"
+msgstr "Terakhir Diperbarui pada"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_link_tracker_click
+msgid "Link Tracker Click"
+msgstr "Klik Pelacak Tautan"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__mail
+msgid "Mail"
+msgstr "Surat"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__mail_author_id
+msgid "Mail Author"
+msgstr "Pengirim Surat"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_clicked_on
+msgid "Mail Clicked On"
+msgstr "Surat Diklik Pada"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_opened_on
+msgid "Mail Opened On"
+msgstr "Surat Dibuka Pada"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_replied_on
+msgid "Mail Replied On"
+msgstr "Surat Dibalas Pada"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_status
+msgid "Mail Status"
+msgstr "Status Surat"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__mail_template_id
+msgid "Mail Template"
+msgstr "Template Surat"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail bounced"
+msgstr "Surat bounced"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail clicked"
+msgstr "Surat diklik"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail not clicked"
+msgstr "Surat tidak diklik"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail not opened"
+msgstr "Surat tidak dibuka"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail not replied"
+msgstr "Surat tidak dibalas"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail opened"
+msgstr "Surat dibuka"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail replied"
+msgstr "Surat dibalas"
+
+#. module: automation_oca
+#: model:res.groups,name:automation_oca.group_automation_manager
+msgid "Manager"
+msgstr "Manajer"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Mark as done"
+msgstr "Tandai sebagai selesai"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__is_periodic
+msgid "Mark it if you want to make the execution periodic"
+msgstr "Centang jika ingin membuat eksekusi menjadi periodik"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__message_id
+msgid "Message"
+msgstr "Pesan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_has_error
+msgid "Message Delivery error"
+msgstr "Kesalahan pengiriman pesan"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain_error
+msgid "Message to show when the activity domain is not as expected"
+msgstr "Pesan yang ditampilkan ketika domain aktivitas tidak sesuai harapan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_ids
+msgid "Messages"
+msgstr "Pesan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__model
+msgid "Model"
+msgstr "Model"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model_id
+msgid "Model ID"
+msgstr "ID Model"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__model_id
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__model_id
+#: model:ir.model.fields,help:automation_oca.field_automation_filter__model_id
+msgid "Model where the configuration is applied"
+msgstr "Model tempat konfigurasi diterapkan"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__months
+msgid "Month(s)"
+msgstr "Bulan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__name
+msgid "Name"
+msgstr "Nama"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__next_execution_date
+msgid "Next Execution Date"
+msgstr "Tanggal Eksekusi Berikutnya"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not bounced yet"
+msgstr "Belum bounced"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not clicked within"
+msgstr "Tidak diklik dalam"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not clicked yet"
+msgstr "Belum diklik"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not finished within"
+msgstr "Tidak selesai dalam"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not opened within"
+msgstr "Tidak dibuka dalam"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not opened yet"
+msgstr "Belum dibuka"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not replied within"
+msgstr "Tidak dibalas dalam"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not replied yet"
+msgstr "Belum dibalas"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_note
+msgid "Note"
+msgstr "Catatan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Jumlah Tindakan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_has_error_counter
+msgid "Number of errors"
+msgstr "Jumlah kesalahan"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Jumlah pesan yang memerlukan tindakan"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Jumlah pesan dengan kesalahan pengiriman"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_date_kind__offset
+msgid "Offset"
+msgstr "Selisih"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"On <b>on demand configurations</b>, the records are created only by pressing the run button.\n"
+"                        It is useful if you want to control the execution and created records manually."
+msgstr ""
+"Pada <b>konfigurasi sesuai permintaan</b>, rekaman hanya dibuat dengan menekan tombol jalankan.\n"
+"                        Berguna jika Anda ingin mengontrol eksekusi dan rekaman yang dibuat secara manual."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"On <b>periodical configurations</b>, the records are created automatically by a cron job.\n"
+"                        It is great for tasks that don't need user validation."
+msgstr ""
+"Pada <b>konfigurasi periodik</b>, rekaman dibuat secara otomatis oleh cron job.\n"
+"                        Sangat baik untuk tugas yang tidak memerlukan validasi pengguna."
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__ondemand
+msgid "On demand"
+msgstr "Sesuai permintaan"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+msgid "On tests, mails will not be sent, but templates will be generated and actions will be executed."
+msgstr "Pada pengujian, surat tidak akan dikirim, tetapi template akan dibuat dan tindakan akan dijalankan."
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__open
+msgid "Opened"
+msgstr "Dibuka"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Opened after"
+msgstr "Dibuka setelah"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record.py:0
+msgid "Orphan Record"
+msgstr "Rekaman Yatim"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Surat Keluar"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__parent_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__parent_id
+msgid "Parent"
+msgstr "Induk"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__parent_position
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__parent_position
+msgid "Parent Position"
+msgstr "Posisi Induk"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__periodic
+msgid "Periodic"
+msgstr "Periodik"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Processed"
+msgstr "Diproses"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__processed_on
+msgid "Processed On"
+msgstr "Diproses Pada"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Processed on"
+msgstr "Diproses pada"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__res_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__record_id
+msgid "Record"
+msgstr "Rekaman"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_count
+msgid "Record Count"
+msgstr "Jumlah Rekaman"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_done_count
+msgid "Record Done Count"
+msgstr "Jumlah Rekaman Selesai"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_run_count
+msgid "Record Run Count"
+msgstr "Jumlah Rekaman Berjalan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_test_count
+msgid "Record Test Count"
+msgstr "Jumlah Rekaman Pengujian"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_configuration_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_record_menu
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_graph_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_pivot_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_graph_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_pivot_view
+msgid "Records"
+msgstr "Rekaman"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__rejected
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Rejected"
+msgstr "Ditolak"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__reply
+msgid "Replied"
+msgstr "Dibalas"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Replied after"
+msgstr "Dibalas setelah"
+
+#. module: automation_oca
+#: model:ir.ui.menu,name:automation_oca.automation_reporting_root_menu
+msgid "Reporting"
+msgstr "Pelaporan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__resource_ref
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__resource_ref
+msgid "Resource Ref"
+msgstr "Referensi Sumber Daya"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_id
+msgid "Responsible"
+msgstr "Penanggung Jawab"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Retry"
+msgstr "Coba Lagi"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_tree_view
+msgid "Run"
+msgstr "Jalankan"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record__state__run
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "Running"
+msgstr "Berjalan"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Save filter"
+msgstr "Simpan filter"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__scheduled
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Scheduled"
+msgstr "Terjadwal"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__scheduled_date
+msgid "Scheduled Date"
+msgstr "Tanggal Terjadwal"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Scheduled date"
+msgstr "Tanggal terjadwal"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__sent
+msgid "Sent"
+msgstr "Terkirim"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_action_id
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__action
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Server Action"
+msgstr "Tindakan Server"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_context
+msgid "Server Context"
+msgstr "Konteks Server"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Server Context is not wellformed"
+msgstr "Konteks Server tidak terbentuk dengan baik"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__trigger_interval
+msgid ""
+"Set a negative time trigger if you want the step to be executed\n"
+"        immediately, in parallel with the previous step, without waiting for it to\n"
+"        finish."
+msgstr ""
+"Atur pemicu waktu negatif jika Anda ingin langkah dieksekusi\n"
+"        segera, secara paralel dengan langkah sebelumnya, tanpa menunggu\n"
+"        selesai."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Specific Domain"
+msgstr "Domain Khusus"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_user_type__specific
+msgid "Specific User"
+msgstr "Pengguna Khusus"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Start"
+msgstr "Mulai"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__state
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__state
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__state
+msgid "State"
+msgstr "Status"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration.py:0
+msgid "State must be in draft in order to start"
+msgstr "Status harus dalam draf untuk dapat memulai"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_actions
+msgid "Step Actions"
+msgstr "Tindakan Langkah"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_icon
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_icon
+msgid "Step Icon"
+msgstr "Ikon Langkah"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_name
+msgid "Step Name"
+msgstr "Nama Langkah"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_type
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_type
+msgid "Step Type"
+msgstr "Tipe Langkah"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_summary
+msgid "Summary"
+msgstr "Ringkasan"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__tag_ids
+msgid "Tag"
+msgstr "Label"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_tag_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_tag_menu
+msgid "Tags"
+msgstr "Label"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Test"
+msgstr "Uji"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_test_act_window
+msgid "Test Configuration"
+msgstr "Konfigurasi Pengujian"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_configuration_test_act_window
+msgid "Test Records"
+msgstr "Rekaman Pengujian"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_test
+msgid "Test automation configuration"
+msgstr "Uji konfigurasi otomasi"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+msgid "Test configuration"
+msgstr "Konfigurasi pengujian"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Tests"
+msgstr "Pengujian"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+msgid ""
+"The record does not fulfill the expected domain:\n"
+"%(domain)s"
+msgstr ""
+"Rekaman tidak memenuhi domain yang diharapkan:\n"
+"%(domain)s"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"The scheduled date will be the date of the record at the moment we generate the new record.\n"
+"                                Later changes of the field will not affect the scheduled date."
+msgstr ""
+"Tanggal terjadwal akan menjadi tanggal rekaman pada saat rekaman baru dibuat.\n"
+"                                Perubahan field di kemudian hari tidak akan mempengaruhi tanggal terjadwal."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"This a periodical configuration. New records are generated automatically.\n"
+"                        Next execution is programed for"
+msgstr ""
+"Ini adalah konfigurasi periodik. Rekaman baru dibuat secara otomatis.\n"
+"                        Eksekusi berikutnya dijadwalkan untuk"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "This is configuration only generates new records on demand. Press the button in order to execute them manually."
+msgstr "Konfigurasi ini hanya membuat rekaman baru sesuai permintaan. Tekan tombol untuk menjalankannya secara manual."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"This is the final domain that will be applied to the records.\n"
+"                                Consists in the join of the specific domain of the step and the domain of the records."
+msgstr ""
+"Ini adalah domain akhir yang akan diterapkan pada rekaman.\n"
+"                                Terdiri dari gabungan domain khusus langkah dan domain rekaman."
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "To use a %(name)s trigger type we need a parent of type %(parents)s"
+msgstr "Untuk menggunakan tipe pemicu %(name)s diperlukan induk bertipe %(parents)s"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Trigger"
+msgstr "Pemicu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_child_types
+msgid "Trigger Child Types"
+msgstr "Tipe Anak Pemicu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field_id
+msgid "Trigger Date Field"
+msgstr "Field Tanggal Pemicu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_kind
+msgid "Trigger Date Kind"
+msgstr "Jenis Tanggal Pemicu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval
+msgid "Trigger Interval"
+msgstr "Interval Pemicu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval_hours
+msgid "Trigger Interval Hours"
+msgstr "Jam Interval Pemicu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval_type
+msgid "Trigger Interval Type"
+msgstr "Tipe Interval Pemicu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_type
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__trigger_type
+msgid "Trigger Type"
+msgstr "Tipe Pemicu"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_type_data
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__trigger_type_data
+msgid "Trigger Type Data"
+msgstr "Data Tipe Pemicu"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Unicity based on"
+msgstr "Keunikan berdasarkan"
+
+#. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/views/automation_upload/automation_upload.xml:0
+msgid "Upload"
+msgstr "Unggah"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_user_type
+msgid ""
+"Use 'Specific User' to always assign the same user on the next activity.\n"
+"        Use 'Generic User From Record' to specify the field name of the user\n"
+"        to choose on the record."
+msgstr ""
+"Gunakan 'Pengguna Khusus' untuk selalu menetapkan pengguna yang sama pada aktivitas berikutnya.\n"
+"        Gunakan 'Pengguna Umum dari Rekaman' untuk menentukan nama field pengguna\n"
+"        yang akan dipilih pada rekaman."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__field_id
+msgid "Used to avoid duplicates"
+msgstr "Digunakan untuk menghindari duplikat"
+
+#. module: automation_oca
+#: model:res.groups,name:automation_oca.group_automation_user
+msgid "User"
+msgstr "Pengguna"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_field_id
+msgid "User field name"
+msgstr "Nama field pengguna"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__weeks
+msgid "Week(s)"
+msgstr "Minggu"
+
+#. module: automation_oca
+#: model:mail.template,name:automation_oca.demo_welcome_template
+msgid "Welcome"
+msgstr "Selamat Datang"
+
+#. module: automation_oca
+#: model:mail.template,subject:automation_oca.demo_welcome_template
+msgid "Welcome! Thanks for being part of our database"
+msgstr "Selamat datang! Terima kasih telah menjadi bagian dari database kami"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+msgid "You can only retry a record step in a rejected, expired, cancelled or error state."
+msgstr "Anda hanya dapat mencoba ulang langkah rekaman yang berstatus ditolak, kedaluwarsa, dibatalkan, atau kesalahan."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "e.g. Remember unpaid invoices"
+msgstr "mis. Ingatkan faktur yang belum dibayar"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "execution of another step"
+msgstr "eksekusi langkah lain"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "start of workflow"
+msgstr "awal alur kerja"
