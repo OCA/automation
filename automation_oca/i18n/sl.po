@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-13 10:46+0000\n"
+"PO-Revision-Date: 2026-06-25 12:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -1136,7 +1136,7 @@ msgstr "Položaj nadrejenega"
 #. module: automation_oca
 #: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__periodic
 msgid "Periodic"
-msgstr "Obdobje"
+msgstr "Periodično"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
