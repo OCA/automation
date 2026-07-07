@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 12:46+0000\n"
+"PO-Revision-Date: 2026-07-07 07:51+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -1361,7 +1361,7 @@ msgstr "Povzetek"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__tag_ids
 msgid "Tag"
-msgstr "Ključna beseda"
+msgstr "Oznaka"
 
 #. module: automation_oca
 #: model:ir.actions.act_window,name:automation_oca.automation_tag_act_window
