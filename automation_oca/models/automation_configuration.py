@@ -6,8 +6,9 @@ import json
 import uuid
 from collections import defaultdict
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.tools import SQL
 from odoo.tools.safe_eval import (
     datetime as safe_datetime,
 )
@@ -117,46 +118,46 @@ class AutomationConfiguration(models.Model):
 
     @api.depends()
     def _compute_click_count(self):
-        data = self.env["link.tracker.click"].read_group(
+        data = self.env["link.tracker.click"]._read_group(
             [("automation_configuration_id", "in", self.ids)],
-            [],
             ["automation_configuration_id"],
-            lazy=False,
+            ["__count"],
         )
-        mapped_data = {d["automation_configuration_id"][0]: d["__count"] for d in data}
+        mapped_data = {
+            automation_configuration.id: count
+            for automation_configuration, count in data
+        }
         for record in self:
             record.click_count = mapped_data.get(record.id, 0)
 
     @api.depends()
     def _compute_activity_count(self):
-        data = self.env["automation.record.step"].read_group(
+        data = self.env["automation.record.step"]._read_group(
             [
                 ("configuration_id", "in", self.ids),
                 ("state", "=", "done"),
                 ("is_test", "=", False),
             ],
-            [],
             ["configuration_id", "step_type"],
-            lazy=False,
+            ["__count"],
         )
         mapped_data = defaultdict(lambda: {})
-        for d in data:
-            mapped_data[d["configuration_id"][0]][d["step_type"]] = d["__count"]
+        for configuration, step_type, count in data:
+            mapped_data[configuration.id][step_type] = count
         for record in self:
             record.activity_mail_count = mapped_data[record.id].get("mail", 0)
             record.activity_action_count = mapped_data[record.id].get("action", 0)
 
     @api.depends()
     def _compute_record_count(self):
-        data = self.env["automation.record"].read_group(
+        data = self.env["automation.record"]._read_group(
             [("configuration_id", "in", self.ids), ("is_test", "=", False)],
-            [],
             ["configuration_id", "state"],
-            lazy=False,
+            ["__count"],
         )
         mapped_data = defaultdict(lambda: {})
-        for d in data:
-            mapped_data[d["configuration_id"][0]][d["state"]] = d["__count"]
+        for configuration, state, count in data:
+            mapped_data[configuration.id][state] = count
         for record in self:
             record.record_done_count = mapped_data[record.id].get("done", 0)
             record.record_run_count = mapped_data[record.id].get("periodic", 0)
@@ -164,13 +165,12 @@ class AutomationConfiguration(models.Model):
 
     @api.depends()
     def _compute_record_test_count(self):
-        data = self.env["automation.record"].read_group(
+        data = self.env["automation.record"]._read_group(
             [("configuration_id", "in", self.ids), ("is_test", "=", True)],
-            [],
             ["configuration_id"],
-            lazy=False,
+            ["__count"],
         )
-        mapped_data = {d["configuration_id"][0]: d["__count"] for d in data}
+        mapped_data = {configuration.id: count for configuration, count in data}
         for record in self:
             record.record_test_count = mapped_data.get(record.id, 0)
 
@@ -205,7 +205,9 @@ class AutomationConfiguration(models.Model):
     def start_automation(self):
         self.ensure_one()
         if self.state != "draft":
-            raise ValidationError(_("State must be in draft in order to start"))
+            raise ValidationError(
+                self.env._("State must be in draft in order to start")
+            )
         self.state = "periodic" if self.is_periodic else "ondemand"
 
     def done_automation(self):
@@ -245,7 +247,7 @@ class AutomationConfiguration(models.Model):
         if self.company_id and "company_id" in Record._fields:
             # In case of company defined, we add only if the records have company field
             domain += [("company_id", "=", self.company_id.id)]
-        query = Record._where_calc(domain)
+        query = Record._search(domain, bypass_access=True)
         alias = add_complex_left_join(
             query,
             Record._table,
@@ -283,11 +285,11 @@ class AutomationConfiguration(models.Model):
                 [Record._name, self.id],
             )
             query.add_where(f"{alias2}.id is NULL")
-            query.group_by = f'"{Record._table}".{self.field_id.name}'
-            query_str, params = query.select(f'MIN("{Record._table}".id)')
+            query.groupby = SQL.identifier(Record._table, self.field_id.name)
+            sql = query.select(SQL("MIN(%s)", SQL.identifier(Record._table, "id")))
         else:
-            query_str, params = query.select()
-        self.env.cr.execute(query_str, params)
+            sql = query.select()
+        self.env.cr.execute(sql)
         return Record.browse([r[0] for r in self.env.cr.fetchall()])
 
     def run_automation(self):

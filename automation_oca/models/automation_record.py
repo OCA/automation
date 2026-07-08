@@ -4,8 +4,9 @@
 import logging
 from collections import defaultdict
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import AccessError
+from odoo.tools import split_every
 
 _logger = logging.getLogger(__name__)
 
@@ -78,7 +79,7 @@ class AutomationRecord(models.Model):
             if not record.is_orphan_record:
                 record.name = self.env[record.model].browse(record.res_id).display_name
             else:
-                record.name = _("Orphan Record")
+                record.name = self.env._("Orphan Record")
 
     @api.model
     def _search(
@@ -87,12 +88,14 @@ class AutomationRecord(models.Model):
         offset=0,
         limit=None,
         order=None,
+        **kwargs,
     ):
         query = super()._search(
-            domain=domain,
+            domain,
             offset=offset,
             limit=limit,
             order=order,
+            **kwargs,
         )
         if self.env.is_superuser():
             # restrictions do not apply for the superuser
@@ -114,12 +117,12 @@ class AutomationRecord(models.Model):
             FROM %(table)s
             WHERE id = ANY (%%(ids)s)
         """
-        for sub_ids in self._cr.split_for_in_conditions(ids):
-            self._cr.execute(
+        for sub_ids in split_every(self.env.cr.IN_MAX, ids):
+            self.env.cr.execute(
                 sub_query % {"table": self._table},
                 dict(ids=list(sub_ids)),
             )
-            for eid, res_id, model in self._cr.fetchall():
+            for eid, res_id, model in self.env.cr.fetchall():
                 if not model:
                     result.append(eid)
                     continue
@@ -165,6 +168,7 @@ class AutomationRecord(models.Model):
                 offset=offset + len(orig_ids),
                 limit=limit,
                 order=order,
+                **kwargs,
             )
             extend_ids = list(extend_query)
             result.extend(extend_ids[: limit - len(result)])
@@ -199,7 +203,7 @@ class AutomationRecord(models.Model):
                 )
 
         for model, rec_ids in by_model_rec_ids.items():
-            records = self.env[model].browse(rec_ids).with_user(self._uid)
+            records = self.env[model].browse(rec_ids).with_user(self.env.uid)
             checker = by_model_checker[model]
             for record in records:
                 check_operation = checker(

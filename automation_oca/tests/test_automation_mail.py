@@ -5,6 +5,7 @@ from odoo import tools
 from odoo.tests import Form
 from odoo.tests.common import HttpCase
 
+from odoo.addons.link_tracker.tests.common import MockLinkTracker
 from odoo.addons.mail.tests.common import MockEmail
 
 from .common import AutomationTestCase
@@ -52,7 +53,7 @@ Content-Transfer-Encoding: quoted-printable
 """
 
 
-class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
+class TestAutomationMail(AutomationTestCase, MockLinkTracker, MockEmail, HttpCase):
     def test_activity_execution(self):
         """
         We will check the execution of the tasks and that we cannot execute them again

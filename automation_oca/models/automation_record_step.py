@@ -1,16 +1,15 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import json
-import threading
 import traceback
 from io import StringIO
 
-import werkzeug.urls
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models, tools
+from odoo import api, fields, models, modules, tools
 from odoo.exceptions import ValidationError
 from odoo.tools.safe_eval import safe_eval
+from odoo.tools.urls import urljoin
 
 
 class AutomationRecordStep(models.Model):
@@ -219,7 +218,6 @@ class AutomationRecordStep(models.Model):
 
     def _run_mail(self):
         composer_values = {
-            "record_name": False,
             "model": self.record_id.model,
             "composition_mode": "mass_mail",
             "template_id": self.configuration_step_id.mail_template_id.id,
@@ -239,7 +237,7 @@ class AutomationRecordStep(models.Model):
         extra_context = self._run_mail_context()
         composer = composer.with_context(active_ids=res_ids, **extra_context)
         # auto-commit except in testing mode
-        auto_commit = not getattr(threading.current_thread(), "testing", False)
+        auto_commit = not modules.module.current_test
         if not self.is_test:
             # We just abort the sending, but we want to check how the generation works
             composer._action_send_mail(auto_commit=auto_commit)
@@ -250,7 +248,7 @@ class AutomationRecordStep(models.Model):
         return tools.hmac(self.env(su=True), "automation_oca", self.id)
 
     def _get_mail_tracking_url(self):
-        return werkzeug.urls.url_join(
+        return urljoin(
             self.get_base_url(),
             f"automation_oca/track/{self.id}/{self._get_mail_tracking_token()}/blank.gif",
         )
@@ -335,7 +333,7 @@ class AutomationRecordStep(models.Model):
         )
         if domain and not self.record_id.resource_ref.filtered_domain(domain):
             raise ValidationError(
-                _(
+                self.env._(
                     "The record does not fulfill the expected domain:\n%(domain)s",
                     domain=self.configuration_step_id.activity_verification_domain_error,
                 )
@@ -421,7 +419,7 @@ class AutomationRecordStep(models.Model):
             return [
                 {
                     "icon": "fa fa-clock-o",
-                    "name": _("Activity Done"),
+                    "name": self.env._("Activity Done"),
                     "done": bool(self.activity_done_on),
                     "color": "text-success",
                 }
@@ -430,13 +428,13 @@ class AutomationRecordStep(models.Model):
             return [
                 {
                     "icon": "fa fa-envelope",
-                    "name": _("Sent"),
+                    "name": self.env._("Sent"),
                     "done": bool(self.mail_status and self.mail_status != "bounced"),
                     "color": "text-success",
                 },
                 {
                     "icon": "fa fa-envelope-open-o",
-                    "name": _("Opened"),
+                    "name": self.env._("Opened"),
                     "done": bool(
                         self.mail_status and self.mail_status in ["reply", "open"]
                     ),
@@ -444,19 +442,19 @@ class AutomationRecordStep(models.Model):
                 },
                 {
                     "icon": "fa fa-hand-pointer-o",
-                    "name": _("Clicked"),
+                    "name": self.env._("Clicked"),
                     "done": bool(self.mail_status and self.mail_clicked_on),
                     "color": "text-success",
                 },
                 {
                     "icon": "fa fa-reply",
-                    "name": _("Replied"),
+                    "name": self.env._("Replied"),
                     "done": bool(self.mail_status and self.mail_status == "reply"),
                     "color": "text-success",
                 },
                 {
                     "icon": "fa fa-exclamation-circle",
-                    "name": _("Bounced"),
+                    "name": self.env._("Bounced"),
                     "done": bool(self.mail_status and self.mail_status == "bounce"),
                     "color": "text-danger",
                 },
@@ -469,7 +467,7 @@ class AutomationRecordStep(models.Model):
         """
         if self.state not in ["error", "rejected", "expired", "cancel"]:
             raise ValidationError(
-                _(
+                self.env._(
                     "You can only retry a record step in a rejected, "
                     "expired, cancelled or error state."
                 )

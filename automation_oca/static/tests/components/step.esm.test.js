@@ -77,10 +77,15 @@ test("Check Activity Sort", async () => {
     });
     expect(`[name="step_ids"]`).toHaveCount(1);
 
-    expect(`[name="step_ids"] .o_kanban_record:not(.o_kanban_ghost)`).toHaveCount(3);
+    // Since 19.0 the x2many kanban renders its inline "New" button as a
+    // ``.o_kanban_record.o-kanban-button-new`` element, so it must be excluded
+    // from the record count.
+    expect(
+        `[name="step_ids"] .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new)`
+    ).toHaveCount(3);
     expect(
         queryAllTexts(
-            `[name="step_ids"] .o_kanban_record:not(.o_kanban_ghost) .o_field_id`
+            `[name="step_ids"] .o_kanban_record:not(.o_kanban_ghost):not(.o-kanban-button-new) .o_field_id`
         )
     ).toEqual(["1", "3", "2"]);
 });

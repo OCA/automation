@@ -19,7 +19,7 @@ export class AutomationKanbanRenderer extends KanbanRenderer {
             if (!record.data.id) {
                 return [];
             }
-            if (record.data.parent_id && record.data.parent_id[0] !== parent_id) {
+            if (record.data.parent_id && record.data.parent_id.id !== parent_id) {
                 return [];
             }
             if (!record.data.parent_id && parent_id) {
