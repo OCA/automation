@@ -1,11 +1,10 @@
 /* global Chart*/
 
+import {Component, onWillStart, useEffect, useRef} from "@odoo/owl";
 import {_t} from "@web/core/l10n/translation";
 import {loadJS} from "@web/core/assets";
 import {registry} from "@web/core/registry";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
-
-const {Component, onWillStart, useEffect, useRef} = owl;
 
 export class AutomationGraph extends Component {
     setup() {

@@ -16,7 +16,7 @@ class TestAutomationSecurity(AutomationTestCase):
         # Removing rules in order to check only what we expect
         cls.env["ir.rule"].search(
             [("model_id", "=", cls.env.ref("base.model_res_partner").id)]
-        ).toggle_active()
+        ).action_archive()
 
         cls.user_automation_01 = mail_new_test_user(
             cls.env,
@@ -39,7 +39,7 @@ class TestAutomationSecurity(AutomationTestCase):
         cls.group_1 = cls.env["res.groups"].create(
             {
                 "name": "G1",
-                "users": [(4, cls.user_automation_01.id)],
+                "user_ids": [(4, cls.user_automation_01.id)],
                 "rule_groups": [
                     (
                         0,
@@ -56,7 +56,7 @@ class TestAutomationSecurity(AutomationTestCase):
         cls.group_2 = cls.env["res.groups"].create(
             {
                 "name": "G2",
-                "users": [(4, cls.user_automation_02.id)],
+                "user_ids": [(4, cls.user_automation_02.id)],
                 "rule_groups": [
                     (
                         0,
@@ -95,7 +95,7 @@ class TestAutomationSecurity(AutomationTestCase):
     @users("user_automation_01")
     @mute_logger("odoo.addons.automation_oca.models.automation_record")
     def test_security_deleted_record(self):
-        self.env.user.groups_id = [(4, self.env.ref("base.group_system").id)]
+        self.env.user.group_ids = [(4, self.env.ref("base.group_system").id)]
         original_record = self.env["automation.record"].search(
             [("configuration_id", "=", self.configuration.id)]
         )

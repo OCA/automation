@@ -4,25 +4,30 @@
 from datetime import datetime
 
 from freezegun import freeze_time
-from odoo_test_helper import FakeModelLoader
+
+from odoo.orm.model_classes import add_to_registry
+from odoo.orm.models import MetaModel
 
 from .common import AutomationTestCase
 
 
 class TestAutomationDate(AutomationTestCase):
-    def setUp(self):
-        super().setUp()
-        self.loader = FakeModelLoader(self.env, self.__module__)
-        self.loader.backup_registry()
-
-        # The fake class is imported here !! After the backup_registry
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         from .models import ResPartner
 
-        self.loader.update_registry((ResPartner,))
+        original_bases = cls.registry["res.partner"]._base_classes__
 
-    def tearDown(self):
-        self.loader.restore_registry()
-        return super().tearDown()
+        def _restore():
+            cls.registry["res.partner"]._base_classes__ = original_bases
+            MetaModel._module_to_models__[ResPartner._module].remove(ResPartner)
+
+        cls.addClassCleanup(_restore)
+        cls.env.invalidate_all()
+        add_to_registry(cls.registry, ResPartner)
+        cls.registry._setup_models__(cls.env.cr, ["res.partner"])
+        cls.registry.init_models(cls.env.cr, ["res.partner"], {"models_to_check": True})
 
     def test_schedule_date_force(self):
         partner_01 = self.env["res.partner"].create(

@@ -3,13 +3,14 @@
 
 import json
 from collections import defaultdict
+from datetime import datetime
 
 import babel.dates
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools import get_lang
 from odoo.tools.safe_eval import safe_eval
 
@@ -21,7 +22,7 @@ class AutomationConfigurationStep(models.Model):
 
     name = fields.Char(required=True)
     configuration_id = fields.Many2one(
-        "automation.configuration", required=True, auto_join=True
+        "automation.configuration", required=True, bypass_search_access=True
     )
     domain = fields.Char(
         required=True, default="[]", help="Filter to apply specifically"
@@ -164,7 +165,9 @@ class AutomationConfigurationStep(models.Model):
                 try:
                     json.loads(record.server_context)
                 except Exception as e:
-                    raise ValidationError(_("Server Context is not wellformed")) from e
+                    raise ValidationError(
+                        self.env._("Server Context is not wellformed")
+                    ) from e
 
     @api.onchange("trigger_type")
     def _onchange_trigger_type(self):
@@ -178,71 +181,72 @@ class AutomationConfigurationStep(models.Model):
 
     @api.depends()
     def _compute_graph_data(self):
-        total = self.env["automation.record.step"].read_group(
+        date_start = fields.Date.context_today(self) + relativedelta(days=-14)
+        total = self.env["automation.record.step"]._read_group(
             [
                 ("configuration_step_id", "in", self.ids),
-                (
-                    "processed_on",
-                    ">=",
-                    fields.Date.context_today(self) + relativedelta(days=-14),
-                ),
+                ("processed_on", ">=", date_start),
                 ("is_test", "=", False),
             ],
-            ["configuration_step_id"],
             ["configuration_step_id", "processed_on:day"],
-            lazy=False,
+            ["__count"],
         )
-        done = self.env["automation.record.step"].read_group(
+        done = self.env["automation.record.step"]._read_group(
             [
                 ("configuration_step_id", "in", self.ids),
-                (
-                    "processed_on",
-                    ">=",
-                    fields.Date.context_today(self) + relativedelta(days=-14),
-                ),
+                ("processed_on", ">=", date_start),
                 ("state", "=", "done"),
                 ("is_test", "=", False),
             ],
-            ["configuration_step_id"],
             ["configuration_step_id", "processed_on:day"],
-            lazy=False,
+            ["__count"],
         )
-        now = fields.Datetime.now()
-        date_map = {
-            babel.dates.format_datetime(
-                now + relativedelta(days=i - 14),
-                format="dd MMM yyy",
-                tzinfo=self._context.get("tz", None),
-                locale=get_lang(self.env).code,
-            ): 0
-            for i in range(0, 15)
+        # Since Odoo 19, ``_read_group`` returns the ``processed_on:day`` value as
+        # a (timezone-adjusted) ``datetime`` object instead of a formatted string.
+        # We bucket the last 15 days as ``date`` objects and format them for
+        # display only in the final step.
+        days = [date_start + relativedelta(days=i) for i in range(0, 15)]
+        labels = {
+            day: babel.dates.format_date(
+                day, format="dd MMM yyy", locale=get_lang(self.env).code
+            )
+            for day in days
         }
-        result = defaultdict(
-            lambda: {"done": date_map.copy(), "error": date_map.copy()}
-        )
-        for line in total:
-            result[line["configuration_step_id"][0]]["error"][
-                line["processed_on:day"]
-            ] += line["__count"]
-        for line in done:
-            result[line["configuration_step_id"][0]]["done"][
-                line["processed_on:day"]
-            ] += line["__count"]
-            result[line["configuration_step_id"][0]]["error"][
-                line["processed_on:day"]
-            ] -= line["__count"]
+        date_map = {day: 0 for day in days}
+        result = defaultdict(lambda: {"done": dict(date_map), "error": dict(date_map)})
+        for configuration_step, processed_on_day, count in total:
+            day = self._graph_data_day(processed_on_day)
+            if day in result[configuration_step.id]["error"]:
+                result[configuration_step.id]["error"][day] += count
+        for configuration_step, processed_on_day, count in done:
+            day = self._graph_data_day(processed_on_day)
+            if day in result[configuration_step.id]["done"]:
+                result[configuration_step.id]["done"][day] += count
+                result[configuration_step.id]["error"][day] -= count
         for record in self:
             graph_info = dict(result[record.id])
             record.graph_data = {
                 "error": [
-                    {"x": key[:-5], "y": value, "name": key}
+                    {"x": labels[key][:-5], "y": value, "name": labels[key]}
                     for (key, value) in graph_info["error"].items()
                 ],
                 "done": [
-                    {"x": key[:-5], "y": value, "name": key}
+                    {"x": labels[key][:-5], "y": value, "name": labels[key]}
                     for (key, value) in graph_info["done"].items()
                 ],
             }
+
+    @staticmethod
+    def _graph_data_day(value):
+        """Normalize a ``_read_group`` ``:day`` value to a ``date``.
+
+        For ``datetime`` fields the ORM returns a ``datetime`` truncated to the
+        day (in the user timezone); ``date`` fields would already return a
+        ``date``.
+        """
+        if isinstance(value, datetime):
+            return value.date()
+        return value
 
     @api.depends()
     def _compute_total_graph_data(self):
@@ -306,7 +310,7 @@ class AutomationConfigurationStep(models.Model):
         for record in self:
             eval_context = record.configuration_id._get_eval_context()
             if record.apply_parent_domain:
-                record.applied_domain = expression.AND(
+                record.applied_domain = Domain.AND(
                     [
                         safe_eval(record.domain, eval_context),
                         safe_eval(
@@ -343,102 +347,102 @@ class AutomationConfigurationStep(models.Model):
         """
         return {
             "start": {
-                "name": _("start of workflow"),
+                "name": self.env._("start of workflow"),
                 "step_type": [],
                 "message_configuration": False,
                 "message": False,
                 "allow_parent": True,
             },
             "after_step": {
-                "name": _("execution of another step"),
+                "name": self.env._("execution of another step"),
                 "color": "text-success",
                 "icon": "fa fa-code-fork fa-rotate-180 fa-flip-vertical",
                 "message_configuration": False,
                 "message": False,
             },
             "mail_open": {
-                "name": _("Mail opened"),
+                "name": self.env._("Mail opened"),
                 "allow_expiry": True,
                 "step_type": ["mail"],
                 "color": "text-success",
                 "icon": "fa fa-envelope-open-o",
-                "message_configuration": _("Opened after"),
-                "message": _("Not opened yet"),
+                "message_configuration": self.env._("Opened after"),
+                "message": self.env._("Not opened yet"),
             },
             "mail_not_open": {
-                "name": _("Mail not opened"),
+                "name": self.env._("Mail not opened"),
                 "step_type": ["mail"],
                 "color": "text-danger",
                 "icon": "fa fa-envelope-open-o",
-                "message_configuration": _("Not opened within"),
+                "message_configuration": self.env._("Not opened within"),
                 "message": False,
             },
             "mail_reply": {
-                "name": _("Mail replied"),
+                "name": self.env._("Mail replied"),
                 "allow_expiry": True,
                 "step_type": ["mail"],
                 "color": "text-success",
                 "icon": "fa fa-reply",
-                "message_configuration": _("Replied after"),
-                "message": _("Not replied yet"),
+                "message_configuration": self.env._("Replied after"),
+                "message": self.env._("Not replied yet"),
             },
             "mail_not_reply": {
-                "name": _("Mail not replied"),
+                "name": self.env._("Mail not replied"),
                 "step_type": ["mail"],
                 "color": "text-danger",
                 "icon": "fa fa-reply",
-                "message_configuration": _("Not replied within"),
+                "message_configuration": self.env._("Not replied within"),
                 "message": False,
             },
             "mail_click": {
-                "name": _("Mail clicked"),
+                "name": self.env._("Mail clicked"),
                 "allow_expiry": True,
                 "step_type": ["mail"],
                 "color": "text-success",
                 "icon": "fa fa-hand-pointer-o",
-                "message_configuration": _("Clicked after"),
-                "message": _("Not clicked yet"),
+                "message_configuration": self.env._("Clicked after"),
+                "message": self.env._("Not clicked yet"),
             },
             "mail_not_clicked": {
-                "name": _("Mail not clicked"),
+                "name": self.env._("Mail not clicked"),
                 "step_type": ["mail"],
                 "color": "text-danger",
                 "icon": "fa fa-hand-pointer-o",
-                "message_configuration": _("Not clicked within"),
+                "message_configuration": self.env._("Not clicked within"),
                 "message": False,
             },
             "mail_bounce": {
-                "name": _("Mail bounced"),
+                "name": self.env._("Mail bounced"),
                 "allow_expiry": True,
                 "step_type": ["mail"],
                 "color": "text-danger",
                 "icon": "fa fa-exclamation-circle",
-                "message_configuration": _("Bounced after"),
-                "message": _("Not bounced yet"),
+                "message_configuration": self.env._("Bounced after"),
+                "message": self.env._("Not bounced yet"),
             },
             "activity_done": {
-                "name": _("Activity has been finished"),
+                "name": self.env._("Activity has been finished"),
                 "step_type": ["activity"],
                 "color": "text-success",
                 "icon": "fa fa-clock-o",
-                "message_configuration": _("After finished"),
-                "message": _("Activity not done"),
+                "message_configuration": self.env._("After finished"),
+                "message": self.env._("Activity not done"),
             },
             "activity_cancel": {
-                "name": _("Activity has been cancelled"),
+                "name": self.env._("Activity has been cancelled"),
                 "step_type": ["activity"],
                 "color": "text-warning",
                 "icon": "fa fa-ban",
-                "message_configuration": _("After finished"),
-                "message": _("Activity not cancelled"),
+                "message_configuration": self.env._("After finished"),
+                "message": self.env._("Activity not cancelled"),
             },
             "activity_not_done": {
-                "name": _("Activity has not been finished"),
+                "name": self.env._("Activity has not been finished"),
                 "allow_expiry": True,
                 "step_type": ["activity"],
                 "color": "text-danger",
                 "icon": "fa fa-clock-o",
-                "message_configuration": _("Not finished within"),
+                "message_configuration": self.env._("Not finished within"),
                 "message": False,
             },
         }
@@ -502,7 +506,7 @@ class AutomationConfigurationStep(models.Model):
         trigger_conf = self._trigger_types()[self.trigger_type]
         if not self.parent_id and not trigger_conf.get("allow_parent"):
             raise ValidationError(
-                _("%s configurations needs a parent") % trigger_conf["name"]
+                self.env._("%s configurations needs a parent", trigger_conf["name"])
             )
         if (
             self.parent_id
@@ -511,17 +515,18 @@ class AutomationConfigurationStep(models.Model):
         ):
             step_types = dict(self._fields["step_type"].selection)
             raise ValidationError(
-                _("To use a %(name)s trigger type we need a parent of type %(parents)s")
-                % {
-                    "name": trigger_conf["name"],
-                    "parents": ",".join(
+                self.env._(
+                    "To use a %(name)s trigger type we need a parent of type"
+                    " %(parents)s",
+                    name=trigger_conf["name"],
+                    parents=",".join(
                         [
                             name
                             for step_type, name in step_types.items()
                             if step_type in trigger_conf["step_type"]
                         ]
                     ),
-                }
+                )
             )
 
     @api.constrains("parent_id", "trigger_type")

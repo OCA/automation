@@ -8,7 +8,7 @@ class AutomationTestCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env["automation.configuration"].search([]).toggle_active()
+        cls.env["automation.configuration"].search([]).action_archive()
         cls.action = cls.env["ir.actions.server"].create(
             {
                 "name": "Demo action",

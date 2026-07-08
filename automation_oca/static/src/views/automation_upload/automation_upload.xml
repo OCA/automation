@@ -28,7 +28,7 @@
         t-inherit-mode="primary"
         owl="1"
     >
-        <xpath expr="//div[hasclass('o_cp_buttons')]" position="inside">
+        <xpath expr="." position="inside">
             <AutomationFileUploader>
                 <t t-set-slot="default">
                     <button
