@@ -1,0 +1,1586 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* automation_oca
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-07-07 07:51+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
+"Language-Team: none\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
+msgid ""
+"\n"
+"        Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
+"\n"
+"        Filter za uporabo\n"
+"        V filtru lahko uporabite naslednje posebne spremenljivke:\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "%s configurations needs a parent"
+msgstr "%s konfiguracij potrebuje nadrejenega"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/>"
+msgstr ""
+"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"Ob\" "
+"title=\"Ob\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Select time\" "
+"title=\"Select time\"/>"
+msgstr ""
+"<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Izberi čas\" "
+"title=\"Izberi čas\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-cogs\" title=\"Actions\"/>"
+msgstr "<i class=\"fa fa-cogs\" title=\"Dejanja\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-envelope\" title=\"Mails\"/>"
+msgstr "<i class=\"fa fa-envelope\" title=\"E-pošta\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "<i class=\"fa fa-hand-pointer-o\" title=\"Clicks\"/>"
+msgstr "<i class=\"fa fa-hand-pointer-o\" title=\"Kliki\"/>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<i class=\"fa fa-plus-circle\"/> Add child activity"
+msgstr "<i class=\"fa fa-plus-circle\"/> Dodaj podrejeno aktivnost"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid ""
+"<i class=\"o_automation_kanban_card_position fa fa-circle text-info text-"
+"right\" title=\"Run on\"/>"
+msgstr ""
+"<i class=\"o_automation_kanban_card_position fa fa-circle text-info text-"
+"right\" title=\"Zaženi ob\"/>"
+
+#. module: automation_oca
+#: model:mail.template,body_html:automation_oca.demo_welcome_template
+msgid ""
+"<p>Welcome!</p>\n"
+"            <p>Thanks <t t-out=\"object.name\"/> for becoming a contact.</p>\n"
+"            <p>Kind regards,</p>\n"
+"        "
+msgstr ""
+"<p>Dobrodošli!</p>\n"
+"            <p>Hvala <t t-out=\"object.name\"/> za to, da ste postali "
+"kontakt.</p>\n"
+"            <p>Lep pozdrav,</p>\n"
+"        "
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"<span class=\"col-2\" invisible=\"trigger_date_kind != 'offset'\">after</span>\n"
+"                                    <span class=\"col-2\" invisible=\"trigger_date_kind == 'offset'\">when</span>"
+msgstr ""
+"<span class=\"col-2\" invisible=\"trigger_date_kind != 'offset'\">po</span>\n"
+"                                    <span class=\"col-2\" "
+"invisible=\"trigger_date_kind == 'offset'\">ko</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "<span class=\"col-2\">after</span>"
+msgstr "<span class=\"col-2\">po</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "<span class=\"col-2\">of</span>"
+msgstr "<span class=\"col-2\">od</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "<span class=\"pe-1\">Immediatly</span>"
+msgstr "<span class=\"pe-1\">Takoj</span>"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "<span>This record is an orphan record</span>"
+msgstr "<span>Ta zapis je osiroteli zapis</span>"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction
+msgid "Action Needed"
+msgstr "Potrebno ukrepanje"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__active
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__active
+msgid "Active"
+msgstr "Aktivno"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_step_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_record_step_menu
+msgid "Activities"
+msgstr "Aktivnosti"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_record_step
+msgid "Activities done on the record"
+msgstr "Aktivnosti opravljene na zapisu"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_activity
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_type_id
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__activity
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Activity"
+msgstr "Aktivnost"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__activity_action_count
+msgid "Activity Action Count"
+msgstr "Število dejanj aktivnosti"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__activity_cancel_on
+msgid "Activity Cancel On"
+msgstr "Preklic aktivnosti dne"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+msgid "Activity Done"
+msgstr "Aktivnost opravljena"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__activity_done_on
+msgid "Activity Done On"
+msgstr "Aktivnost opravljena dne"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__activity_mail_count
+msgid "Activity Mail Count"
+msgstr "Število e-poštnih aktivnosti"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_type
+msgid "Activity User Type"
+msgstr "Tip uporabnika aktivnosti"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain
+msgid "Activity Verification Domain"
+msgstr "Domena preverjanja aktivnosti"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_verification_domain_error
+msgid "Activity Verification Domain Error"
+msgstr "Napaka domene preverjanja aktivnosti"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity has been cancelled"
+msgstr "Aktivnost je bila preklicana"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity has been finished"
+msgstr "Aktivnost je bila zaključena"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity has not been finished"
+msgstr "Aktivnost ni bila zaključena"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity not cancelled"
+msgstr "Aktivnost ni preklicana"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Activity not done"
+msgstr "Aktivnost ni opravljena"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "After finished"
+msgstr "Po zaključku"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__allow_expiry
+msgid "Allow Expiry"
+msgstr "Dovoli potek"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__applied_domain
+msgid "Applied Domain"
+msgstr "Uporabljena domena"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__apply_parent_domain
+msgid "Apply Parent Domain"
+msgstr "Uporabi nadrejeno domeno"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+msgid "Archived"
+msgstr "Arhivirano"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_attachment_count
+msgid "Attachment Count"
+msgstr "Št. priponk"
+
+#. module: automation_oca
+#: model:ir.ui.menu,name:automation_oca.automation_root_menu
+msgid "Automation"
+msgstr "Avtomatizacija"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_act_window
+#: model:ir.model,name:automation_oca.model_automation_configuration
+#: model:ir.ui.menu,name:automation_oca.automation_configuration_menu
+msgid "Automation Configuration"
+msgstr "Konfiguracija avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_export_act_window
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_export_form_view
+msgid "Automation Configuration Export"
+msgstr "Izvoz konfiguracije avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__automation_direct_step_ids
+msgid "Automation Direct Step"
+msgstr "Neposredni korak avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_filter
+msgid "Automation Filter"
+msgstr "Filter avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_act_window
+#: model:ir.model,name:automation_oca.model_automation_record
+msgid "Automation Record"
+msgstr "Zapis avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_activity__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_compose_message__automation_record_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_mail_mail__automation_record_step_id
+msgid "Automation Record Step"
+msgstr "Korak zapisa avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__automation_step_ids
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__automation_step_ids
+msgid "Automation Step"
+msgstr "Korak avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_step
+msgid "Automation Steps"
+msgstr "Koraki avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_tag
+msgid "Automation Tag"
+msgstr "Oznaka avtomatizacije"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.link_tracker_click_search_view
+msgid "Automation configuration"
+msgstr "Konfiguracija avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.cron_configuration_run_ir_actions_server
+msgid "Automation: Create records"
+msgstr "Avtomatizacija: Ustvari zapise"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.cron_step_execute_ir_actions_server
+msgid "Automation: Execute scheduled activities"
+msgstr "Avtomatizacija: Izvedi načrtovane aktivnosti"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Back to draft"
+msgstr "Vrni v osnutek"
+
+#. module: automation_oca
+#: model:ir.actions.server,name:automation_oca.demo_bounce_action
+msgid "Blacklist Partner"
+msgstr "Partner na črnem seznamu"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__bounce
+msgid "Bounced"
+msgstr "Zavrnjeno"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Bounced after"
+msgstr "Odbojeno po"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_export_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Canceled"
+msgstr "Preklicano"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__cancel
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Cancelled"
+msgstr "Preklicano"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__child_ids
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__child_ids
+msgid "Child"
+msgstr "Podrejeni"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__click_count
+msgid "Click Count"
+msgstr "Število klikov"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+msgid "Clicked"
+msgstr "Kliknil"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Clicked after"
+msgstr "Kliknjeno po"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.link_tracker_click_act_window
+#: model:ir.ui.menu,name:automation_oca.link_tracker_click_menu
+msgid "Clicks"
+msgstr "Klikov"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__color
+msgid "Color"
+msgstr "Barva"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__company_id
+msgid "Company"
+msgstr "Družba"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__configuration_id
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_configuration_id
+#: model:ir.ui.menu,name:automation_oca.automation_config_root_menu
+msgid "Configuration"
+msgstr "Nastavitve"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__configuration_step_id
+#: model:ir.model.fields,field_description:automation_oca.field_link_tracker_click__automation_configuration_step_id
+msgid "Configuration Step"
+msgstr "Konfiguracijski korak"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__create_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__create_uid
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__create_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__create_date
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_search_view
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__days
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__days
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__days
+msgid "Day(s)"
+msgstr "Dan(dni)"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Deadline"
+msgstr "Rok izvedbe"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Delete"
+msgstr "Izbriši"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__display_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__display_name
+msgid "Display Name"
+msgstr "Prikazani naziv"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__do_not_wait
+msgid "Do Not Wait"
+msgstr "Ne čakaj"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__domain
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__domain
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__domain
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Domain"
+msgstr "Domena"
+
+#. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/fields/automation_graph/automation_graph.esm.js:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__done
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record__state__done
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__done
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Done"
+msgstr "Opravljeno"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__draft
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+msgid "Draft"
+msgstr "Osnutek"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_date_deadline_range
+msgid "Due Date In"
+msgstr "Datum zapadlosti v"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_date_deadline_range_type
+msgid "Due type"
+msgstr "Vrsta zapadlosti"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Edit"
+msgstr "Uredi"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__editable_domain
+msgid "Editable Domain"
+msgstr "Uredljiva domena"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_thread
+msgid "Email Thread"
+msgstr "E-poštni niz"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Čarovnik za sestavljanje e-pošte"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Enforce generation"
+msgstr "Vsili generiranje"
+
+#. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/fields/automation_graph/automation_graph.esm.js:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__error
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Error"
+msgstr "Napaka"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__error_trace
+msgid "Error Trace"
+msgstr "Sled napake"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Error on"
+msgstr "Napaka ob"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__expired
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Expired"
+msgstr "Poteklo"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry
+msgid "Expiry"
+msgstr "Potek"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__expiry_date
+msgid "Expiry Date"
+msgstr "Datum poteka"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry_interval
+msgid "Expiry Interval"
+msgstr "Interval poteka"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__expiry_interval_type
+msgid "Expiry Interval Type"
+msgstr "Tip intervala poteka"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Export"
+msgstr "Izvozi"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_export
+msgid "Export Automation Configuration"
+msgstr "Izvozi konfiguracijo avtomatizacije"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__field_id
+msgid "Field"
+msgstr "Polje"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field
+msgid "Field Label"
+msgstr "Označba polja"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__file_content
+msgid "File Content"
+msgstr "Vsebina datoteke"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__file_name
+msgid "File Name"
+msgstr "Naziv datoteke"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_id
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Filter"
+msgstr "Filter"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_domain
+msgid "Filter Domain"
+msgstr "Domena filtra"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_filter__domain
+msgid "Filter to apply"
+msgstr "Filter za uporabo"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__editable_domain
+msgid ""
+"Filter to apply\n"
+"        Following special variable can be used in filter :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+msgstr ""
+"Filter za uporabo\n"
+"        V filtru lahko uporabite naslednje posebne spremenljivke:\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__domain
+msgid "Filter to apply specifically"
+msgstr "Filter za specifično uporabo"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain
+msgid "Filter to verify when the activity is done"
+msgstr "Filter za preverjanje, ko je aktivnost opravljena"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_filter_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_filter_menu
+msgid "Filters"
+msgstr "Filtri"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Final Domain"
+msgstr "Končna domena"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_follower_ids
+msgid "Followers"
+msgstr "Sledilci"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Sledilci (partnerji)"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_date_kind__date
+msgid "Force on Record Date"
+msgstr "Vsili na datum zapisa"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Generate new records"
+msgstr "Ustvari nove zapise"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_user_type__generic
+msgid "Generic User From Record"
+msgstr "Generični uporabnik iz zapisa"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_data
+msgid "Graph Data"
+msgstr "Podatki grafa"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_done
+msgid "Graph Done"
+msgstr "Graf opravljenih"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__graph_error
+msgid "Graph Error"
+msgstr "Graf napak"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__has_message
+msgid "Has Message"
+msgstr "Vsebuje sporočilo"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__expiry_interval_type__hours
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_interval_type__hours
+msgid "Hour(s)"
+msgstr "Ure"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__id
+msgid "ID"
+msgstr "ID"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Če je označeno, nova sporočila zahtevajo vašo pozornost."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+"Kadar je označeno, pomeni, da je pri nekaterih sporočilih prišlo do napake "
+"pri dostavi."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"In this case, the task will be executed automatically when we create it in "
+"the same process."
+msgstr ""
+"V tem primeru bo naloga samodejno izvedena, ko jo ustvarimo v istem procesu."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_record__is_orphan_record
+msgid "Indicates if this record is a placeholder for a missing resource."
+msgstr "Označuje, ali je ta zapis nadomestek za manjkajoč vir."
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_is_follower
+msgid "Is Follower"
+msgstr "Je sledilec"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__is_orphan_record
+msgid "Is Orphan Record"
+msgstr "Je osiroteli zapis"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__is_periodic
+msgid "Is Periodic"
+msgstr "Je periodično"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__is_test
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__is_test
+msgid "Is Test"
+msgstr "Je test"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__write_uid
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__write_uid
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_export__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__write_date
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__write_date
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_link_tracker_click
+msgid "Link Tracker Click"
+msgstr "Klik sledilnika povezav"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__mail
+msgid "Mail"
+msgstr "E-pošta"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__mail_author_id
+msgid "Mail Author"
+msgstr "Avtor e-pošte"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_clicked_on
+msgid "Mail Clicked On"
+msgstr "E-pošta kliknjena dne"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_opened_on
+msgid "Mail Opened On"
+msgstr "E-pošta odprta dne"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_replied_on
+msgid "Mail Replied On"
+msgstr "Odgovorjeno na e-pošto dne"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__mail_status
+msgid "Mail Status"
+msgstr "Status e-pošte"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__mail_template_id
+msgid "Mail Template"
+msgstr "Predloga za e-pošto"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail bounced"
+msgstr "E-pošta odbojna"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail clicked"
+msgstr "E-pošta kliknjena"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail not clicked"
+msgstr "E-pošta ni kliknjena"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail not opened"
+msgstr "E-pošta ni odprta"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail not replied"
+msgstr "Na e-pošto ni odgovorjeno"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail opened"
+msgstr "E-pošta odprta"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Mail replied"
+msgstr "Odgovorjeno na e-pošto"
+
+#. module: automation_oca
+#: model:res.groups,name:automation_oca.group_automation_manager
+msgid "Manager"
+msgstr "Upravitelj"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Mark as done"
+msgstr "Označi kot opravljeno"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__is_periodic
+msgid "Mark it if you want to make the execution periodic"
+msgstr "Označite, če želite, da je izvajanje periodično"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__message_id
+msgid "Message"
+msgstr "Sporočilo"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_has_error
+msgid "Message Delivery error"
+msgstr "Napaka ob dostavi sporočila"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_verification_domain_error
+msgid "Message to show when the activity domain is not as expected"
+msgstr "Sporočilo za prikaz, ko domena aktivnosti ni pričakovana"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_ids
+msgid "Messages"
+msgstr "Sporočila"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__model
+msgid "Model"
+msgstr "Model"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__model_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__model_id
+msgid "Model ID"
+msgstr "ID modela"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__model_id
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__model_id
+#: model:ir.model.fields,help:automation_oca.field_automation_filter__model_id
+msgid "Model where the configuration is applied"
+msgstr "Model, kjer se konfiguracija uporablja"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__months
+msgid "Month(s)"
+msgstr "Mesec(i)"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_filter__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_tag__name
+msgid "Name"
+msgstr "Naziv"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__next_execution_date
+msgid "Next Execution Date"
+msgstr "Naslednji datum izvršbe"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not bounced yet"
+msgstr "Še ni odbojeno"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not clicked within"
+msgstr "Ni kliknjeno v roku"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not clicked yet"
+msgstr "Še ni kliknjeno"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not finished within"
+msgstr "Ni zaključeno v roku"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not opened within"
+msgstr "Ni odprto v roku"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not opened yet"
+msgstr "Še ni odprto"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not replied within"
+msgstr "Ni odgovorjeno v roku"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Not replied yet"
+msgstr "Še ni odgovorjeno"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_note
+msgid "Note"
+msgstr "Opomba"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Število ukrepov"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__message_has_error_counter
+msgid "Number of errors"
+msgstr "Število napak"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Število sporočil, ki zahtevajo ukrepanje"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Število sporočil, ki niso bila pravilno dostavljena"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__trigger_date_kind__offset
+msgid "Offset"
+msgstr "Odmik"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"On <b>on demand configurations</b>, the records are created only by pressing the run button.\n"
+"                        It is useful if you want to control the execution and created records manually."
+msgstr ""
+"Pri <b>konfiguracijah na zahtevo</b> se zapisi ustvarijo le s pritiskom na "
+"gumb za zagon.\n"
+"                        Uporabno je, če želite ročno nadzirati izvajanje in "
+"ustvarjene zapise."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"On <b>periodical configurations</b>, the records are created automatically by a cron job.\n"
+"                        It is great for tasks that don't need user validation."
+msgstr ""
+"Pri <b>periodičnih konfiguracijah</b> se zapisi samodejno ustvarijo s cron "
+"opravili.\n"
+"                        Odlično za naloge, ki ne potrebujejo potrditve "
+"uporabnika."
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__ondemand
+msgid "On demand"
+msgstr "Na zahtevo"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+msgid ""
+"On tests, mails will not be sent, but templates will be generated and "
+"actions will be executed."
+msgstr ""
+"Pri testih se e-pošta ne bo poslala, vendar bodo predloge ustvarjene in "
+"dejanja izvedena."
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__open
+msgid "Opened"
+msgstr "Odprto"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Opened after"
+msgstr "Odprto po"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record.py:0
+msgid "Orphan Record"
+msgstr "Osiroteli zapis"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Izhodna pošta"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__parent_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__parent_id
+msgid "Parent"
+msgstr "Nadrejeni"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__parent_position
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__parent_position
+msgid "Parent Position"
+msgstr "Položaj nadrejenega"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration__state__periodic
+msgid "Periodic"
+msgstr "Periodično"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Processed"
+msgstr "Obdelano"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__processed_on
+msgid "Processed On"
+msgstr "Obdelano dne"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Processed on"
+msgstr "Obdelano dne"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__res_id
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__record_id
+msgid "Record"
+msgstr "Zapis"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_count
+msgid "Record Count"
+msgstr "Število zapisov"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_done_count
+msgid "Record Done Count"
+msgstr "Število opravljenih zapisov"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_run_count
+msgid "Record Run Count"
+msgstr "Število zagonov zapisov"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__record_test_count
+msgid "Record Test Count"
+msgstr "Število testnih zapisov"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_configuration_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_record_menu
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_graph_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_pivot_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_graph_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_pivot_view
+msgid "Records"
+msgstr "Zapisi"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__rejected
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Rejected"
+msgstr "Zavrnjeno"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__reply
+msgid "Replied"
+msgstr "Odgovorjeno"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Replied after"
+msgstr "Odgovorjeno po"
+
+#. module: automation_oca
+#: model:ir.ui.menu,name:automation_oca.automation_reporting_root_menu
+msgid "Reporting"
+msgstr "Poročanje"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_test__resource_ref
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__resource_ref
+msgid "Resource Ref"
+msgstr "Referenca vira"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_id
+msgid "Responsible"
+msgstr "Odgovorni"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Retry"
+msgstr "Ponovno"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_search_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_tree_view
+msgid "Run"
+msgstr "Zaženi"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record__state__run
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
+msgid "Running"
+msgstr "V teku"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Save filter"
+msgstr "Shrani filter"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__state__scheduled
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Scheduled"
+msgstr "Načrtovano"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__scheduled_date
+msgid "Scheduled Date"
+msgstr "Načrtovani datum"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_step_search_view
+msgid "Scheduled date"
+msgstr "Predviden datum"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_record_step__mail_status__sent
+msgid "Sent"
+msgstr "Poslano"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_action_id
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__step_type__action
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Server Action"
+msgstr "Strežniško dejanje"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__server_context
+msgid "Server Context"
+msgstr "Kontekst strežnika"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "Server Context is not wellformed"
+msgstr "Kontekst strežnika ni pravilno oblikovan"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__trigger_interval
+msgid ""
+"Set a negative time trigger if you want the step to be executed\n"
+"        immediately, in parallel with the previous step, without waiting for it to\n"
+"        finish."
+msgstr ""
+"Nastavite negativni časovni sprožilec, če želite, da se korak izvede\n"
+"        takoj, vzporedno s prejšnjim korakom, brez čakanja na njegov\n"
+"        zaključek."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Specific Domain"
+msgstr "Specifična domena"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_user_type__specific
+msgid "Specific User"
+msgstr "Določen uporabnik"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Start"
+msgstr "Začetek"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__state
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record__state
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__state
+msgid "State"
+msgstr "Stanje"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration.py:0
+msgid "State must be in draft in order to start"
+msgstr "Stanje mora biti v osnutku, da se lahko začne"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_actions
+msgid "Step Actions"
+msgstr "Dejanja koraka"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_icon
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_icon
+msgid "Step Icon"
+msgstr "Ikona koraka"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_name
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_name
+msgid "Step Name"
+msgstr "Ime koraka"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__step_type
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__step_type
+msgid "Step Type"
+msgstr "Vrsta koraka"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_summary
+msgid "Summary"
+msgstr "Povzetek"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__tag_ids
+msgid "Tag"
+msgstr "Oznaka"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_tag_act_window
+#: model:ir.ui.menu,name:automation_oca.automation_tag_menu
+msgid "Tags"
+msgstr "Oznake"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_record_form_view
+msgid "Test"
+msgstr "Test"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_configuration_test_act_window
+msgid "Test Configuration"
+msgstr "Testna konfiguracija"
+
+#. module: automation_oca
+#: model:ir.actions.act_window,name:automation_oca.automation_record_configuration_test_act_window
+msgid "Test Records"
+msgstr "Testni zapisi"
+
+#. module: automation_oca
+#: model:ir.model,name:automation_oca.model_automation_configuration_test
+msgid "Test automation configuration"
+msgstr "Preizkusi konfiguracijo avtomatizacije"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_test_form_view
+msgid "Test configuration"
+msgstr "Testna konfiguracija"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Tests"
+msgstr "Preizkusi"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+msgid ""
+"The record does not fulfill the expected domain:\n"
+"%(domain)s"
+msgstr ""
+"Zapis ne izpolnjuje pričakovane domene:\n"
+"%(domain)s"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"The scheduled date will be the date of the record at the moment we generate the new record.\n"
+"                                Later changes of the field will not affect the scheduled date."
+msgstr ""
+"Načrtovani datum bo datum zapisa v trenutku, ko ustvarimo nov zapis.\n"
+"                                Poznejše spremembe polja ne bodo vplivale na "
+"načrtovani datum."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"This a periodical configuration. New records are generated automatically.\n"
+"                        Next execution is programed for"
+msgstr ""
+"To je periodična konfiguracija. Novi zapisi se ustvarijo samodejno.\n"
+"                        Naslednje izvajanje je načrtovano za"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid ""
+"This is configuration only generates new records on demand. Press the button"
+" in order to execute them manually."
+msgstr ""
+"Ta konfiguracija ustvarja nove zapise samo na zahtevo. Pritisnite gumb, da "
+"jih izvedete ročno."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid ""
+"This is the final domain that will be applied to the records.\n"
+"                                Consists in the join of the specific domain of the step and the domain of the records."
+msgstr ""
+"To je končna domena, ki bo uporabljena za zapise.\n"
+"                                Sestavljena je iz združitve specifične "
+"domene koraka in domene zapisov."
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "To use a %(name)s trigger type we need a parent of type %(parents)s"
+msgstr ""
+"Za uporabo vrste sprožilca %(name)s potrebujemo nadrejenega vrste %(parents)s"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "Trigger"
+msgstr "Sprožilec"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_child_types
+msgid "Trigger Child Types"
+msgstr "Tipi podrejenih sprožilcev"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_field_id
+msgid "Trigger Date Field"
+msgstr "Polje datuma sprožilca"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_date_kind
+msgid "Trigger Date Kind"
+msgstr "Vrsta datuma sprožilca"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval
+msgid "Trigger Interval"
+msgstr "Interval sprožilca"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval_hours
+msgid "Trigger Interval Hours"
+msgstr "Ure intervala sprožilca"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_interval_type
+msgid "Trigger Interval Type"
+msgstr "Tip intervala sprožilca"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_type
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__trigger_type
+msgid "Trigger Type"
+msgstr "Vrsta sprožilca"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__trigger_type_data
+#: model:ir.model.fields,field_description:automation_oca.field_automation_record_step__trigger_type_data
+msgid "Trigger Type Data"
+msgstr "Podatki vrste sprožilca"
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+msgid "Unicity based on"
+msgstr "Enoličnost temelji na"
+
+#. module: automation_oca
+#. odoo-javascript
+#: code:addons/automation_oca/static/src/views/automation_upload/automation_upload.xml:0
+msgid "Upload"
+msgstr "Naloži"
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration_step__activity_user_type
+msgid ""
+"Use 'Specific User' to always assign the same user on the next activity.\n"
+"        Use 'Generic User From Record' to specify the field name of the user\n"
+"        to choose on the record."
+msgstr ""
+"Uporabite 'Specifični uporabnik', da je pri naslednji aktivnosti vedno "
+"dodeljen isti uporabnik.\n"
+"        Uporabite 'Generični uporabnik iz zapisa', da določite ime polja "
+"uporabnika,\n"
+"        ki ga želite izbrati na zapisu."
+
+#. module: automation_oca
+#: model:ir.model.fields,help:automation_oca.field_automation_configuration__field_id
+msgid "Used to avoid duplicates"
+msgstr "Uporablja se za preprečevanje dvojnikov"
+
+#. module: automation_oca
+#: model:res.groups,name:automation_oca.group_automation_user
+msgid "User"
+msgstr "Uporabnik"
+
+#. module: automation_oca
+#: model:ir.model.fields,field_description:automation_oca.field_automation_configuration_step__activity_user_field_id
+msgid "User field name"
+msgstr "Ime polja uporabnika"
+
+#. module: automation_oca
+#: model:ir.model.fields.selection,name:automation_oca.selection__automation_configuration_step__activity_date_deadline_range_type__weeks
+msgid "Week(s)"
+msgstr "Tedni(ov)"
+
+#. module: automation_oca
+#: model:mail.template,name:automation_oca.demo_welcome_template
+msgid "Welcome"
+msgstr "Dobrodošli"
+
+#. module: automation_oca
+#: model:mail.template,subject:automation_oca.demo_welcome_template
+msgid "Welcome! Thanks for being part of our database"
+msgstr "Dobrodošli! Hvala, ker ste del naše baze podatkov"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_record_step.py:0
+msgid ""
+"You can only retry a record step in a rejected, expired, cancelled or error "
+"state."
+msgstr ""
+"Korak zapisa lahko ponovno poskusite le v stanju zavrnjen, potekel, "
+"preklican ali napaka."
+
+#. module: automation_oca
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
+#: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_step_form_view
+msgid "e.g. Remember unpaid invoices"
+msgstr "npr. Opomni na neplačane račune"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "execution of another step"
+msgstr "izvedba drugega koraka"
+
+#. module: automation_oca
+#. odoo-python
+#: code:addons/automation_oca/models/automation_configuration_step.py:0
+msgid "start of workflow"
+msgstr "začetek poteka dela"
