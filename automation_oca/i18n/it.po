@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-02-04 10:09+0000\n"
+"PO-Revision-Date: 2026-07-28 08:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -660,7 +660,7 @@ msgstr "Filtro"
 #. module: automation_oca
 #: model:ir.model.fields,field_description:automation_oca.field_automation_configuration__filter_domain
 msgid "Filter Domain"
-msgstr "Dominio filtro"
+msgstr "Filtra dominio"
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_filter__domain
