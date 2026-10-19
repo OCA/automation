@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-19 21:46+0000\n"
+"Last-Translator: Cándido Martínez <candido@supermercadoscooperativos.com>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: automation_oca
 #: model:ir.model.fields,help:automation_oca.field_automation_configuration__domain
@@ -26,18 +28,28 @@ msgid ""
 "         * user\n"
 "         * ref "
 msgstr ""
+"\n"
+"        Filtros a aplicar\n"
+"        As seguintes variables poden ser usadas no filtro :\n"
+"         * datetime\n"
+"         * dateutil\n"
+"         * time\n"
+"         * user\n"
+"         * ref "
 
 #. module: automation_oca
 #. odoo-python
 #: code:addons/automation_oca/models/automation_configuration_step.py:0
 #, python-format
 msgid "%s configurations needs a parent"
-msgstr ""
+msgstr "%s configuracións precisan un pai"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
 msgid "<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" title=\"At\"/>"
 msgstr ""
+"<i class=\"fa fa-calendar pe-1\" role=\"img\" aria-label=\"At\" "
+"title=\"At\"/>"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_form_view
@@ -45,6 +57,8 @@ msgid ""
 "<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Select time\" "
 "title=\"Select time\"/>"
 msgstr ""
+"<i class=\"fa fa-clock-o pe-1\" role=\"img\" aria-label=\"Select time\" "
+"title=\"Select time\"/>"
 
 #. module: automation_oca
 #: model_terms:ir.ui.view,arch_db:automation_oca.automation_configuration_kanban_view
