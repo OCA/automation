@@ -431,7 +431,7 @@ class AutomationRecordStep(models.Model):
                 {
                     "icon": "fa fa-envelope",
                     "name": _("Sent"),
-                    "done": bool(self.mail_status and self.mail_status != "bounced"),
+                    "done": bool(self.mail_status and self.mail_status != "bounce"),
                     "color": "text-success",
                 },
                 {
