@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="demo_tag_process" model="automation.tag">
+        <field name="name">Automatic Process</field>
+    </record>
+    <record id="demo_tag_demo" model="automation.tag">
+        <field name="name">Demo</field>
+    </record>
+
+    <record id="demo_bounce_action" model="ir.actions.server">
+        <field name="name">Blacklist Partner</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="code">
+for record in records.filtered(lambda r: not r.is_blacklisted):
+    env["mail.blacklist"].create({"email": record.email})
+        </field>
+    </record>
+    <record id="demo_welcome_template" model="mail.template">
+        <field name="name">Welcome</field>
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="partner_to">{{object.id}}</field>
+        <field name="subject">Welcome! Thanks for being part of our database</field>
+        <field name="body_html" type="html">
+            <p>Welcome!</p>
+            <p>Thanks <t t-out="object.name" /> for becoming a contact.</p>
+            <p>Kind regards,</p>
+        </field>
+    </record>
+    <record id="demo_configuration_welcome" model="automation.configuration">
+        <field name="name">Welcome email</field>
+        <field name="model_id" ref="base.model_res_partner" />
+        <field
+            name="tag_ids"
+            eval="[(4, ref('demo_tag_process')), (4, ref('demo_tag_demo'))]"
+        />
+        <field name="field_id" ref="base.field_res_partner__email" />
+        <field
+            name="editable_domain"
+        >[ ("email", "!=", False), ("create_date", "&lt;=", datetime.datetime.now())]</field>
+    </record>
+    <record id="demo_configuration_welcome_send" model="automation.configuration.step">
+        <field name="name">Send email</field>
+        <field name="configuration_id" ref="demo_configuration_welcome" />
+        <field name="step_type">mail</field>
+        <field name="trigger_interval">2</field>
+        <field name="mail_template_id" ref="demo_welcome_template" />
+    </record>
+    <record
+        id="demo_configuration_welcome_bounced"
+        model="automation.configuration.step"
+    >
+        <field name="name">Blacklist bounced</field>
+        <field name="configuration_id" ref="demo_configuration_welcome" />
+        <field name="step_type">action</field>
+        <field name="trigger_type">mail_bounce</field>
+        <field name="expiry" eval="True" />
+        <field name="expiry_interval">24</field>
+        <field name="parent_id" ref="demo_configuration_welcome_send" />
+        <field name="trigger_interval">1</field>
+        <field name="server_action_id" ref="demo_bounce_action" />
+    </record>
+</odoo>
