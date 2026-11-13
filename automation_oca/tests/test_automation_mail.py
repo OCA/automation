@@ -112,6 +112,13 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
                 if step["done"] and step["icon"] == "fa fa-exclamation-circle"
             ]
         )
+        self.assertTrue(
+            [
+                step
+                for step in record_activity.step_actions
+                if step["done"] and step["icon"] == "fa fa-envelope"
+            ]
+        )
         self.env["mail.thread"]._routing_handle_bounce(False, parsed_bounce_values)
         self.assertEqual("bounce", record_activity.mail_status)
         self.assertTrue(record_child_activity.scheduled_date)
@@ -121,6 +128,13 @@ class TestAutomationMail(AutomationTestCase, MockEmail, HttpCase):
                 step
                 for step in record_activity.step_actions
                 if step["done"] and step["icon"] == "fa fa-exclamation-circle"
+            ]
+        )
+        self.assertFalse(
+            [
+                step
+                for step in record_activity.step_actions
+                if step["done"] and step["icon"] == "fa fa-envelope"
             ]
         )
 
